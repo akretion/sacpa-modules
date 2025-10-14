@@ -1,0 +1,17 @@
+<odoo>
+    <menuitem id="menu_animal_root" name="Gestion Animaux" sequence="10"
+              groups="animal_identification.group_animal_id_user,animal_identification.group_animal_id_manager"/>
+
+    <menuitem id="menu_animal" name="Animeaux" sequence="1" parent="menu_animal_root">
+            <menuitem id="menu_animal_identifications" name="Identification animal"
+                      action="action_animal_identification"/>
+    </menuitem>
+    <menuitem id="menu_animal_setting" name="Configuration" sequence="2" parent="menu_animal_root"
+              groups="animal_identification.group_animal_id_manager">
+         <menuitem id="menu_animal_species" name="Espèces" action="action_species"/>
+        <menuitem id="menu_animal_breeds" name="Races" action="action_breed"/>
+        <menuitem id="menu_animal_status" name="Statuts" action="action_status"/>
+        <menuitem id="menu_animal_health_status" name="États sanitaires" action="action_animal_health_status"/>
+    </menuitem>
+
+</odoo>

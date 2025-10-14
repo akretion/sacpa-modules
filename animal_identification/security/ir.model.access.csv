@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_animal_species_user,access.animal.species.user,model_animal_species,animal_identification.group_animal_id_user,1,0,0,0
+access_animal_breed_user,access.animal.breed.user,model_animal_breed,animal_identification.group_animal_id_user,1,0,0,0
+access_animal_status_user,access.animal.status.user,model_animal_status,animal_identification.group_animal_id_user,1,0,0,0
+access_animal_health_status_user,access.animal.health.status.user,model_animal_health_status,animal_identification.group_animal_id_user,1,0,0,0
+access_animal_identification_user,access.animal.identification.user,model_animal_identification,animal_identification.group_animal_id_user,1,1,1,1
+access_animal_species_manager,access.animal.species.manager,model_animal_species,animal_identification.group_animal_id_manager,1,1,1,1
+access_animal_breed_manager,access.animal.breed.manager,model_animal_breed,animal_identification.group_animal_id_manager,1,1,1,1
+access_animal_status_manager,access.animal.status.manager,model_animal_status,animal_identification.group_animal_id_manager,1,1,1,1
+access_animal_health_status_manager,access.animal.health.status.manager,model_animal_health_status,animal_identification.group_animal_id_manager,1,1,1,1
+access_animal_identification_manager,access.animal.identification.manager,model_animal_identification,animal_identification.group_animal_id_manager,1,1,1,1
