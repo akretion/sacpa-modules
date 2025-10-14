@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_helpdesk_requester_user,access.helpdesk.requester.user,model_helpdesk_requester,helpdesk_mgmt.group_helpdesk_user,1,0,0,0
+access_helpdesk_requester_manager,access.helpdesk.requester.manager,model_helpdesk_requester,helpdesk_mgmt.group_helpdesk_manager,1,1,1,1
+access_helpdesk_intervention_type_user,access.helpdesk.intervention.type.user,model_helpdesk_intervention_type,helpdesk_mgmt.group_helpdesk_user,1,0,0,0
+access_helpdesk_intervention_type_manager,access.helpdesk.intervention.type.manager,model_helpdesk_intervention_type,helpdesk_mgmt.group_helpdesk_manager,1,1,1,1
