@@ -1,4 +1,3 @@
-
 <odoo>
     <!-- Helpdesk Ticket Form View -->
     <record id="helpdesk_ticket_view_call_and_animal_form" model="ir.ui.view">
@@ -6,37 +5,37 @@
         <field name="inherit_id" ref="helpdesk_mgmt.ticket_view_form" />
         <field name="arch" type="xml">
             <page name="other_info" position="after">
-                    <page string="Gestion appel et animal">
-                        <group>
-                            <group string="Informations d'appel">
-                                <field name="call_date"/>
-                                <field name="call_time" widget="float_time"/>
-                                <field name="agency_id"/>
-                                <field name="requester_id"/>
-                                <field name="requester_name"/>
-                                <field name="requester_phone"/>
-                                <field name="nature_id"/>
-                            </group>
-                            <group string="Localisation">
-                                <field name="address"/>
-                                <field name="zip"/>
-                                <field name="city"/>
-                                <field name="contact_phone"/>
-                                <field name="fax"/>
-                            </group>
-                            <group string="Informations animales">
-                                <field name="species_id"/>
-                                <field name="breed_id"/>
-                                <field name="is_crossbreed"/>
-                                <field name="crossbreed_breed_id" />
-                                <field name="animal_count"/>
-                                <field name="animal_status_id"/>
-                            </group>
-                            <group>
-                                <field name="notes"/>
-                            </group>
+                <page string="Gestion appel et animal">
+                    <group>
+                        <group string="Informations d'appel">
+                            <field name="call_date" />
+                            <field name="call_time" widget="float_time" />
+                            <field name="agency_id" />
+                            <field name="requester_id" />
+                            <field name="requester_name" />
+                            <field name="requester_phone" />
+                            <field name="nature_id" />
                         </group>
-                    </page>
+                        <group string="Localisation">
+                            <field name="address" />
+                            <field name="zip" />
+                            <field name="city" />
+                            <field name="contact_phone" />
+                            <field name="fax" />
+                        </group>
+                        <group string="Informations animales">
+                            <field name="species_id" />
+                            <field name="breed_id" />
+                            <field name="is_crossbreed" />
+                            <field name="crossbreed_breed_id" />
+                            <field name="animal_count" />
+                            <field name="animal_status_id" />
+                        </group>
+                        <group>
+                            <field name="notes" />
+                        </group>
+                    </group>
+                </page>
             </page>
         </field>
     </record>
@@ -53,5 +52,4 @@
             </field>
         </field>
     </record>
-
 </odoo>

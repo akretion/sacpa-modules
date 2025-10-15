@@ -5,7 +5,7 @@
     "version": "18.0.1.0.0",
     "summary": "Gestion des fiches d'animaux",
     "category": "Uncategorized",
-    "website": "https://akretion.com",
+    "website": "https://github.com/akretion/sacpa-modules",
     "author": " Akretion",
     "depends": ["base"],
     "data": [
@@ -19,5 +19,5 @@
         "views/animal_menuitem.xml",
     ],
     "installable": True,
-    "application": True
+    "application": True,
 }

@@ -1,7 +1,7 @@
 # Copyright (C) 2025 - TODAY, Akretion
 # @author Mourad EL HADJ MIMOUNE <mourad.elhadj.mimoune@akretion.com>
 
-from odoo import models, fields
+from odoo import fields, models
 
 
 class AnimalBreed(models.Model):
@@ -12,7 +12,9 @@ class AnimalBreed(models.Model):
     name = fields.Char(string="Libellé", required=True)
     code = fields.Char(string="Code")
     species_id = fields.Many2one("animal.species", string="Espèce")
-    code_group = fields.Char(string="Code Group",)
+    code_group = fields.Char(
+        string="Code Group",
+    )
     code_scc = fields.Char(string="Code SCC")
     classification = fields.Char(string="Classification")
     categorie = fields.Char(string="Catégorie")

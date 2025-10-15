@@ -1,7 +1,7 @@
 # Copyright (C) 2025 - TODAY, Akretion
 # @author Mourad EL HADJ MIMOUNE <mourad.elhadj.mimoune@akretion.com>
 
-from odoo import models, fields
+from odoo import fields, models
 
 
 class AnimalHealthStatus(models.Model):

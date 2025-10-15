@@ -1,97 +1,119 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="view_fsm_order_form_animal_extension" model="ir.ui.view">
         <field name="name">fsm.order.form.animal.extension</field>
         <field name="model">fsm.order</field>
-        <field name="inherit_id" ref="fieldservice.fsm_order_form"/>
+        <field name="inherit_id" ref="fieldservice.fsm_order_form" />
         <field name="arch" type="xml">
             <page name="execution_page" position="after">
                 <page string="Gestion animal">
                     <group>
-
                         <!-- Bloc Intervention -->
                         <group string="Détails d'intervention">
-                            <field name="request_ref"/>
-                            <field name="intervention_number"/>
-                            <field name="internal_reference"/>
-                            <field name="intervention_date"/>
-                            <field name="intervention_type_id"/>
-                            <field name="departure_time"/>
-                            <field name="arrival_time"/>
-                            <field name="capture_time"/>
-                            <field name="return_time"/>
+                            <field name="request_ref" />
+                            <field name="intervention_number" />
+                            <field name="internal_reference" />
+                            <field name="intervention_date" />
+                            <field name="intervention_type_id" />
+                            <field name="departure_time" />
+                            <field name="arrival_time" />
+                            <field name="capture_time" />
+                            <field name="return_time" />
                         </group>
 
                         <!-- Bloc Animaux -->
                         <group string="Détails de l'animal">
-                            <field name="animal_order_number"/>
-                            <field name="tattoo_number"/>
-                            <field name="chip_number"/>
-                            <field name="medal_number"/>
-                            <field name="species_id"/>
-                            <field name="breed_id"/>
-                            <field name="is_crossbreed"/>
-                            <field name="crossbreed_breed_id"/>
-                            <field name="gender"/>
-                            <field name="animal_name"/>
-                            <field name="pickup_location"/>
+                            <field name="animal_order_number" />
+                            <field name="tattoo_number" />
+                            <field name="chip_number" />
+                            <field name="medal_number" />
+                            <field name="species_id" />
+                            <field name="breed_id" />
+                            <field name="is_crossbreed" />
+                            <field name="crossbreed_breed_id" />
+                            <field name="gender" />
+                            <field name="animal_name" />
+                            <field name="pickup_location" />
                         </group>
 
                         <group string="Age de l'animal">
-                            <field name="birth_date"/>
-                            <field name="calculated_age"/>
+                            <field name="birth_date" />
+                            <field name="calculated_age" />
                             <div>
                                 <span class="fw-bold">ou Age estimer entre : </span>
                                 <div class="row mt-2">
                                     <div class="col-3">
-                                        <label string="Mois min" for="estimated_age_min_month"/>
-                                        <field name="estimated_age_min_month" placeholder="0-11"/>
+                                        <label
+                                            string="Mois min"
+                                            for="estimated_age_min_month"
+                                        />
+                                        <field
+                                            name="estimated_age_min_month"
+                                            placeholder="0-11"
+                                        />
                                     </div>
                                     <div class="col-3">
-                                        <label string="Année min" for="estimated_age_min_year"/>
-                                        <field name="estimated_age_min_year" placeholder="ex: 2"/>
+                                        <label
+                                            string="Année min"
+                                            for="estimated_age_min_year"
+                                        />
+                                        <field
+                                            name="estimated_age_min_year"
+                                            placeholder="ex: 2"
+                                        />
                                     </div>
                                     <div class="row">
                                         <span class="fw-bold">ET</span>
                                     </div>
                                     <div class="col-3">
-                                        <label string="Mois max" for="estimated_age_max_month"/>
-                                        <field name="estimated_age_max_month" placeholder="0-11"/>
+                                        <label
+                                            string="Mois max"
+                                            for="estimated_age_max_month"
+                                        />
+                                        <field
+                                            name="estimated_age_max_month"
+                                            placeholder="0-11"
+                                        />
                                     </div>
                                     <div class="col-3">
-                                        <label string="Année max" for="estimated_age_max_year"/>
-                                        <field name="estimated_age_max_year" placeholder="ex: 5"/>
+                                        <label
+                                            string="Année max"
+                                            for="estimated_age_max_year"
+                                        />
+                                        <field
+                                            name="estimated_age_max_year"
+                                            placeholder="ex: 5"
+                                        />
                                     </div>
                                 </div>
                             </div>
-                            <field name="estimation_date"/>
+                            <field name="estimation_date" />
                         </group>
                         <group string="Autres infos">
-                            <field name="folder_pound_number"/>
-                            <field name="collar"/>
-                            <field name="leash"/>
-                            <field name="muzzle"/>
-                            <field name="other_restraints"/>
-                            <field name="behavior"/>
-                            <field name="health_status"/>
-                            <field name="legal_deposit"/>
+                            <field name="folder_pound_number" />
+                            <field name="collar" />
+                            <field name="leash" />
+                            <field name="muzzle" />
+                            <field name="other_restraints" />
+                            <field name="behavior" />
+                            <field name="health_status" />
+                            <field name="legal_deposit" />
                         </group>
                         <group string="Caractéristiques">
-                            <field name="animal_status_id"/>
-                            <field name="size"/>
-                            <field name="ears"/>
-                            <field name="tail"/>
-                            <field name="hair"/>
-                            <field name="color1"/>
-                            <field name="color2"/>
-                            <field name="color3"/>
-                            <field name="color4"/>
-                            <field name="pattern"/>
-                            <field name="is_sterilized"/>
+                            <field name="animal_status_id" />
+                            <field name="size" />
+                            <field name="ears" />
+                            <field name="tail" />
+                            <field name="hair" />
+                            <field name="color1" />
+                            <field name="color2" />
+                            <field name="color3" />
+                            <field name="color4" />
+                            <field name="pattern" />
+                            <field name="is_sterilized" />
                         </group>
-                </group>
-
-            </page>
+                    </group>
+                </page>
             </page>
         </field>
     </record>

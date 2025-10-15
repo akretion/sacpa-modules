@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="view_breed_tree" model="ir.ui.view">
         <field name="model">animal.breed</field>
         <field name="arch" type="xml">
             <list string="Races">
-                <field name="name"/>
-                <field name="code"/>
-                <field name="species_id"/>
+                <field name="name" />
+                <field name="code" />
+                <field name="species_id" />
             </list>
         </field>
     </record>
@@ -17,13 +17,13 @@
             <form>
                 <sheet>
                     <group>
-                        <field name="name"/>
-                        <field name="code"/>
-                        <field name="species_id"/>
-                        <field name="code_group"/>
-                        <field name="code_scc"/>
-                        <field name="classification"/>
-                        <field name="categorie"/>
+                        <field name="name" />
+                        <field name="code" />
+                        <field name="species_id" />
+                        <field name="code_group" />
+                        <field name="code_scc" />
+                        <field name="classification" />
+                        <field name="categorie" />
                     </group>
                 </sheet>
             </form>

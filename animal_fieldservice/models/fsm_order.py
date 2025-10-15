@@ -2,7 +2,9 @@
 # @author Mourad EL HADJ MIMOUNE <mourad.elhadj.mimoune@akretion.com>
 
 from datetime import date
+
 from dateutil.relativedelta import relativedelta
+
 from odoo import api, fields, models
 
 
@@ -14,7 +16,9 @@ class FSMOrder(models.Model):
     intervention_number = fields.Integer(string="N° Intervention")
     internal_reference = fields.Char(string="N° Interne")
     intervention_date = fields.Date(string="Date d'intervention")
-    intervention_type_id = fields.Many2one("helpdesk.intervention.type", string="Type d'intervention")
+    intervention_type_id = fields.Many2one(
+        "helpdesk.intervention.type", string="Type d'intervention"
+    )
 
     departure_time = fields.Float(string="Heure de départ")
     arrival_time = fields.Float(string="Heure d'arrivée")
@@ -34,7 +38,9 @@ class FSMOrder(models.Model):
     animal_name = fields.Char(string="Nom de l’animal")
     pickup_location = fields.Char(string="Lieu de ramassage")
     birth_date = fields.Date(string="Date de naissance")
-    calculated_age = fields.Char(string="Âge calculé", compute="_compute_calculated_age")
+    calculated_age = fields.Char(
+        string="Âge calculé", compute="_compute_calculated_age"
+    )
     estimated_age_min_month = fields.Integer(string="Âge estimé (min) mois")
     estimated_age_min_year = fields.Integer(string="Âge estimé (min) année")
     estimated_age_max_month = fields.Integer(string="Âge estimé (max) mois")
@@ -42,25 +48,19 @@ class FSMOrder(models.Model):
     estimation_date = fields.Date(string="Date de l'Estimation")
     # caractéristiques
     animal_status_id = fields.Many2one("animal.status", string="Statut")
-    size = fields.Selection([
-        ("petit", "Petit"),
-        ("moyen", "Moyen"),
-        ("grand", "Grand")
-    ], string="Taille")
-    ears = fields.Selection([
-        ("droites", "Droites"),
-        ("tombantes", "Tombantes"),
-        ("autres", "Autres")
-    ], string="Oreilles")
-    tail = fields.Selection([
-        ("entiere", "Entière"),
-        ("ecourtee", "Écourtée")
-    ], string="Queue")
-    hair = fields.Selection([
-        ("court", "Court"),
-        ("mi-long", "Mi-long"),
-        ("long", "Long")
-    ], string="Poil")
+    size = fields.Selection(
+        [("petit", "Petit"), ("moyen", "Moyen"), ("grand", "Grand")], string="Taille"
+    )
+    ears = fields.Selection(
+        [("droites", "Droites"), ("tombantes", "Tombantes"), ("autres", "Autres")],
+        string="Oreilles",
+    )
+    tail = fields.Selection(
+        [("entiere", "Entière"), ("ecourtee", "Écourtée")], string="Queue"
+    )
+    hair = fields.Selection(
+        [("court", "Court"), ("mi-long", "Mi-long"), ("long", "Long")], string="Poil"
+    )
     color1 = fields.Char(string="Couleur 1")
     color2 = fields.Char(string="Couleur 2")
     color3 = fields.Char(string="Couleur 3")
@@ -75,7 +75,6 @@ class FSMOrder(models.Model):
     behavior = fields.Text(string="Comportement")
     health_status = fields.Many2one("animal.health.status", string="État sanitaire")
     legal_deposit = fields.Many2one("res.partner", string="Dépôt légal")
-
 
     @api.depends("birth_date")
     def _compute_calculated_age(self):

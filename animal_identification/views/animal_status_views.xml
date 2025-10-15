@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="view_status_tree" model="ir.ui.view">
         <field name="model">animal.status</field>
         <field name="arch" type="xml">
             <list string="Statuts Animal">
-                <field name="name"/>
-                <field name="code"/>
+                <field name="name" />
+                <field name="code" />
             </list>
         </field>
     </record>
@@ -16,8 +16,8 @@
             <form>
                 <sheet>
                     <group>
-                        <field name="name"/>
-                        <field name="code"/>
+                        <field name="name" />
+                        <field name="code" />
                     </group>
                 </sheet>
             </form>

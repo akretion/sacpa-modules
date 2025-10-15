@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="view_animal_tree" model="ir.ui.view">
         <field name="model">animal.identification</field>
         <field name="arch" type="xml">
             <list string="Identification Animal">
-                <field name="fiche_number"/>
-                <field name="name"/>
-                <field name="species_id"/>
-                <field name="breed_id"/>
-                <field name="gender"/>
+                <field name="fiche_number" />
+                <field name="name" />
+                <field name="species_id" />
+                <field name="breed_id" />
+                <field name="gender" />
             </list>
         </field>
     </record>
@@ -19,62 +19,85 @@
                 <sheet>
                     <group>
                         <group string="Infos animal">
-                            <field name="fiche_number"/>
-                            <field name="species_id"/>
-                            <field name="breed_id"/>
-                            <field name="is_crossed"/>
-                            <field name="status_id"/>
-                         </group>
-                       <group string="Identification">
-                            <field name="chip_number"/>
-                            <field name="tattoo_number"/>
-                            <field name="medal_number"/>
-                            <field name="name"/>
-                            <field name="gender"/>
+                            <field name="fiche_number" />
+                            <field name="species_id" />
+                            <field name="breed_id" />
+                            <field name="is_crossed" />
+                            <field name="status_id" />
+                        </group>
+                        <group string="Identification">
+                            <field name="chip_number" />
+                            <field name="tattoo_number" />
+                            <field name="medal_number" />
+                            <field name="name" />
+                            <field name="gender" />
                         </group>
 
                         <group string="Age de l'animal">
-                            <field name="birth_date"/>
-                            <field name="calculated_age"/>
+                            <field name="birth_date" />
+                            <field name="calculated_age" />
                             <div>
-                            <span class="fw-bold">ou Age estimer entre : </span>
+                                <span class="fw-bold">ou Age estimer entre : </span>
                                 <div class="row mt-2">
                                     <div class="col-3">
-                                        <label string="Mois min" for="estimated_age_min_month"/>
-                                        <field name="estimated_age_min_month" placeholder="0-11"/>
+                                        <label
+                                            string="Mois min"
+                                            for="estimated_age_min_month"
+                                        />
+                                        <field
+                                            name="estimated_age_min_month"
+                                            placeholder="0-11"
+                                        />
                                     </div>
                                     <div class="col-3">
-                                        <label string="Année min" for="estimated_age_min_year" />
-                                        <field name="estimated_age_min_year" placeholder="ex: 2"/>
+                                        <label
+                                            string="Année min"
+                                            for="estimated_age_min_year"
+                                        />
+                                        <field
+                                            name="estimated_age_min_year"
+                                            placeholder="ex: 2"
+                                        />
                                     </div>
                                     <div class="row">
                                         <span class="fw-bold">ET</span>
                                     </div>
                                     <div class="col-3">
-                                        <label string="Mois max" for="estimated_age_max_month"/>
-                                        <field name="estimated_age_max_month" placeholder="0-11"/>
+                                        <label
+                                            string="Mois max"
+                                            for="estimated_age_max_month"
+                                        />
+                                        <field
+                                            name="estimated_age_max_month"
+                                            placeholder="0-11"
+                                        />
                                     </div>
                                     <div class="col-3">
-                                        <label string="Année max" for="estimated_age_max_year"/>
-                                        <field name="estimated_age_max_year" placeholder="ex: 5"/>
+                                        <label
+                                            string="Année max"
+                                            for="estimated_age_max_year"
+                                        />
+                                        <field
+                                            name="estimated_age_max_year"
+                                            placeholder="ex: 5"
+                                        />
                                     </div>
                                 </div>
                             </div>
-                            <field name="estimation_date"/>
+                            <field name="estimation_date" />
                         </group>
                         <group string="Caractéristiques">
-                            <field name="size"/>
-                            <field name="ears"/>
-                            <field name="tail"/>
-                            <field name="hair"/>
-                            <field name="color1"/>
-                            <field name="color2"/>
-                            <field name="color3"/>
-                            <field name="color4"/>
-                            <field name="pattern"/>
-                            <field name="is_sterilized"/>
+                            <field name="size" />
+                            <field name="ears" />
+                            <field name="tail" />
+                            <field name="hair" />
+                            <field name="color1" />
+                            <field name="color2" />
+                            <field name="color3" />
+                            <field name="color4" />
+                            <field name="pattern" />
+                            <field name="is_sterilized" />
                         </group>
-
                     </group>
                 </sheet>
             </form>

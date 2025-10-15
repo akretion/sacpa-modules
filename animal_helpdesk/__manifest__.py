@@ -5,12 +5,12 @@
     "version": "18.0.1.0.0",
     "summary": "Helpdesk Extension - Appels et Animaux",
     "category": "Uncategorized",
-    "website": "https://akretion.com",
+    "website": "https://github.com/akretion/sacpa-modules",
     "author": " Akretion",
     "depends": [
-            "helpdesk_mgmt",
-            "animal_identification",
-        ],
+        "helpdesk_mgmt",
+        "animal_identification",
+    ],
     "data": [
         "security/ir.model.access.csv",
         "views/helpdesk_intervention_type_views.xml",

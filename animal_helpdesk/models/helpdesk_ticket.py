@@ -7,7 +7,6 @@ from odoo import fields, models
 class HelpdeskTicket(models.Model):
     _inherit = "helpdesk.ticket"
 
-
     call_date = fields.Date(string="Date de l'appel")
     call_time = fields.Float(string="Heure de l'appel")
 
@@ -16,7 +15,9 @@ class HelpdeskTicket(models.Model):
     requester_name = fields.Char(string="Nom du donneur d'ordre")
     requester_phone = fields.Char(string="Téléphone du donneur d'ordre")
 
-    nature_id = fields.Many2one("helpdesk.intervention.type", string="Nature de l'intervention")
+    nature_id = fields.Many2one(
+        "helpdesk.intervention.type", string="Nature de l'intervention"
+    )
 
     address = fields.Char(string="Adresse")
     zip = fields.Char(string="Code Postal")

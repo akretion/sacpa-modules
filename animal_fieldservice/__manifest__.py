@@ -5,12 +5,12 @@
     "version": "18.0.1.0.0",
     "summary": "fieldservice Extension - Gestion des Animaux",
     "category": "Uncategorized",
-    "website": "https://akretion.com",
+    "website": "https://github.com/akretion/sacpa-modules",
     "author": " Akretion",
     "depends": [
-            "fieldservice",
-            "animal_identification",
-            "animal_helpdesk",
+        "fieldservice",
+        "animal_identification",
+        "animal_helpdesk",
     ],
     "data": [
         "views/fsm_order_view.xml",
