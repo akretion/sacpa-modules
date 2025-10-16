@@ -10,4 +10,4 @@ class HelpdeskRequester(models.Model):
     _order = "name"
 
     name = fields.Char(string="Nom", required=True)
-    code = fields.Char(string="Code")
+    code = fields.Char()

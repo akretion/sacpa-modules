@@ -10,4 +10,4 @@ class AnimalStatus(models.Model):
     _order = "name"
 
     name = fields.Char(string="Libellé", required=True)
-    code = fields.Char(string="Code")
+    code = fields.Char()
