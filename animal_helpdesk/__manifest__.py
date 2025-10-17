@@ -4,6 +4,7 @@
     "name": "Animal helpdesk",
     "version": "18.0.1.0.0",
     "summary": "Helpdesk Extension - Appels et Animaux",
+    "license": "AGPL-3",
     "category": "Uncategorized",
     "website": "https://github.com/akretion/sacpa-modules",
     "author": " Akretion",

@@ -10,11 +10,11 @@ class AnimalBreed(models.Model):
     _order = "name"
 
     name = fields.Char(string="Libellé", required=True)
-    code = fields.Char(string="Code")
+    code = fields.Char()
     species_id = fields.Many2one("animal.species", string="Espèce")
     code_group = fields.Char(
-        string="Code Group",
+        string="Code Groupe",
     )
     code_scc = fields.Char(string="Code SCC")
-    classification = fields.Char(string="Classification")
+    classification = fields.Char()
     categorie = fields.Char(string="Catégorie")

@@ -6,6 +6,7 @@
     "summary": "Gestion des fiches d'animaux",
     "category": "Uncategorized",
     "website": "https://github.com/akretion/sacpa-modules",
+    "license": "AGPL-3",
     "author": " Akretion",
     "depends": ["base"],
     "data": [

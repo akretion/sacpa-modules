@@ -9,4 +9,4 @@ class AnimalHealthStatus(models.Model):
     _description = "État sanitaire de l'animal"
 
     name = fields.Char(string="Libellé", required=True)
-    code = fields.Char(string="Code")
+    code = fields.Char()

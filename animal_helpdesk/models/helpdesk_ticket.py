@@ -23,7 +23,7 @@ class HelpdeskTicket(models.Model):
     zip = fields.Char(string="Code Postal")
     city = fields.Char(string="Ville")
     contact_phone = fields.Char(string="Téléphone de contact")
-    fax = fields.Char(string="Fax")
+    fax = fields.Char()
 
     species_id = fields.Many2one("animal.species", string="Espèce")
     breed_id = fields.Many2one("animal.breed", string="Race")
