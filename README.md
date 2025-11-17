@@ -24,6 +24,7 @@ addon | version | maintainers | summary
 [animal_fieldservice](animal_fieldservice/) | 18.0.1.0.0 |  | fieldservice Extension - Gestion des Animaux
 [animal_helpdesk](animal_helpdesk/) | 18.0.1.0.0 |  | Helpdesk Extension - Appels et Animaux
 [animal_identification](animal_identification/) | 18.0.1.0.0 |  | Gestion des fiches d'animaux
+[invoice_move_webhook](invoice_move_webhook/) | 18.0.1.0.0 |  | Gestion du webhook pour les factures
 
 [//]: # (end addons)
 
