@@ -1,0 +1,16 @@
+<odoo>
+    <record model='ir.actions.act_url' id='action_demat_website'>
+        <field name='name'>Demat website</field>
+        <field
+            name='url'
+        >https://sacpa.docuware.cloud/DocuWare/Platform/WebClient/a7f32a96-b91e-421e-970e-a589e8c0a73c/Integration?rl=00ec700a-1223-431f-9145-762d49b86990&amp;p=RLV</field>
+        <field name="target">new</field>
+    </record>
+    <menuitem
+        id="menu_webhook_Demat_root"
+        name="Controle de factures"
+        sequence="20"
+        groups="account.group_account_invoice"
+        action="action_demat_website"
+    />
+</odoo>

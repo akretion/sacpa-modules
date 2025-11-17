@@ -1,0 +1,37 @@
+<odoo>
+    <record id="account_move_form_webhook" model="ir.ui.view">
+        <field name="name">account.move.form.webhook</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <notebook>
+                <page id="webhook_tab" name="webhook tab" string="Webhook information">
+                    <group name="webhook_info">
+                        <field
+                            name="state_webhook"
+                            string="Etat demat"
+                            widget="status Bar"
+                        />
+                        <field
+                            name="webhook_id"
+                            readonly="True"
+                            string="webhook lier"
+                        />
+                        <field name="ttc_ok" readonly="True" string="Montant TTC OK" />
+                        <field name="tva_ok" readonly="True" string="Montant TVA OK" />
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+    <!-- <record id="bills_list_view_sacpa" model="ir.ui.view"> -->
+    <!--     <field name="name">sacpa.bills.list</field> -->
+    <!--     <field name="model">account.move</field> -->
+    <!--     <field name="inherit_id" ref="account.view_in_invoice_bill_tree" /> -->
+    <!--     <field name="arch" type="xml"> -->
+    <!--         <list position="inside"> -->
+    <!--             <field name="state_webhook" readonly="1" string="Etat demat" optional="show"/> -->
+    <!--         </list> -->
+    <!--     </field> -->
+    <!-- </record> -->
+</odoo>
