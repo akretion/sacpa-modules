@@ -1,10 +1,11 @@
 [project]
 name = "odoo-addons-akretion-sacpa-modules"
-version = "18.0.20251015.0"
+version = "18.0.20251117.0"
 dependencies = [
     "odoo-addon-animal_fieldservice==18.0.*",
     "odoo-addon-animal_helpdesk==18.0.*",
     "odoo-addon-animal_identification==18.0.*",
+    "odoo-addon-invoice_move_webhook==18.0.*",
 ]
 classifiers=[
     "Programming Language :: Python",
