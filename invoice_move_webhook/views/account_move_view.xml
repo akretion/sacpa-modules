@@ -14,8 +14,8 @@
                         />
                         <field
                             name="webhook_id"
-                            readonly="True"
                             string="webhook lier"
+                            domain="[('partner_id', '=', partner_id), ('reference_de_la_commande', 'ilike', sale_order_id.name)]"
                         />
                         <field name="ttc_ok" readonly="True" string="Montant TTC OK" />
                         <field name="tva_ok" readonly="True" string="Montant TVA OK" />

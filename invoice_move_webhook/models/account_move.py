@@ -7,7 +7,15 @@ from odoo import api, fields, models
 class AccountMove(models.Model):
     _inherit = "account.move"
 
-    webhook_id = fields.Many2one("webhook.move", string="webhook connector")
+    webhook_id = fields.Many2one(
+        "webhook.move",
+        string="webhook connector",
+        domain="""[('partner_id', '=', partner_id),
+                 ('reference_de_la_commande', 'ilike', sale_order_id.name)]""",
+    )
+    sale_order_id = fields.Many2one(
+        "sale.order", string="unique sale order", compute="_compute_sale_order_one"
+    )
 
     state_webhook = fields.Selection(
         [
@@ -45,7 +53,7 @@ class AccountMove(models.Model):
                     val = True
             record.tva_ok = val
 
-    @api.onchange("webhook_id", "state_webhook", "ttc_ok")
+    @api.depends("webhook_id", "ttc_ok", "state_webhook")
     def _compute_state_webhook(self):
         for record in self:
             if record.webhook_id:
@@ -53,3 +61,13 @@ class AccountMove(models.Model):
                     record.state_webhook = "to_validate"
                 else:
                     record.state_webhook = "to_correct"
+            else:
+                record.state_webhook = "no_return"
+
+    def _compute_sale_order_one(self):
+        for record in self:
+            order_sources = record.line_ids.sale_line_ids.order_id
+            if len(order_sources) == 1:
+                record.sale_order_id = order_sources.id
+            else:
+                record.sale_order_id = False

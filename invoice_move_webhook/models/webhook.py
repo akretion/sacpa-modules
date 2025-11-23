@@ -30,6 +30,19 @@ class WebhookMove(models.Model):
     commentaires = fields.Text(string="commentaires")
 
     account_move_id = fields.Many2one("account.move")
+    partner_id = fields.Many2one(
+        "res.partner", string="Fournisseur", compute="_compute_fournisseur"
+    )
+
+    def _compute_fournisseur(self):
+        for record in self:
+            partner_id = record.env["res.partner"].search(
+                [
+                    ("name", "ilike", record.nom_fournisseur),
+                    ("ref", "=", record.code_fournisseur),
+                ]
+            )
+            record.partner_id = partner_id.id
 
     def _compute_name(self):
         self.ensure_one()
