@@ -10,13 +10,9 @@ class AccountMove(models.Model):
     webhook_id = fields.Many2one(
         "webhook.move",
         string="webhook connector",
-        domain="""[('partner_id', '=', partner_id),
-                 ('reference_de_la_commande', 'ilike', sale_order_id.name)]""",
+        # domain="""[('partner_id', '=', partner_id),
+        #          ('reference_de_la_commande', 'ilike', purechase_id.name)]""",
     )
-    sale_order_id = fields.Many2one(
-        "sale.order", string="unique sale order", compute="_compute_sale_order_one"
-    )
-
     state_webhook = fields.Selection(
         [
             ("no_return", "Pas de retour"),
@@ -63,11 +59,3 @@ class AccountMove(models.Model):
                     record.state_webhook = "to_correct"
             else:
                 record.state_webhook = "no_return"
-
-    def _compute_sale_order_one(self):
-        for record in self:
-            order_sources = record.line_ids.sale_line_ids.order_id
-            if len(order_sources) == 1:
-                record.sale_order_id = order_sources.id
-            else:
-                record.sale_order_id = False

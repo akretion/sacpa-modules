@@ -7,16 +7,16 @@
             <notebook>
                 <page id="webhook_tab" name="webhook tab" string="Webhook information">
                     <group name="webhook_info">
+                        <field name="purchase_id" invisible="1" />
                         <field
                             name="state_webhook"
                             string="Etat demat"
                             widget="status Bar"
+                            decoration-success="state_webhook == 'to_validate'"
+                            decoration-warning="state_webhook == 'to_correct'"
+                            decoration-info="state_webhook == 'no_return'"
                         />
-                        <field
-                            name="webhook_id"
-                            string="webhook lier"
-                            domain="[('partner_id', '=', partner_id), ('reference_de_la_commande', 'ilike', sale_order_id.name)]"
-                        />
+                        <field name="webhook_id" string="webhook lier" />
                         <field name="ttc_ok" readonly="True" string="Montant TTC OK" />
                         <field name="tva_ok" readonly="True" string="Montant TVA OK" />
                     </group>

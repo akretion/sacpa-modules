@@ -31,7 +31,7 @@ class WebhookMove(models.Model):
 
     account_move_id = fields.Many2one("account.move")
     partner_id = fields.Many2one(
-        "res.partner", string="Fournisseur", compute="_compute_fournisseur"
+        "res.partner", string="Fournisseur", compute="_compute_fournisseur", store=True
     )
 
     def _compute_fournisseur(self):
