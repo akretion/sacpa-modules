@@ -5,18 +5,27 @@
         <field name="inherit_id" ref="account.view_move_form" />
         <field name="arch" type="xml">
             <notebook>
-                <page id="webhook_tab" name="webhook tab" string="Webhook information">
+                <page
+                    id="webhook_tab"
+                    name="webhook tab"
+                    string="Webhook information"
+                    invisible="move_type in ('out_invoice', 'out_refund', 'entry', 'out_receipt')"
+                >
                     <group name="webhook_info">
                         <field name="purchase_id" invisible="1" />
                         <field
                             name="state_webhook"
                             string="Etat demat"
-                            widget="status Bar"
+                            widget="badge"
                             decoration-success="state_webhook == 'to_validate'"
                             decoration-warning="state_webhook == 'to_correct'"
                             decoration-info="state_webhook == 'no_return'"
                         />
-                        <field name="webhook_id" string="webhook lier" />
+                        <field
+                            name="webhook_id"
+                            string="webhook lier"
+                            domain="[('account_move_id', '=', False), ('partner_id', '=', partner_id)]"
+                        />
                         <field name="ttc_ok" readonly="True" string="Montant TTC OK" />
                         <field name="tva_ok" readonly="True" string="Montant TVA OK" />
                     </group>
