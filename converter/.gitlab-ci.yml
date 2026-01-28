@@ -1,0 +1,17 @@
+include:
+  - project: xcg/ci-templates
+    file: /odoo/18.0/gitlab-ci.yaml
+
+variables:
+  TEST_OPTIONS: --test-tags=odoo_addons_mail
+  # Also install mail to run mail dependant tets
+  ODOO_SCRIPTS_MODULE_LIST: mail
+
+mypy:
+  variables:
+    INSTALL_SECTION: "[test,schema-validation]"
+
+test-schema-validation:
+  extends: test
+  variables:
+    INSTALL_SECTION: "[test,schema-validation]"
