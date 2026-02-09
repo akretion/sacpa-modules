@@ -10,6 +10,7 @@
     "author": " Akretion",
     "depends": [
         "helpdesk_mgmt",
+        "helpdesk_mgmt_fieldservice",
         "animal_identification",
     ],
     "data": [

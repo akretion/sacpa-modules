@@ -19,16 +19,13 @@ class HelpdeskTicket(models.Model):
         "helpdesk.intervention.type", string="Nature de l'intervention"
     )
 
+    animal_ids = fields.Many2many("animal.identification", string="Animaux")
+
     address = fields.Char(string="Adresse")
     zip = fields.Char(string="Code Postal")
     city = fields.Char(string="Ville")
     contact_phone = fields.Char(string="Téléphone de contact")
     fax = fields.Char()
-
-    species_id = fields.Many2one("animal.species", string="Espèce")
-    breed_id = fields.Many2one("animal.breed", string="Race")
-    is_crossbreed = fields.Boolean(string="Croisé ?")
-    crossbreed_breed_id = fields.Many2one("animal.breed", string="Race de croisement")
 
     animal_count = fields.Integer(string="Nombre d'animaux concernés")
     animal_status_id = fields.Many2one("animal.status", string="Statut de l'animal")
