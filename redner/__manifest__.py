@@ -24,7 +24,7 @@
     "version": "18.0.1.8.3",
     "category": "Reporting",
     "author": "XCG Consulting",
-    "website": "https://orbeet.io/",
+    "website": "https://github.com/akretion/sacpa-modules",
     "summary": "Odoo addon to use redner (producer of reports and emails)",
     # converter: https://orus.io/xcg/odoo-modules/converter
     "depends": ["converter", "mail", "web"],

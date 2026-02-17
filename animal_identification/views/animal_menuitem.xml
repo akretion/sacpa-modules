@@ -1,14 +1,15 @@
 <odoo>
     <menuitem
         id="menu_animal_root"
-        name="Gestion Animaux"
+        name="Animaux"
         sequence="10"
         groups="animal_identification.group_animal_id_user,animal_identification.group_animal_id_manager"
+        web_icon="animal_identification,static/description/icon.png"
     />
 
-    <menuitem id="menu_animal" name="Animeaux" sequence="1" parent="menu_animal_root">
+    <menuitem id="menu_animal" name="Animaux" sequence="1" parent="menu_animal_root">
         <menuitem
-            id="menu_animal_identifications"
+            id="menu_animal_identification"
             name="Identification animal"
             action="action_animal_identification"
         />

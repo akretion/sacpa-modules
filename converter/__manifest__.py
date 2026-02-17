@@ -24,7 +24,7 @@
     "version": "18.0.6.0.0",
     "category": "Hidden",
     "author": "XCG Consulting",
-    "website": "https://orbeet.io/",
+    "website": "https://github.com/akretion/sacpa-modules",
     "depends": ["base"],
     "installable": True,
 }
