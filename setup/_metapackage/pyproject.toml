@@ -1,7 +1,8 @@
 [project]
 name = "odoo-addons-akretion-sacpa-modules"
-version = "18.0.20260128.0"
+version = "18.0.20260220.0"
 dependencies = [
+    "odoo-addon-animacare==18.0.*",
     "odoo-addon-animal_fieldservice==18.0.*",
     "odoo-addon-animal_helpdesk==18.0.*",
     "odoo-addon-animal_identification==18.0.*",

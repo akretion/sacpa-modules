@@ -1,0 +1,17 @@
+<odoo noupdate="0">
+    <record id="data_map_animac_corps" model="data.map">
+        <field name="model_id" ref="model_corpse_transit" />
+        <field name="code">Corps</field>
+        <field name="flow">import</field>
+        <field name="readonly">1</field>
+        <field name="transformation">animacare_corps</field>
+    </record>
+
+    <record id="data_map_animac_urne" model="data.map">
+        <field name="model_id" ref="model_corpse_transit" />
+        <field name="code">Urnes</field>
+        <field name="flow">import</field>
+        <field name="readonly">1</field>
+        <field name="transformation">animacare_urne</field>
+    </record>
+</odoo>

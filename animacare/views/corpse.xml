@@ -1,0 +1,122 @@
+<odoo>
+    <record id="corpse_transit_form" model="ir.ui.view">
+        <field name="model">corpse.transit</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group name="main">
+                        <group name="left">
+                            <field name="collector_id" />
+                            <field name="cremation" />
+                            <field name="animal" />
+                            <field name="breed" />
+                            <field name="weight" />
+                            <field name="death_date" />
+                            <field name="process" />
+                            <field name="date" />
+                            <field name="initial_state" />
+                        </group>
+                        <group name="right">
+                            <field name="back_collector_id" />
+                            <field name="operator1" />
+                            <field name="return_date" />
+                            <field name="final_state" />
+                            <field name="operator2" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="corpse_transit_list" model="ir.ui.view">
+        <field name="model">corpse.transit</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="collector_id" string="Collecte" />
+                <field name="cremation" string="Dossier" />
+                <field name="animal" string="Animal" />
+                <field name="breed" />
+                <field name="weight" />
+                <field name="death_date" string="Décès" />
+                <field name="process" string="Procédé" />
+                <field name="date" />
+                <field name="back_collector_id" string="Destination" />
+                <field name="initial_state" />
+                <field name="operator1" />
+                <field name="return_date" string="Retour" />
+                <field name="final_state" />
+                <field name="operator2" />
+            </list>
+        </field>
+    </record>
+
+    <record id="corpse_transit_search" model="ir.ui.view">
+        <field name="model">corpse.transit</field>
+        <field name="arch" type="xml">
+            <search>
+                <field
+                    name="cremation"
+                    string="Dossier"
+                    filter_domain="[('cremation', 'ilike', self)]"
+                />
+                <field
+                    name="operator2"
+                    string="Opérateur Sacpa"
+                    filter_domain="[('operator2', 'ilike', self)]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="collector_id"
+                        string="Point Collecteur"
+                        domain="[]"
+                        context="{'group_by' : 'collector_id'}"
+                    />
+                    <filter
+                        name="back_collector_id"
+                        string="Point Retour"
+                        domain="[]"
+                        context="{'group_by' : 'back_collector_id'}"
+                    />
+                    <filter
+                        name="breed"
+                        string="Race"
+                        domain="[]"
+                        context="{'group_by' : 'breed'}"
+                    />
+                    <filter
+                        name="process"
+                        string="Procédé"
+                        domain="[]"
+                        context="{'group_by' : 'process'}"
+                    />
+                    <filter
+                        name="breed"
+                        string="Race"
+                        domain="[]"
+                        context="{'group_by' : 'breed'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="corpse_log_action" model="ir.actions.act_window">
+        <field name="name">Animacare</field>
+        <field name="res_model">corpse.transit</field>
+        <field name="view_mode">list,form</field>
+        <field name="path">animacare</field>
+    </record>
+
+    <menuitem
+        id="menu_animacare_root"
+        name="Animacare"
+        sequence="9"
+        web_icon="animacare,static/description/icon.png"
+    />
+    <menuitem
+        id="corpse_transit_menu"
+        parent="menu_animacare_root"
+        action="corpse_log_action"
+    />
+</odoo>
