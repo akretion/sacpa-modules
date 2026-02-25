@@ -1,0 +1,182 @@
+<odoo>
+    <record id="pet_declaration_form" model="ir.ui.view">
+        <field name="model">pet.declaration</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group name="main">
+                        <group name="left">
+                            <field name="raw_time" />
+                            <field name="date" />
+                            <field name="domain" />
+                            <field name="entry_date" />
+                            <field name="entry" />
+                            <field name="declaration_ref" />
+                            <field name="specie" />
+                            <field name="sex" />
+                            <field name="sterilized" />
+                            <field name="identified" />
+                            <field name="identifiant" />
+                            <field name="breed" />
+                            <field name="crossbred" />
+                            <field name="color" />
+                            <field name="pet_name" />
+                            <field name="age" />
+                            <field name="age_unit" />
+                            <field name="url" />
+                        </group>
+                        <group name="right">
+                            <field name="comment" />
+                            <field name="address_area" />
+                            <field name="city_area" />
+                            <field name="zip_area" />
+                            <field name="last_name" />
+                            <field name="first_name" />
+                            <field name="address" />
+                            <field name="zip" />
+                            <field name="city" />
+                            <field name="phone" />
+                            <field name="email" />
+                            <field name="consentement1" />
+                            <field name="consentement2" />
+                            <field name="ip" />
+                            <field name="infosupp1" />
+                            <field name="infosupp2" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="pet_declaration_list" model="ir.ui.view">
+        <field name="model">pet.declaration</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="raw_time" optional="hide" />
+                <field name="date" />
+                <field name="entry_date" />
+                <field name="entry" />
+                <field name="declaration_ref" string="Déclaration" />
+                <field name="domain" />
+                <field name="specie" />
+                <field name="sex" optional="hide" />
+                <field name="sterilized" />
+                <field name="identified" optional="hide" />
+                <field name="identifiant" optional="hide" />
+                <field name="breed" />
+                <field name="crossbred" />
+                <field name="color" />
+                <field name="pet_name" />
+                <field name="age" />
+                <field name="age_unit" />
+                <field name="url" optional="hide" />
+                <field name="comment" optional="hide" />
+                <field name="address_area" optional="hide" />
+                <field name="city_area" />
+                <field name="zip_area" />
+                <field name="last_name" />
+                <field name="first_name" />
+                <field name="address" optional="hide" />
+                <field name="zip" />
+                <field name="city" />
+                <field name="phone" optional="hide" />
+                <field name="email" optional="hide" />
+                <field name="consentement1" optional="hide" />
+                <field name="consentement2" optional="hide" />
+                <field name="ip" optional="hide" />
+                <field name="infosupp1" optional="hide" />
+                <field name="infosupp2" optional="hide" />
+            </list>
+        </field>
+    </record>
+
+    <record id="pet_declaration_search" model="ir.ui.view">
+        <field name="model">pet.declaration</field>
+        <field name="arch" type="xml">
+            <search>
+                <field
+                    name="declaration_ref"
+                    string="Déclaration"
+                    filter_domain="[('declaration_ref', 'ilike', self)]"
+                />
+                <filter name="Femelle" domain="[('sex', '=', 'femelle')]" />
+                <filter name="Mâle" domain="[('sex', '=', 'mâle')]" />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="city_area"
+                        string="Ville"
+                        domain="[]"
+                        context="{'group_by' : 'city_area'}"
+                    />
+                    <filter
+                        name="date"
+                        string="Date"
+                        domain="[]"
+                        context="{'group_by' : 'date'}"
+                    />
+                    <filter
+                        name="sex"
+                        string="Sex"
+                        domain="[]"
+                        context="{'group_by' : 'sex'}"
+                    />
+                    <filter
+                        name="specie"
+                        string="Espèce"
+                        domain="[]"
+                        context="{'group_by' : 'specie'}"
+                    />
+                    <filter
+                        name="breed"
+                        string="Race"
+                        domain="[]"
+                        context="{'group_by' : 'breed'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="pet_decla_action" model="ir.actions.act_window">
+        <field name="name">Pet Déclarations</field>
+        <field name="res_model">pet.declaration</field>
+        <field name="view_mode">list,form</field>
+        <field name="path">pet-decla</field>
+    </record>
+
+    <record id="pet_decla_found_action" model="ir.actions.act_window">
+        <field name="name">Animal trouvé</field>
+        <field name="res_model">pet.declaration</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('domain', '=', 'found')]</field>
+        <field name="path">pet-found</field>
+    </record>
+
+    <record id="pet_decla_lost_action" model="ir.actions.act_window">
+        <field name="name">Animal perdu</field>
+        <field name="res_model">pet.declaration</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('domain', '=', 'lost')]</field>
+        <field name="path">pet-lost</field>
+    </record>
+
+    <menuitem
+        id="menu_vigipet_root"
+        name="Vigipets"
+        sequence="9"
+        web_icon="vigipet,static/description/icon.png"
+    />
+    <menuitem id="pet_menu" name="Animaux" parent="menu_vigipet_root" />
+    <menuitem id="pet_declaration_menu" parent="pet_menu" action="pet_decla_action" />
+    <menuitem
+        id="pet_decla_found_menu"
+        parent="pet_menu"
+        action="pet_decla_found_action"
+    />
+    <menuitem
+        id="pet_decla_lost_menu"
+        parent="pet_menu"
+        action="pet_decla_lost_action"
+    />
+</odoo>
