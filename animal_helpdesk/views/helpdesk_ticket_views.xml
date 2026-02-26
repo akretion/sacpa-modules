@@ -67,39 +67,77 @@
                         />
                         </div>
                         <h1 class="oe_title">
-                            <field name="number" />
+                            <field name="name"  />
                         </h1>
-                        <h2 class="o_row">
-                            <field name="name" />
-                        </h2>
+                        <!-- <h2 class="o_row"> -->
+                        <!--     <field name="name" /> -->
+                        <!-- </h2> -->
                     </div>
                     <group name="main" col="2">
-                        <group>
-                            <field name="active" invisible="1" />
-                            <field name="duplicate_tracking_enabled" invisible="1" />
-                            <field name="team_id" options='{"always_reload": True}' />
-                            <field name="user_ids" invisible="1" readonly="1" />
-                            <field
-                                name="user_id"
-                                options='{"always_reload": True}'
-                                widget="many2one_avatar_user"
-                            />
-                            <field name="priority" widget="priority" />
-                            <field
-                                name="company_id"
-                                options="{'no_create': True}"
-                                groups="base.group_multi_company"
-                            />
-                            <field name="create_date" readonly="1" />
-                            <field name="channel_id" />
+                        <group col="1">
+                            <group>
+                                <field name="number" string="Numéro de la demande"/>
+                                <field name="create_date" string="Date/heure de la demande" />
+                            </group>
+                            <group string="QUI ?">
+                                <field name="canal_demande"/>
+                                <field name="partner_id" />
+                                <field name="agreement_id" string="Contrat" />
+                                <field name="donneur_ordre" string="Donneur d'ordre Type(liste déroulante)"/>
+                                <field name="donneur_partner" string="Donneur d'ordre Contact"/>
+                            </group>
+                            <group string="QUAND ?">
+                                <field name="priority" string="Priorité"/>
+                                <field name="fsm_order_date" string="Date/heure de l'interventions" />
+                            </group>
+                            <group string="QUOI ?">
+                                <field name="nature_id" string="Nature" />
+                                <field name="description" string="Description" />
+                            </group>
+                            <group>
+                                <field name="active" invisible="1" />
+                                <field name="duplicate_tracking_enabled" invisible="1" />
+                                <field name="team_id" options='{"always_reload": True}' />
+                                <field name="user_ids" invisible="1" readonly="1" />
+                                <field
+                                    name="user_id"
+                                    options='{"always_reload": True}'
+                                    widget="many2one_avatar_user"
+                                />
+                                <field name="priority" widget="priority" />
+                                <field
+                                    name="company_id"
+                                    options="{'no_create': True}"
+                                    groups="base.group_multi_company"
+                                />
+                                <field name="create_date" readonly="1" />
+                                <field name="channel_id" />
 
+                            </group>
                         </group>
-                        <group>
-                            <field name="address"/>
-                            <field name="zip"/>
-                            <field name="city"/>
-                            <field name="contact_phone" />
-                            <field name="fax" />
+                        <group col="1">
+                            <group string="OU ?">
+                                <field name="fsm_location_id" />
+                                <field name="location_address"/>
+                                <field name="location_address2" />
+                                <field name="location_zip"/>
+                                <field name="location_city"/>
+                                <div>
+                                    <button icon="fa-gear" string="Compute based on address" title="Compute Localization" name="geo_localize" type="object" class="btn btn-link p-0"/>
+                                </div>
+                                <div>
+                                    <button string="Liem google map" name="action_open_google_map"/>
+                                </div>
+                                <field name="contact_on_place" />
+                                <field name="contact_phone" />
+                                <field name="infos_localisation" />
+                                <field name="blood" widget="Toggle"/>
+                            </group>
+                            <group string="COMMENT ?">
+                                <field name="company_id" string="Société" />
+                                <field name="team_id" string="Affecté à" />
+                                <field name="fsm_vhl" string="Véhicule" />
+                            </group>
                         </group>
                     </group>
                     <group>
@@ -115,7 +153,7 @@
                                     </list>
                                 </field>
                             </page>
-                            <page>
+                            <page name="List_intervention" String="Liste des interventions">
                                 <field name="fsm_order_ids" string="List des interventions">
                                     <list string="List des interventions">
                                         <field name="name"/>
@@ -123,7 +161,8 @@
                                 </field>
                             </page>
                             <page string="Autres informations" name="Autres informations">
-                                <field name="notes"/>
+                                <field name="notes" string="Notes"/>
+                                <field name="description" string="Description" />
                             </page>
                         </notebook>
                     </group>

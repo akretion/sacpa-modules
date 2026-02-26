@@ -3,118 +3,324 @@
     <record id="view_fsm_order_form_animal_extension" model="ir.ui.view">
         <field name="name">fsm.order.form.animal.extension</field>
         <field name="model">fsm.order</field>
-        <field name="inherit_id" ref="fieldservice.fsm_order_form" />
+        <field name="priority" eval="1"/>
+        <!-- <field name="inherit_id" ref="fieldservice.fsm_order_form" /> -->
         <field name="arch" type="xml">
-            <page name="execution_page" position="after">
-                <page string="Gestion animal">
-                    <group>
-                        <!-- Bloc Intervention -->
-                        <group string="Détails d'intervention">
-                            <field name="request_ref" />
-                            <field name="intervention_number" />
-                            <field name="internal_reference" />
-                            <field name="intervention_date" />
-                            <field name="intervention_type_id" />
-                            <field name="departure_time" />
-                            <field name="arrival_time" />
-                            <field name="capture_time" />
-                            <field name="return_time" />
+            <form string="Order">
+                <header>
+                    <field name="is_button" invisible="1" />
+                    <field name="team_id" invisible="1" />
+                    <button
+                        id="action_complete"
+                        name="action_complete"
+                        string="Complete"
+                        class="oe_highlight"
+                        type="object"
+                        groups="fieldservice.group_fsm_user"
+                        invisible="is_closed"
+                    />
+                    <button
+                        id="action_cancel"
+                        name="action_cancel"
+                        string="Cancel Order"
+                        type="object"
+                        groups="fieldservice.group_fsm_dispatcher"
+                        invisible="is_closed"
+                    />
+                    <field
+                        name="stage_id"
+                        widget="statusbar"
+                        options="{'fold_field': 'fold', 'clickable': True}"
+                        domain="[('stage_type', '=', 'order'), '|', ('team_ids', 'in', team_id), ('team_ids', '=', False)]"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box" />
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1" />
+                        </h1>
+                    </div>
+                    <group col="2">
+                        <group string="RAPPEL DE LA DEMANDE" >
+                            <field name="ticket_id" string="Numéro de la demande" />
+                            <field name="client_id" string="Client" />
+                            <field name="donneur_ordre" string="Donneur d'ordre" />
+                            <field name="donneur_partner" string="Contatct donneur d'ordre" />
+                            <field name="date_demande" string="Date/heure de la demande" />
+                            <field name="nature_demande" string="Nature de la demande" />
+                            <field
+                                name="template_id"
+                                groups="fieldservice.group_fsm_template"
+                            />
+                            <field
+                                name="type"
+                                options="{'no_create': True, 'no_open': True}"
+                            />
+                            <field name="priority" widget="priority" />
+                            <field
+                                name="tag_ids"
+                                widget="many2many_tags"
+                                groups="fieldservice.group_fsm_tag"
+                                options="{'color_field': 'color', 'no_create_edit': True}"
+                            />
                         </group>
-
-                        <!-- Bloc Animaux -->
-                        <group string="Détails de l'animal">
-                            <field name="animal_order_number" />
-                            <field name="tattoo_number" />
-                            <field name="chip_number" />
-                            <field name="medal_number" />
-                            <field name="specie_id" />
-                            <field name="breed_id" />
-                            <field name="is_crossbreed" />
-                            <field name="crossbreed_breed_id" />
-                            <field name="gender" />
-                            <field name="animal_name" />
-                            <field name="pickup_location" />
-                        </group>
-
-                        <group string="Age de l'animal">
-                            <field name="birth_date" />
-                            <field name="calculated_age" />
-                            <div>
-                                <span class="fw-bold">ou Age estimer entre : </span>
-                                <div class="row mt-2">
-                                    <div class="col-3">
-                                        <label
-                                            string="Mois min"
-                                            for="estimated_age_min_month"
-                                        />
-                                        <field
-                                            name="estimated_age_min_month"
-                                            placeholder="0-11"
-                                        />
-                                    </div>
-                                    <div class="col-3">
-                                        <label
-                                            string="Année min"
-                                            for="estimated_age_min_year"
-                                        />
-                                        <field
-                                            name="estimated_age_min_year"
-                                            placeholder="ex: 2"
-                                        />
-                                    </div>
-                                    <div class="row">
-                                        <span class="fw-bold">ET</span>
-                                    </div>
-                                    <div class="col-3">
-                                        <label
-                                            string="Mois max"
-                                            for="estimated_age_max_month"
-                                        />
-                                        <field
-                                            name="estimated_age_max_month"
-                                            placeholder="0-11"
-                                        />
-                                    </div>
-                                    <div class="col-3">
-                                        <label
-                                            string="Année max"
-                                            for="estimated_age_max_year"
-                                        />
-                                        <field
-                                            name="estimated_age_max_year"
-                                            placeholder="ex: 5"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                            <field name="estimation_date" />
-                        </group>
-                        <group string="Autres infos">
-                            <field name="folder_pound_number" />
-                            <field name="collar" />
-                            <field name="leash" />
-                            <field name="muzzle" />
-                            <field name="other_restraints" />
-                            <field name="behavior" />
-                            <field name="health_status" />
-                            <field name="legal_deposit" />
-                        </group>
-                        <group string="Caractéristiques">
-                            <field name="animal_status_id" />
-                            <field name="size" />
-                            <field name="ears" />
-                            <field name="tail" />
-                            <field name="hair" />
-                            <field name="color1" />
-                            <field name="color2" />
-                            <field name="color3" />
-                            <field name="color4" />
-                            <field name="pattern" />
-                            <field name="is_sterilized" />
+                        <group string="INTERVENTION">
+                            <field name="name" string="Nom de l'intervention"/>
+                            <field name="intervention_number" string="Numéro interne d'intervention" />
+                            <field name="company_id" string="Société"/>
+                            <field name="person_id" string="Assigné à"/>
+                            <field name="vehicle_id" string="Véhicule utilisé"/>
+                            <field name="date_start" string="Date/heure début de l'intervention"/>
+                            <field name="nature_intervention" string="Nature de l'intervention"/>
+                            <field name="date_end" string="Date/heure fin de l'intervention"/>
+                            <field name="duration"  readonly="1" string="durée de l'intervention"/>
+                            <field name="location_id" string="lieu de l'intervention"/>
+                            <field
+                                name="territory_id"
+                                invisible='1'
+                                groups="fieldservice.group_fsm_territory"
+                            />
+                            <field name="branch_id" invisible='1' />
+                            <field name="district_id" invisible='1' />
+                            <field name="region_id" invisible='1' />
+                            <field
+                                name="team_id"
+                                groups="fieldservice.group_fsm_team"
+                            />
+                            <field name="internal_type" invisible="1" />
+                            <field
+                                name="company_id"
+                                options="{'no_create': True}"
+                                groups="base.group_multi_company"
+                            />
                         </group>
                     </group>
-                </page>
-            </page>
+                    <group string="Description" name="description_grp">
+                        <field
+                            name="description"
+                            nolabel="1"
+                            colspan="2"
+                            placeholder="Add a description for the order..."
+                        />
+                    </group>
+                    <group string="Resolution" name="resolution_grp">
+                        <field
+                            name="resolution"
+                            nolabel="1"
+                            colspan="2"
+                            placeholder="Enter the resolution for the order..."
+                        />
+                    </group>
+                    <notebook>
+                        <page string="Animaux" name="animaux_page">
+                            <field name="animal_ids" >
+                                <list string="List animaux" open_form_view="True">
+                                    <field name="name"/>
+                                    <field name="species_id" />
+                                    <field name="breed_id" />
+                                    <field name="is_crossed" />
+                                    <field name="status_id" />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Planning" name="planning_page">
+                            <group>
+                                <group string="Requirements" name="requirements_grp">
+                                    <field
+                                        name="category_ids"
+                                        widget="many2many_tags"
+                                        options="{'color_field': 'color'}"
+                                        groups="fieldservice.group_fsm_category"
+                                    />
+                                    <field name="request_early" />
+                                    <field name="request_late" />
+                                </group>
+                                <group id="schedule" string="Schedule Details">
+                                    <field name="scheduled_date_start" />
+                                    <field name="scheduled_duration" />
+                                    <field name="scheduled_date_end" readonly="1" />
+                                </group>
+                            </group>
+                            <group string="Request Workers" name="request_workers">
+                                <field
+                                    name="person_ids"
+                                    widget="many2many"
+                                    nolabel="1"
+                                    colspan="2"
+                                    context="{'search_default_location_ids': location_id}"
+                                >
+                                    <list>
+                                        <field name="name" />
+                                        <field name="phone" />
+                                        <field name="email" />
+                                        <field
+                                            name="category_ids"
+                                            widget="many2many_tags"
+                                            options="{'color_field': 'color'}"
+                                            groups="fieldservice.group_fsm_category"
+                                        />
+                                        <field name="calendar_id" />
+                                    </list>
+                                </field>
+                            </group>
+                        </page>
+                        <page string="Instructions" name="instructions_page">
+                            <group string="Instructions" name="instructions_grp">
+                                <field
+                                    name="todo"
+                                    nolabel="1"
+                                    colspan="2"
+                                    widget="html"
+                                />
+                            </group>
+                            <group
+                                string="Location Directions"
+                                name="location_directions_grp"
+                            >
+                                <field
+                                    name="location_directions"
+                                    nolabel="1"
+                                    colspan="2"
+                                    widget="html"
+                                />
+                            </group>
+                        </page>
+                        <page
+                            string="Equipments"
+                            groups="fieldservice.group_fsm_equipment"
+                            name="equipements_page"
+                        >
+                            <field
+                                name="equipment_ids"
+                                options="{'no_create': True}"
+                                domain="[('current_location_id','=',location_id)]"
+                            >
+                                <list>
+                                    <field name="name" />
+                                    <field name="person_id" />
+                                    <field name="location_id" />
+                                    <field name="current_location_id" />
+                                    <field name="stage_id" />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter />
+            </form>
         </field>
     </record>
+    <!--         <page name="execution_page" position="after"> -->
+    <!--             <page string="Gestion animal"> -->
+    <!--                 <group> -->
+                         <!-- Bloc Intervention -->
+    <!--                     <group string="Détails d'intervention"> -->
+    <!--                         <field name="request_ref" /> -->
+    <!--                         <field name="intervention_number" /> -->
+    <!--                         <field name="internal_reference" /> -->
+    <!--                         <field name="intervention_date" /> -->
+    <!--                         <field name="intervention_type_id" /> -->
+    <!--                         <field name="departure_time" /> -->
+    <!--                         <field name="arrival_time" /> -->
+    <!--                         <field name="capture_time" /> -->
+    <!--                         <field name="return_time" /> -->
+    <!--                     </group> -->
+    <!---->
+                         <!-- Bloc Animaux -->
+    <!--                     <group string="Détails de l'animal"> -->
+    <!--                         <field name="animal_order_number" /> -->
+    <!--                         <field name="tattoo_number" /> -->
+    <!--                         <field name="chip_number" /> -->
+    <!--                         <field name="medal_number" /> -->
+    <!--                         <field name="species_id" /> -->
+    <!--                         <field name="breed_id" /> -->
+    <!--                         <field name="is_crossbreed" /> -->
+    <!--                         <field name="crossbreed_breed_id" /> -->
+    <!--                         <field name="gender" /> -->
+    <!--                         <field name="animal_name" /> -->
+    <!--                         <field name="pickup_location" /> -->
+    <!--                     </group> -->
+    <!---->
+    <!--                     <group string="Age de l'animal"> -->
+    <!--                         <field name="birth_date" /> -->
+    <!--                         <field name="calculated_age" /> -->
+    <!--                         <div> -->
+    <!--                             <span class="fw-bold">ou Age estimer entre : </span> -->
+    <!--                             <div class="row mt-2"> -->
+    <!--                                 <div class="col-3"> -->
+    <!--                                     <label -->
+    <!--                                         string="Mois min" -->
+    <!--                                         for="estimated_age_min_month" -->
+    <!--                                     /> -->
+    <!--                                     <field -->
+    <!--                                         name="estimated_age_min_month" -->
+    <!--                                         placeholder="0-11" -->
+    <!--                                     /> -->
+    <!--                                 </div> -->
+    <!--                                 <div class="col-3"> -->
+    <!--                                     <label -->
+    <!--                                         string="Année min" -->
+    <!--                                         for="estimated_age_min_year" -->
+    <!--                                     /> -->
+    <!--                                     <field -->
+    <!--                                         name="estimated_age_min_year" -->
+    <!--                                         placeholder="ex: 2" -->
+    <!--                                     /> -->
+    <!--                                 </div> -->
+    <!--                                 <div class="row"> -->
+    <!--                                     <span class="fw-bold">ET</span> -->
+    <!--                                 </div> -->
+    <!--                                 <div class="col-3"> -->
+    <!--                                     <label -->
+    <!--                                         string="Mois max" -->
+    <!--                                         for="estimated_age_max_month" -->
+    <!--                                     /> -->
+    <!--                                     <field -->
+    <!--                                         name="estimated_age_max_month" -->
+    <!--                                         placeholder="0-11" -->
+    <!--                                     /> -->
+    <!--                                 </div> -->
+    <!--                                 <div class="col-3"> -->
+    <!--                                     <label -->
+    <!--                                         string="Année max" -->
+    <!--                                         for="estimated_age_max_year" -->
+    <!--                                     /> -->
+    <!--                                     <field -->
+    <!--                                         name="estimated_age_max_year" -->
+    <!--                                         placeholder="ex: 5" -->
+    <!--                                     /> -->
+    <!--                                 </div> -->
+    <!--                             </div> -->
+    <!--                         </div> -->
+    <!--                         <field name="estimation_date" /> -->
+    <!--                     </group> -->
+    <!--                     <group string="Autres infos"> -->
+    <!--                         <field name="folder_pound_number" /> -->
+    <!--                         <field name="collar" /> -->
+    <!--                         <field name="leash" /> -->
+    <!--                         <field name="muzzle" /> -->
+    <!--                         <field name="other_restraints" /> -->
+    <!--                         <field name="behavior" /> -->
+    <!--                         <field name="health_status" /> -->
+    <!--                         <field name="legal_deposit" /> -->
+    <!--                     </group> -->
+    <!--                     <group string="Caractéristiques"> -->
+    <!--                         <field name="animal_status_id" /> -->
+    <!--                         <field name="size" /> -->
+    <!--                         <field name="ears" /> -->
+    <!--                         <field name="tail" /> -->
+    <!--                         <field name="hair" /> -->
+    <!--                         <field name="color1" /> -->
+    <!--                         <field name="color2" /> -->
+    <!--                         <field name="color3" /> -->
+    <!--                         <field name="color4" /> -->
+    <!--                         <field name="pattern" /> -->
+    <!--                         <field name="is_sterilized" /> -->
+    <!--                     </group> -->
+    <!--                 </group> -->
+    <!--             </page> -->
+    <!--         </page> -->
+    <!--     </field> -->
+    <!-- </record> -->
 </odoo>

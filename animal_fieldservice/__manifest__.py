@@ -12,9 +12,11 @@
         "fieldservice",
         "animal_identification",
         "animal_helpdesk",
+        "fieldservice_survey",
     ],
     "data": [
         "views/fsm_order_view.xml",
+        "views/view_fsm_order_survey.xml",
     ],
     "installable": True,
 }

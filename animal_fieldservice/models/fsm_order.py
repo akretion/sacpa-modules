@@ -5,12 +5,18 @@ from datetime import date
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import api, fields, models
+from odoo import api, fields, models, Command
 
 
 class FSMOrder(models.Model):
     _inherit = "fsm.order"
 
+    # Details de la demande
+    donneur_ordre = fields.Selection(related="ticket_id.donneur_ordre")
+    donneur_partner = fields.Many2one(related="ticket_id.donneur_partner")
+    date_demande = fields.Datetime(related="ticket_id.create_date")
+    nature_demande = fields.Many2one(related="ticket_id.nature_id")
+    client_id = fields.Many2one(related="ticket_id.partner_id")
     # Détails d'intervention
     request_ref = fields.Char(string="Référence Demande")
     intervention_number = fields.Integer(string="N° Intervention")
@@ -19,6 +25,7 @@ class FSMOrder(models.Model):
     intervention_type_id = fields.Many2one(
         "helpdesk.intervention.type", string="Type d'intervention"
     )
+    nature_intervention = fields.Char(string="Nature de l'intervention")
 
     departure_time = fields.Float(string="Heure de départ")
     arrival_time = fields.Float(string="Heure d'arrivée")
@@ -26,6 +33,7 @@ class FSMOrder(models.Model):
     return_time = fields.Float(string="Heure de retour")
 
     # Bloc Animaux
+    animal_ids = fields.Many2many("animal.identification", string="Animaux")
     animal_order_number = fields.Char(string="N° Animal Intervention")
     tattoo_number = fields.Char(string="N° Tatouage")
     chip_number = fields.Char(string="N° Puce")
@@ -87,3 +95,9 @@ class FSMOrder(models.Model):
                 record.calculated_age = f"{years} an(s) {months} mois"
             else:
                 record.calculated_age = ""
+
+    @api.onchange("ticket_id")
+    def _compute_animaux_demande(self):
+        for record in self:
+            record.animal_ids = [Command.set(record.ticket_id.animal_ids.ids)]
+            record.location_id = record.ticket_id.fsm_location_id.id
