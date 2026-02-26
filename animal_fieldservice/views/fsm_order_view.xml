@@ -3,12 +3,11 @@
     <record id="view_fsm_order_form_animal_extension" model="ir.ui.view">
         <field name="name">fsm.order.form.animal.extension</field>
         <field name="model">fsm.order</field>
-        <field name="priority" eval="1"/>
+        <field name="priority" eval="1" />
         <!-- <field name="inherit_id" ref="fieldservice.fsm_order_form" /> -->
         <field name="arch" type="xml">
             <form string="Order">
                 <header>
-                    <field name="is_button" invisible="1" />
                     <field name="team_id" invisible="1" />
                     <button
                         id="action_complete"
@@ -42,13 +41,19 @@
                         </h1>
                     </div>
                     <group col="2">
-                        <group string="RAPPEL DE LA DEMANDE" >
+                        <group string="RAPPEL DE LA DEMANDE">
                             <field name="ticket_id" string="Numéro de la demande" />
                             <field name="client_id" string="Client" />
-                            <field name="donneur_ordre" string="Donneur d'ordre" />
-                            <field name="donneur_partner" string="Contatct donneur d'ordre" />
-                            <field name="date_demande" string="Date/heure de la demande" />
-                            <field name="nature_demande" string="Nature de la demande" />
+                            <field name="partner_order_type" string="Donneur d'ordre" />
+                            <field
+                                name="partner_order_id"
+                                string="Contact donneur d'ordre"
+                            />
+                            <field
+                                name="date_ticket"
+                                string="Date/heure de la demande"
+                            />
+                            <field name="nature_ticket" string="Nature de la demande" />
                             <field
                                 name="template_id"
                                 groups="fieldservice.group_fsm_template"
@@ -66,16 +71,32 @@
                             />
                         </group>
                         <group string="INTERVENTION">
-                            <field name="name" string="Nom de l'intervention"/>
-                            <field name="intervention_number" string="Numéro interne d'intervention" />
-                            <field name="company_id" string="Société"/>
-                            <field name="person_id" string="Assigné à"/>
-                            <field name="vehicle_id" string="Véhicule utilisé"/>
-                            <field name="date_start" string="Date/heure début de l'intervention"/>
-                            <field name="nature_intervention" string="Nature de l'intervention"/>
-                            <field name="date_end" string="Date/heure fin de l'intervention"/>
-                            <field name="duration"  readonly="1" string="durée de l'intervention"/>
-                            <field name="location_id" string="lieu de l'intervention"/>
+                            <field name="name" string="Nom de l'intervention" />
+                            <field
+                                name="intervention_number"
+                                string="Numéro interne d'intervention"
+                            />
+                            <field name="company_id" string="Société" />
+                            <field name="person_id" string="Assigné à" />
+                            <field name="vehicle_id" string="Véhicule utilisé" />
+                            <field
+                                name="date_start"
+                                string="Date/heure début de l'intervention"
+                            />
+                            <field
+                                name="nature_intervention"
+                                string="Nature de l'intervention"
+                            />
+                            <field
+                                name="date_end"
+                                string="Date/heure fin de l'intervention"
+                            />
+                            <field
+                                name="duration"
+                                readonly="1"
+                                string="durée de l'intervention"
+                            />
+                            <field name="location_id" string="lieu de l'intervention" />
                             <field
                                 name="territory_id"
                                 invisible='1'
@@ -114,9 +135,9 @@
                     </group>
                     <notebook>
                         <page string="Animaux" name="animaux_page">
-                            <field name="animal_ids" >
+                            <field name="animal_ids">
                                 <list string="List animaux" open_form_view="True">
-                                    <field name="name"/>
+                                    <field name="name" />
                                     <field name="species_id" />
                                     <field name="breed_id" />
                                     <field name="is_crossed" />
@@ -214,7 +235,7 @@
     <!--         <page name="execution_page" position="after"> -->
     <!--             <page string="Gestion animal"> -->
     <!--                 <group> -->
-                         <!-- Bloc Intervention -->
+    <!-- Bloc Intervention -->
     <!--                     <group string="Détails d'intervention"> -->
     <!--                         <field name="request_ref" /> -->
     <!--                         <field name="intervention_number" /> -->
@@ -227,7 +248,7 @@
     <!--                         <field name="return_time" /> -->
     <!--                     </group> -->
     <!---->
-                         <!-- Bloc Animaux -->
+    <!-- Bloc Animaux -->
     <!--                     <group string="Détails de l'animal"> -->
     <!--                         <field name="animal_order_number" /> -->
     <!--                         <field name="tattoo_number" /> -->

@@ -1,7 +1,7 @@
 # Copyright (C) 2025 - TODAY, Akretion
 # @author Mourad EL HADJ MIMOUNE <mourad.elhadj.mimoune@akretion.com>
 
-from odoo import fields, models, api
+from odoo import api, fields, models
 
 
 class HelpdeskTicket(models.Model):
@@ -16,13 +16,13 @@ class HelpdeskTicket(models.Model):
     call_time = fields.Float(string="Heure de l'appel")
     canal_demande = fields.Char(string="Canal de la demande")
 
-    donneur_ordre = fields.Selection(
+    partner_order_type = fields.Selection(
         [
             ("police", "Police"),
         ],
         string="Type de donneur ordre",
     )
-    donneur_partner = fields.Many2one(
+    partner_order_id = fields.Many2one(
         "res.partner", string="Contact du donneur d'ordre"
     )
 
@@ -52,25 +52,24 @@ class HelpdeskTicket(models.Model):
     location_longitude = fields.Float(
         related="fsm_location_id.partner_longitude", string="Longitude"
     )
-    lien_google_localisation = fields.Char(
+    url_google_location = fields.Char(
         string="Lien_google", compute="_compute_google_map_url"
     )
     contact_on_place = fields.Char(string="Contact sur place")
     contact_phone = fields.Char(string="Téléphone de contact")
     fax = fields.Char()
     blood = fields.Boolean(string="Présence de sang?")
-    infos_localisation = fields.Text(string="Informations sur la localisation")
+    infos_location = fields.Text(string="Informations sur la localisation")
 
     animal_count = fields.Integer(string="Nombre d'animaux concernés")
     animal_status_id = fields.Many2one("animal.status", string="Statut de l'animal")
 
     notes = fields.Text(string="Commentaires")
 
-    api.depends("")
-
+    @api.depends("location_latitude", "location_longitude")
     def _compute_google_map_url(self):
         for record in self:
-            record.lien_google_localisation = (
+            record.url_google_location = (
                 "http://google.map:"
                 + str(record.location_longitude)
                 + ","
@@ -82,12 +81,12 @@ class HelpdeskTicket(models.Model):
         return self.fsm_location_id.geo_localize()
 
     def action_open_google_map(self):
-        if not self.lien_google_localisation:
+        if not self.url_google_location:
             return
         else:
             return {
                 "type": "ir.action.act_url",
-                "url": self.lien_google_localisation,
+                "url": self.url_google_location,
                 "target": "new",
             }
 

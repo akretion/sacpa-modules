@@ -5,17 +5,17 @@ from datetime import date
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import api, fields, models, Command
+from odoo import Command, api, fields, models
 
 
 class FSMOrder(models.Model):
     _inherit = "fsm.order"
 
     # Details de la demande
-    donneur_ordre = fields.Selection(related="ticket_id.donneur_ordre")
-    donneur_partner = fields.Many2one(related="ticket_id.donneur_partner")
-    date_demande = fields.Datetime(related="ticket_id.create_date")
-    nature_demande = fields.Many2one(related="ticket_id.nature_id")
+    partner_order_type = fields.Selection(related="ticket_id.donneur_ordre")
+    partner_order_id = fields.Many2one(related="ticket_id.donneur_partner")
+    date_ticket = fields.Datetime(related="ticket_id.create_date")
+    nature_ticket = fields.Many2one(related="ticket_id.nature_id")
     client_id = fields.Many2one(related="ticket_id.partner_id")
     # Détails d'intervention
     request_ref = fields.Char(string="Référence Demande")
