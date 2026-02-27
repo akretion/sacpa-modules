@@ -10,17 +10,23 @@ class DataMap(models.Model):
         selection_add=[("vigipet_found",) * 2, ("vigipet_lost",) * 2]
     )
 
-    def _additionnal_df_columns_hook(self):
-        cols = super()._additionnal_df_columns_hook()
+    def _df_transform(self):
+        elm = super()._df_transform()
         if self.transformation == "vigipet_found":
-            cols["domain"] = (
-                "pl.lit('found')  # ajout de la colonne domaine avec "
-                + "la valeur 'found' pour les animaux trouvés"
+            elm.append(
+                (
+                    "col",
+                    "pl.lit('found').alias('domain')  # ajout de la colonne domain "
+                    + "avec la valeur 'found' pour les animaux trouvés",
+                )
             )
         elif self.transformation == "vigipet_lost":
-            cols["domain"] = (
-                "pl.lit('lost')  # ajout de la colonne domaine avec "
-                + "la valeur 'lost' pour les animaux trouvés"
+            elm.append(
+                (
+                    "col",
+                    "pl.lit('lost').alias('domain')  # ajout de la colonne domain "
+                    + "avec la valeur 'lost' pour les animaux perdus",
+                )
             )
         if self.transformation in ("vigipet_found", "vigipet_lost"):
             for col in (
@@ -30,11 +36,20 @@ class DataMap(models.Model):
                 "Couleur Chien",
                 "Couleur Chat",
             ):
-                cols[col] = f"pl.col('{col}')" + ".replace({'-': '', '  ': ' '})"
-            cols["sex"] = "pl.col('sex').str.to_lowercase()  # minuscule"
-            cols["specie"] = (
-                "pl.col('specie').str.to_lowercase().str.replace_many({'autres': "
-                + "'autre', 'nac (veuillez préciser dans \"race\")': 'nac'})"
+                mapping = {"-": "", "  ": " "}
+                elm.append(
+                    ("col", f"pl.col('{col}').replace({mapping}).alias('{col}')")
+                )
+            elm.append(
+                ("col", "pl.col('sex').str.to_lowercase().alias('sex')  # minuscule")
+            )
+            elm.append(
+                (
+                    "col",
+                    "pl.col('specie').str.to_lowercase().str.replace_many({'autres': "
+                    + "'autre', 'nac (veuillez préciser dans \"race\")': 'nac'})"
+                    + ".alias('specie')",
+                )
             )
             yes_no = (
                 "{'Oui': '1', 'Non': '0', '-': '0', 'yes': '1', "
@@ -47,12 +62,23 @@ class DataMap(models.Model):
                 "consentement1",
                 "consentement2",
             ):
-                cols[col] = f"pl.col('{col}').str.replace_many({yes_no})"
-            cols["breed"] = (
-                "(pl.col('Race Chien') + pl.col('Race Chat') + pl.col('Race NAC'))"
-                + ".alias('breed')"
+                elm.append(
+                    (
+                        "col",
+                        f"pl.col('{col}').str.replace_many({yes_no}).alias('{col}')",
+                    )
+                )
+            elm.append(
+                (
+                    "col",
+                    "(pl.col('Race Chien') + pl.col('Race Chat') + pl.col('Race NAC'))"
+                    + ".alias('breed')",
+                )
             )
-            cols["color"] = (
-                "(pl.col('Couleur Chien') + pl.col('Couleur Chat')).alias('color')"
+            elm.append(
+                (
+                    "col",
+                    "(pl.col('Couleur Chien') + pl.col('Couleur Chat')).alias('color')",
+                )
             )
-        return cols
+        return elm
