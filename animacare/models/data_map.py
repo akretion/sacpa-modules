@@ -1,3 +1,5 @@
+import polars as pl
+
 from odoo import fields, models
 
 
@@ -8,14 +10,13 @@ class DataMap(models.Model):
         selection_add=[("animacare_corps",) * 2, ("animacare_urne",) * 2]
     )
 
-    def _df_transform(self):
-        elm = super()._df_transform()
+    def _df_alter(self, df):
+        "Method is firstly parsed by inspect before to be executed"
+        df = super()._df_alter(df)
         if self.transformation == "animacare_corps":
-            elm.append(
-                (
-                    "col",
-                    "pl.col('cremation').alias('id')  # ajout colonne 'id' "
-                    + "avec dossier comme clé",
-                )
-            )
-        return elm
+            # ajout colonne 'id' avec dossier comme clé"
+            df = df.with_columns(pl.col("cremation").alias("id"))
+        if self.transformation in ("animacare_corps", "animacare_urne"):
+            # ajout colonne 'id' avec dossier comme clé"
+            df = df.with_columns(pl.col("cremation").alias("id"))
+        return df
