@@ -13,9 +13,6 @@ class DataMap(models.Model):
     def _df_alter(self, df):
         "Method is firstly parsed by inspect before to be executed"
         df = super()._df_alter(df)
-        if self.transformation == "animacare_corps":
-            # ajout colonne 'id' avec dossier comme clé"
-            df = df.with_columns(pl.col("cremation").alias("id"))
         if self.transformation in ("animacare_corps", "animacare_urne"):
             # ajout colonne 'id' avec dossier comme clé"
             df = df.with_columns(pl.col("cremation").alias("id"))

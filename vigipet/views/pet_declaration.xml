@@ -37,8 +37,8 @@
                             <field name="city" />
                             <field name="phone" />
                             <field name="email" />
-                            <field name="consentement1" />
-                            <field name="consentement2" />
+                            <field name="consent1" />
+                            <field name="consent2" />
                             <field name="ip" />
                             <field name="infosupp1" />
                             <field name="infosupp2" />
@@ -82,8 +82,8 @@
                 <field name="city" />
                 <field name="phone" optional="hide" />
                 <field name="email" optional="hide" />
-                <field name="consentement1" optional="hide" />
-                <field name="consentement2" optional="hide" />
+                <field name="consent1" optional="hide" />
+                <field name="consent2" optional="hide" />
                 <field name="ip" optional="hide" />
                 <field name="infosupp1" optional="hide" />
                 <field name="infosupp2" optional="hide" />
