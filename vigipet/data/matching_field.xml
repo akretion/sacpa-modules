@@ -1,0 +1,9 @@
+<odoo noupdate="0">
+    <record id="vigipet_matching_field" model="matching.field">
+        <field name="model_id" ref="vigipet.model_pet_declaration" />
+        <field
+            name="field_ids"
+            eval="[(4, ref('vigipet.field_pet_declaration__declaration_ref'))]"
+        />
+    </record>
+</odoo>

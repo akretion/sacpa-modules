@@ -25,17 +25,15 @@ class DataMap(models.Model):
             "autres": "autre",
             'nac (veuillez préciser dans "race")': "nac",
         }
-        yes_no_mapping = (
-            {
-                "Oui": "1",
-                "Non": "0",
-                "-": "0",
-                "yes": "1",
-                "Non accepté": "0",
-                "Non merci": "0",
-                "Je ne sais pas": "0",
-            },
-        )
+        yes_no_mapping = {
+            "Oui": "1",
+            "Non": "0",
+            "-": "0",
+            "yes": "1",
+            "Non accepté": "0",
+            "Non merci": "0",
+            "Je ne sais pas": "0",
+        }
         if self.transformation in ("vigipet_found", "vigipet_lost"):
             if self.transformation == "vigipet_found":
                 # ajout colonne domain avec la valeur 'found' pour les animaux trouvés
@@ -49,7 +47,18 @@ class DataMap(models.Model):
             df = df.with_columns(
                 pl.col("specie").str.to_lowercase().str.replace_many(mapping_specie)
             )
-            cols = ("sterilized", "identified", "crossbred", "consent1", "consent2")
+            cols = [
+                x
+                for x in (
+                    "sterilized",
+                    "identified",
+                    "crossbred",
+                    "consent1",
+                    "consent2",
+                )
+                if x in df.columns
+            ]
+            # TODO
             for col in cols:
                 df = df.with_columns(  # "Oui": "1", "Non": "0", "-": "0"
                     pl.col(col).str.replace_many(yes_no_mapping).alias(col)

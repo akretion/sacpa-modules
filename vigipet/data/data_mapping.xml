@@ -3,12 +3,8 @@
         <field name="model_id" ref="model_pet_declaration" />
         <field name="code">Animal trouvé</field>
         <field name="transformation">vigipet_found</field>
+        <field name="matching_field_id" ref="vigipet.vigipet_matching_field" />
         <field name="flow">import</field>
-        <!-- config [ renamed ]
-Adresse Declarant = address ; Adresse lieu de perte = address_area ; Age = age ; Age Unite = age_unit ; Ville Declarant = city ; Ville lieu de perte = city_area ; Signes distinctifs = comment ; Consentement CGS 1 = consentement1 ; Consentement CGS 2 = consentement2 ; Croisé = crossbred ; Timestamp = date ; ID Déclaration = declaration_ref ; domain = domain ; Email Declarant = email ; Entry ID = entry ; Date d'entrée = entry_date ; Prénom Declarant = first_name ; Identifiant = identifiant ; Identifié = identified ; Nom Declarant = last_name ; Tel Declarant = phone ; Sexe = sex ; Espèce = specie ; Stérilisée = sterilized ; PJ = url ; Code postal Declarant = zip ; Code postal lieu de perte = zip_area ; Nom animal = pet_name
-[ useless ]
-Form Host = True
--->
     </record>
 
     <record id="data_map_lost_animal" model="data.map">
@@ -16,6 +12,7 @@ Form Host = True
         <field name="code">Animal perdu</field>
         <field name="flow">import</field>
         <field name="transformation">vigipet_lost</field>
+        <field name="matching_field_id" ref="vigipet.vigipet_matching_field" />
         <field name="config" />
     </record>
 </odoo>

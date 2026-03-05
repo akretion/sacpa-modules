@@ -17,6 +17,7 @@
     "data": [
         "views/pet_declaration.xml",
         "security/ir.model.access.csv",
+        "data/matching_field.xml",
         "data/data_mapping.xml",
     ],
     "application": True,
