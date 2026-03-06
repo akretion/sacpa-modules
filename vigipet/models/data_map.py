@@ -10,8 +10,19 @@ class DataMap(models.Model):
         selection_add=[("vigipet_found",) * 2, ("vigipet_lost",) * 2]
     )
 
-    def _df_alter(self, df):
-        "Method is firstly parsed by inspect before to be executed"
+    def _df_alter_vigipet_found(self, df):
+        # ajout colonne domain avec la valeur 'found' pour les animaux trouvés
+        df = df.with_columns(pl.lit("found").alias("domain"))
+        df = self._df_alter_vigipet_found_vigipet_lost(df)
+        return df
+
+    def _df_alter_vigipet_lost(self, df):
+        # ajout colonne domain avec la valeur 'lost' pour les animaux perdus
+        df = df.with_columns(pl.lit("lost").alias("domain"))
+        df = self._df_alter_vigipet_found_vigipet_lost(df)
+        return df
+
+    def _df_alter_vigipet_found_vigipet_lost(self, df):
         df = super()._df_alter(df)
         clean_empty_field = {"-": "", "  ": " "}
         breed_color_c = (
@@ -35,9 +46,6 @@ class DataMap(models.Model):
             "Je ne sais pas": "0",
         }
         if self.transformation in ("vigipet_found", "vigipet_lost"):
-            if self.transformation == "vigipet_found":
-                # ajout colonne domain avec la valeur 'found' pour les animaux trouvés
-                df = df.with_columns(pl.lit("found").alias("domain"))
             if self.transformation == "vigipet_lost":
                 # ajout colonne domain avec la valeur 'lost' pour les animaux perdus
                 df = df.with_columns(pl.lit("lost").alias("domain"))
@@ -47,17 +55,8 @@ class DataMap(models.Model):
             df = df.with_columns(
                 pl.col("specie").str.to_lowercase().str.replace_many(mapping_specie)
             )
-            cols = [
-                x
-                for x in (
-                    "sterilized",
-                    "identified",
-                    "crossbred",
-                    "consent1",
-                    "consent2",
-                )
-                if x in df.columns
-            ]
+            cols = ("sterilized", "identified", "crossbred", "consent1", "consent2")
+            cols = [x for x in cols if x in df.columns]
             # TODO
             for col in cols:
                 df = df.with_columns(  # "Oui": "1", "Non": "0", "-": "0"
