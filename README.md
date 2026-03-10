@@ -21,6 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
+[accord](accord/) | 18.0.1.0.0 |  | Accord to manage contracts
 [animacare](animacare/) | 18.0.1.0.0 |  | Animacare models
 [animal_fieldservice](animal_fieldservice/) | 18.0.1.0.0 |  | fieldservice Extension - Gestion des Animaux
 [animal_helpdesk](animal_helpdesk/) | 18.0.1.0.0 |  | Helpdesk Extension - Appels et Animaux
