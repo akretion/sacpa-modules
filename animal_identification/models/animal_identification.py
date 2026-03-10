@@ -15,9 +15,15 @@ class AnimalIdentification(models.Model):
 
     name = fields.Char(string="Nom")
     fiche_number = fields.Char(string="N° Fiche", required=True)
+    coaxis_id = fields.Char(
+        string="ID coaxis",
+    )
     species_id = fields.Many2one("animal.species", string="Espèce")
     breed_id = fields.Many2one("animal.breed", string="Race")
     is_crossed = fields.Boolean(string="Croisé")
+    breed2_id = fields.Many2one(
+        "animal.bread", string="Race-croisé", required="is_crossed"
+    )
     gender = fields.Selection([("male", "Mâle"), ("female", "Femelle")], string="Sexe")
     chip_number = fields.Char(string="N° Puce")
     tattoo_number = fields.Char(string="N° Tatouage")

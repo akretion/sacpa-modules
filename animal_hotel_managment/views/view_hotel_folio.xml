@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Action for pension folio -->
+    <record id="open_pension_folio1_form_tree_all" model="ir.actions.act_window">
+        <field name="name">Generate pension Folio</field>
+        <field name="res_model">hotel.folio</field>
+        <field name="domain">[("type_folio", "=", "pension")]</field>
+        <field name="view_mode">list,form,calendar,graph</field>
+        <field name="context">{'folio': True}</field>
+    </record>
+    <!-- Action for fourriere folio -->
+    <record id="open_fourriere_folio1_form_tree_all" model="ir.actions.act_window">
+        <field name="name">Generate fourriere Folio</field>
+        <field name="res_model">hotel.folio</field>
+        <field name="domain">[("type_folio", "=", "fourriere")]</field>
+        <field name="view_mode">list,form,calendar,graph</field>
+        <field name="context">{'folio': True}</field>
+    </record>
+    <!-- Action for refuge folio -->
+    <record id="open_refuge_folio1_form_tree_all" model="ir.actions.act_window">
+        <field name="name">Generate refuge Folio</field>
+        <field name="res_model">hotel.folio</field>
+        <field name="domain">[("type_folio", "=", "refuge")]</field>
+        <field name="view_mode">list,form,calendar,graph</field>
+        <field name="context">{'folio': True}</field>
+    </record>
+</odoo>

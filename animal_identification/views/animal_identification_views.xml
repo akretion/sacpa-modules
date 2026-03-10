@@ -17,13 +17,14 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
+                    <field name="fiche_number" />
                     <group>
                         <group string="Infos animal">
-                            <field name="fiche_number" />
+                            <field name="coaxis_id" />
                             <field name="species_id" />
                             <field name="breed_id" />
                             <field name="is_crossed" />
-                            <field name="status_id" />
+                            <field name="breed2_id" invisible="not is_crossed" />
                         </group>
                         <group string="Identification">
                             <field name="chip_number" />
@@ -31,6 +32,7 @@
                             <field name="medal_number" />
                             <field name="name" />
                             <field name="gender" />
+                            <field name="is_sterilized" />
                         </group>
 
                         <group string="Age de l'animal">
@@ -96,7 +98,6 @@
                             <field name="color3" />
                             <field name="color4" />
                             <field name="pattern" />
-                            <field name="is_sterilized" />
                         </group>
                     </group>
                 </sheet>

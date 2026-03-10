@@ -1,0 +1,42 @@
+
+    <!-- Action for Room Reservation Summary -->
+    <record id="action_pension_reservation_summary" model="ir.actions.act_window">
+        <field name="name">Reservation Summary</field>
+        <field name="res_model">room.reservation.summary</field>
+        <field name="domain">[("type_job", "=", "pension")]</field>
+        <field name="view_mode">form</field>
+    </record>
+    <record id="action_fourriere_reservation_summary" model="ir.actions.act_window">
+        <field name="name">Reservation Summary</field>
+        <field name="res_model">room.reservation.summary</field>
+        <field name="domain">[("type_job", "=", "fourriere")]</field>
+        <field name="view_mode">form</field>
+    </record>
+    <record id="action_refuge_reservation_summary" model="ir.actions.act_window">
+        <field name="name">Reservation Summary</field>
+        <field name="res_model">room.reservation.summary</field>
+        <field name="domain">[("type_job", "=", "refuge")]</field>
+        <field name="view_mode">form</field>
+    </record>
+    <!-- Action of hotel reservation -->
+    <record id="action_pension_reservation_tree_all" model="ir.actions.act_window">
+        <field name="name">Reservations</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hotel.reservation</field>
+        <field name="domain">[("type_job", "=", "pension")]</field>
+        <field name="view_mode">list,form,calendar</field>
+    </record>
+    <record id="action_fourriere_reservation_tree_all" model="ir.actions.act_window">
+        <field name="name">Reservations</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hotel.reservation</field>
+        <field name="domain">[("type_job", "=", "fourriere")]</field>
+        <field name="view_mode">list,form,calendar</field>
+    </record>
+    <record id="action_refuge_reservation_tree_all" model="ir.actions.act_window">
+        <field name="name">Reservations</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hotel.reservation</field>
+        <field name="domain">[("type_job", "=", "refuge")]</field>
+        <field name="view_mode">list,form,calendar</field>
+    </record>
