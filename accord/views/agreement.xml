@@ -1,0 +1,14 @@
+<odoo>
+    <record id="agreement_form" model="ir.ui.view">
+        <field name="model">agreement</field>
+        <field name="inherit_id" ref="agreement.agreement_form" />
+        <field name="arch" type="xml">
+            <field name="domain" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="agreement_type_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>

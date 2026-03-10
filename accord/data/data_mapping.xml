@@ -1,0 +1,9 @@
+<odoo noupdate="0">
+    <record id="dmap_abonnement" model="data.map">
+        <field name="model_id" ref="agreement.model_agreement" />
+        <field name="matching_field_id" ref="accord.agreement_matching_field" />
+        <field name="code">Abonnement</field>
+        <field name="flow">import</field>
+        <field name="transformation">agreement</field>
+    </record>
+</odoo>

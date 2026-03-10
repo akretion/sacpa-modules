@@ -1,0 +1,6 @@
+<odoo noupdate="0">
+    <record id="agreement_matching_field" model="matching.field">
+        <field name="model_id" ref="agreement.model_agreement" />
+        <field name="field_ids" eval="[(4, ref('agreement.field_agreement__code'))]" />
+    </record>
+</odoo>
