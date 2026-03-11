@@ -1,6 +1,6 @@
 {
-    "name": "Accord Sacpa",
-    "summary": "Accord to manage contracts",
+    "name": "City INSEE",
+    "summary": "Add INSEE code on city/zip data and on matching partner",
     "version": "18.0.1.0.0",
     "development_status": "Alpha",
     "category": "Project",
@@ -11,14 +11,11 @@
         "python": [],
     },
     "depends": [
-        "account",
-        "agreement",
         "base_address_extended",
-        "file_df",
+        "base_location",
     ],
     "data": [
-        "views/agreement.xml",
-        "data/matching_field.xml",
-        "data/data_mapping.xml",
+        "views/partner.xml",
+        "views/city.xml",
     ],
 }

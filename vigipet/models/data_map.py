@@ -23,7 +23,6 @@ class DataMap(models.Model):
         return df
 
     def _df_alter_vigipet_found_vigipet_lost(self, df):
-        df = super()._df_alter(df)
         clean_empty_field = {"-": "", "  ": " "}
         breed_color_c = (
             "Race Chien",

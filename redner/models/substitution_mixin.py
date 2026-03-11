@@ -149,9 +149,11 @@ class SubstitutionMixin(models.AbstractModel):
                     "converter": sub.converter,
                     "value": sub.value,
                     "template_id": sub.template_id.id if sub.template_id else False,
-                    "ir_actions_report_id": sub.ir_actions_report_id.id
-                    if sub.ir_actions_report_id
-                    else False,
+                    "ir_actions_report_id": (
+                        sub.ir_actions_report_id.id
+                        if sub.ir_actions_report_id
+                        else False
+                    ),
                     "sequence": sub.sequence,
                 }
             # Default empty values
@@ -160,9 +162,9 @@ class SubstitutionMixin(models.AbstractModel):
                 "value_type": "",
                 "converter": False,
                 "value": False,
-                "sequence": sequence_map.get(keyword, 10)
-                if sequence is None
-                else sequence,
+                "sequence": (
+                    sequence_map.get(keyword, 10) if sequence is None else sequence
+                ),
             }
 
         # Process remounted keywords

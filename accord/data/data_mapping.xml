@@ -4,6 +4,6 @@
         <field name="matching_field_id" ref="accord.agreement_matching_field" />
         <field name="code">Abonnement</field>
         <field name="flow">import</field>
-        <field name="transformation">agreement</field>
+        <field name="transformation">sacpa_agreement</field>
     </record>
 </odoo>

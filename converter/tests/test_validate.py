@@ -34,7 +34,8 @@ class TestValidate(tests.TransactionCase):
         validator.initialize()
         validator.validate(
             "product",
-            json.loads("""{
+            json.loads(
+                """{
   "productId": 1,
   "productName": "An ice sculpture",
   "price": 12.5,
@@ -42,7 +43,8 @@ class TestValidate(tests.TransactionCase):
     "cold",
     "ice"
   ]
-}"""),
+}"""
+            ),
         )
 
     def test_validate_dir(self):
@@ -54,7 +56,8 @@ class TestValidate(tests.TransactionCase):
         validator.initialize()
         validator.validate(
             "product",
-            json.loads("""{
+            json.loads(
+                """{
   "productId": 1,
   "productName": "An ice sculpture",
   "price": 12.5,
@@ -62,5 +65,6 @@ class TestValidate(tests.TransactionCase):
     "cold",
     "ice"
   ]
-}"""),
+}"""
+            ),
         )
