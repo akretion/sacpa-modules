@@ -15,7 +15,7 @@
     ],
     "data": [
         "security/groups_security_animal_hotel.xml",
-        "security/ir.model.access.csv",
+        # "security/ir.model.access.csv",
         "views/view_hotel_folio.xml",
         "views/views_hotel_reservation.xml",
         "views/views_menu_item.xml",
