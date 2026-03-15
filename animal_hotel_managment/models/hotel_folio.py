@@ -10,11 +10,15 @@ class FolioRoomLine(models.Model):
 class HotelFolio(models.Model):
     _inherit = "hotel.folio"
 
-    checkout_date = fields.Datetime(required="type_folio == 'pension'")
+    checkout_date = fields.Datetime(required=False)
 
-    company_id = fields.Many2one("res.company", string="Société", required="True")
+    company_id = fields.Many2one(
+        "res.company",
+        string="Société",
+        # required="True",
+    )
     animal_ids = fields.Many2many(
-        "animal.indentification", required=True, string="Animal"
+        "animal.identification", required=True, string="Animal"
     )
     type_folio = fields.Selection(
         selection=[
@@ -25,10 +29,10 @@ class HotelFolio(models.Model):
         string="Type de folio",
     )
 
-    def write(self, vals: ValuesType) -> typing.Literal[True]:
+    def write(self, vals):
         for record in self:
             if record.reservation_id.type_folio:
-            type_folio = record.reservation_id.type_folio
+                type_folio = record.reservation_id.type_folio
             vals["type_folio"] = type_folio
         return super().write(vals)
 
@@ -38,5 +42,5 @@ class HotelFolioLine(models.Model):
 
     animal_id = fields.Many2one("animal.identification", string="animal lier au box")
 
-    def create(self, vals_list: list[ValuesType]) -> Self:
+    def create(self, vals_list):
         return super().create(vals_list)

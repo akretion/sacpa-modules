@@ -8,8 +8,8 @@ class HotelReservation(models.Model):
     adults = fields.Integer(
         required=False,
     )
-    animal_id = fields.Many2one("animal.identification", required=True, string="Animal")
-    company_id = fields.Many2one("res.company", required=True, string="Société")
+    animal_id = fields.Many2one("animal.identification", string="Animal")
+    # company_id = fields.Many2one("res.company", required=True, string="Société")
     type_reservation = fields.Selection(
         selection=[
             ("Pension", "pension"),

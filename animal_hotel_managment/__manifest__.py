@@ -20,6 +20,7 @@
         "views/views_hotel_reservation.xml",
         "views/views_menu_item.xml",
     ],
-    "installable": False,
+    "installable": True,
     "application": True,
+    "post_init_hook": "post_init_hook",
 }
