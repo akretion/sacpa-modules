@@ -11,7 +11,6 @@
         "python": [],
     },
     "depends": [
-        "account",
         "agreement",
         "base_address_extended",
         "file_df",
