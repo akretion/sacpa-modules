@@ -9,6 +9,32 @@
             <field name="agreement_type_id" position="attributes">
                 <attribute name="invisible">1</attribute>
             </field>
+            <xpath expr="//group[@name='main']/group[@name='left']" position="inside">
+                <field name="statut" />
+                <field name="contrat" />
+            </xpath>
+            <xpath expr="//notebook/page[@name='config']" position="inside">
+                <field name="signature_date" position="move" />
+                <field name="is_template" position="move" />
+            </xpath>
+            <xpath expr="//notebook/page[1]" position="before">
+                <page
+                    string="Exceptions"
+                    name="exceptions"
+                    invisible="not field_log_ids"
+                >
+                    <field
+                        name="field_log_ids"
+                        domain="[('model_id', '=', %(agreement.model_agreement)d), ('res_id', '=', id)]"
+                    />
+                </page>
+            </xpath>
+            <xpath expr="//group[@name='main']" position="after">
+                <group col="2">
+                    <field name="partner_ids" widget="many2many_tags" />
+                    <field name="insee_refs" />
+                </group>
+            </xpath>
         </field>
     </record>
 </odoo>

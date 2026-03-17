@@ -19,6 +19,17 @@ class ResCityZip(models.Model):
         for rec in self:
             rec.zipcity = f"{rec.name}{rec.city_id.city_ref}"
 
+    def _prepare_commune_vals(self):
+        return {
+            "name": self.city_id.name,
+            "zip_city_id": self.id,
+            "country_id": self.env.ref("base.fr").id,
+            "city": self.city_id.name,
+            "city_id": self.city_id.id,
+            "zip": self.name,
+            "company_id": False,
+        }
+
 
 class ResCity(models.Model):
     _inherit = "res.city"

@@ -12,6 +12,7 @@
     },
     "depends": [
         "agreement",
+        "city_insee",
         "base_address_extended",
         "file_df",
     ],
