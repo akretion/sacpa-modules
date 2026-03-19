@@ -10,3 +10,42 @@ class AnimalHealthStatus(models.Model):
 
     name = fields.Char(string="Libellé", required=True)
     code = fields.Char()
+    date_event = fields.Date(string="Date")
+    event = fields.Selection(
+        [
+            ("fsm_order", "Intervention"),
+            ("enter", "Entrer en centre"),
+            ("medical", "Visite medical"),
+            ("exit", "Sortie"),
+        ],
+        string="Moment",
+    )
+    value = fields.Selection([()], string="Valeur")
+
+
+class AnimalComportement(models.Model):
+    _name = "animal.comportement"
+    _description = "Comportement de l'animal"
+
+    date = fields.Date(string="date")
+    event = fields.Selection(
+        [
+            ("fsm_order", "Intervention"),
+            ("enter", "Entrée en centre"),
+            ("medical", "Visite médicale"),
+            ("exit", "Sortie"),
+        ]
+    )
+    value = fields.Selection(
+        [],
+        string="Valeur",
+    )
+
+
+class AnimalWeight(models.Model):
+    _name = "animal.weight"
+    _description = "Comportement de l'animal"
+
+    date_event = fields.Date(string="Date")
+    value = fields.Float(string="Poids en kg")
+    notes = fields.Text(string="Remarques")

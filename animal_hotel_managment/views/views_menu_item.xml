@@ -3,7 +3,7 @@
     <!-- RENAME Hotel menue -->
     <menuitem
         id="hotel.hotel_managment_menu"
-        string="Gestion box"
+        name="Gestion box"
         sequence="11"
         groups="animal_hotel_managment.groups_gestion_box_animal"
     />
@@ -12,9 +12,9 @@
         id="pension_management_menu"
         name="Pension"
         sequence="11"
-        groups="animal_hotel_managment.group_animal_pension_user"
-        web_icon="animal_hotel_managment,static/description/icon_pension.png"
+        groups="animal_hotel_managment.group_pension_animal_user"
     />
+        <!-- web_icon="animal_hotel_managment,static/description/icon_pension.png" -->
     <menuitem
         id="pension_reservation_menu"
         name="Réservation de box"
@@ -54,9 +54,9 @@
         id="fourriere_management_menu"
         name="Fourrière"
         sequence="11"
-        groups="animal_hotel_managment.group_animal_fourriere_user"
-        web_icon="animal_hotel_managment,static/description/icon_fourriere.png"
+        groups="animal_hotel_managment.group_fourriere_animal_user"
     />
+        <!-- web_icon="animal_hotel_managment,static/description/icon_fourriere.png" -->
     <menuitem
         id="fourriere_reservation_menu"
         name="Réservation de box"
@@ -95,9 +95,9 @@
         id="refuge_management_menu"
         name="Refuge"
         sequence="11"
-        groups="animal_hotel_managment.group_animal_refuge_user"
-        web_icon="animal_hotel_managment,static/description/icon_refuge.png"
+        groups="animal_hotel_managment.group_refuge_animal_user"
     />
+        <!-- web_icon="animal_hotel_managment,static/description/icon_refuge.png" -->
     <menuitem
         id="refuge_reservation_menu"
         name="Réservation de box"

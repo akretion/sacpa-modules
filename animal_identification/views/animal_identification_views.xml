@@ -100,6 +100,72 @@
                             <field name="pattern" />
                         </group>
                     </group>
+                    <notebook>
+                        <page name="page_photo" string="Photos" />
+                        <page name="page_documents" string="Documents" />
+                        <page name="page_detenteurs" string="Détenteurs">
+                            <field name="owner_ids">
+                                <list string="Propriétaire" open_form_view="True">
+                                    <field name="partner_id" />
+                                    <field name="name" />
+                                    <field name="city" />
+                                    <field name="start_date" />
+                                    <field name="legal" />
+                                </list>
+                            </field>
+                        </page>
+                        <page name="page_interventions" string="Interventions">
+                            <field name="fsm_order">
+                                <list string="Interventions" open_form_view="True">
+                                    <field name="code" />
+                                    <field name="nature" />
+                                    <field name="date" />
+                                    <field name="Résultat" />
+                                </list>
+                            </field>
+                        </page>
+                        <page name="page_folio" string="Folio / Dossiers">
+                            <field name="folio_ids">
+                                <list string="Folio-Dossier">
+                                    <field name="code" />
+                                    <field name="type_job" />
+                                    <field name="animal_ids" />
+                                </list>
+                            </field>
+                        </page>
+                        <page name="page_sanitaire" string="Etats sanitaire">
+                            <field name="status_id">
+                                <list string="Etats sanitaire">
+                                    <field name="date" />
+                                    <field name="event" />
+                                    <field name="value" />
+                                </list>
+                            </field>
+                        </page>
+                        <page name="page_comportement" string="Comportement">
+                            <field name="">
+                                <list string="Comportement">
+                                    <field name="date" />
+                                    <field name="event" />
+                                    <field name="value" />
+                                </list>
+                            </field>
+                        </page>
+                        <page name="page_poids" string="Poids">
+                            <field name="weight_ids">
+                                <list string="Courbe de poids">
+                                    <field name="date" />
+                                    <field name="value" />
+                                    <field name="notes" />
+                                </list>
+                            </field>
+                        </page>
+                        <page name="page_protocoles" string="Protocoles" />
+                        <page name="page_visites" string="Visites" />
+                        <page name="page_actes" string="Actes" />
+                        <page name="page_traitement" string="Traitements" />
+                        <page name="page_soin" string="Soins" />
+                    </notebook>
                 </sheet>
             </form>
         </field>

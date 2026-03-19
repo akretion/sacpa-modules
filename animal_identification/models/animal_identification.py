@@ -58,6 +58,33 @@ class AnimalIdentification(models.Model):
     color4 = fields.Char(string="Couleur 4")
     pattern = fields.Char(string="Dessin")
     is_sterilized = fields.Boolean(string="Stérilisé")
+    parent_1_id = fields.Many2one(
+        "animal.identification",
+        relation="parent_1_rel_animal_identification",
+        column1="child_id",
+        column2="parent_id",
+        string="Affiliation Mère",
+    )
+    parent_2_id = fields.Many2one(
+        "animal.identification",
+        relation="parent_2_rel_animal_identification",
+        column1="child_id",
+        column2="parent_id",
+        string="Affiliation Pére",
+    )
+    child_of_1_ids = fields.One2Many(
+        "animal.identification", "parent_1_id", string="Parent de"
+    )
+
+    owner_ids = fields.Many2many(
+        "animal.owner",
+        string="Détenteurs",
+    )
+    fsm_ids = fields.Many2many(
+        "fsm.order",
+        string="Interventions",
+    )
+    folio_ids = fields.Many2many("hotel.folio", string="Dossiers")
 
     @api.depends("birth_date")
     def _compute_calculated_age(self):
