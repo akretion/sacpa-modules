@@ -60,16 +60,10 @@ class AnimalIdentification(models.Model):
     is_sterilized = fields.Boolean(string="Stérilisé")
     parent_1_id = fields.Many2one(
         "animal.identification",
-        relation="parent_1_rel_animal_identification",
-        column1="child_id",
-        column2="parent_id",
         string="Affiliation Mère",
     )
     parent_2_id = fields.Many2one(
         "animal.identification",
-        relation="parent_2_rel_animal_identification",
-        column1="child_id",
-        column2="parent_id",
         string="Affiliation Pére",
     )
     child_of_1_ids = fields.One2many(
@@ -78,10 +72,16 @@ class AnimalIdentification(models.Model):
 
     owner_ids = fields.Many2many(
         "animal.owner",
+        relation="tabl_owner_animal_identif",
+        column1="col_own",
+        column2="col_animal",
         string="Détenteurs",
     )
     fsm_ids = fields.Many2many(
         "fsm.order",
+        relation="tabl_fsm_animal_identif",
+        column1="col_fsm",
+        column2="col_animal",
         string="Interventions",
     )
     folio_ids = fields.Many2many("hotel.folio", string="Dossiers")

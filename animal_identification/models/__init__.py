@@ -3,3 +3,4 @@ from . import animal_breed
 from . import animal_status
 from . import animal_identification
 from . import animal_health_status
+from . import animal_owner
