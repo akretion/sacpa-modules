@@ -136,7 +136,7 @@
                         <page name="page_sanitaire" string="Etats sanitaire">
                             <field name="status_id">
                                 <list string="Etats sanitaire">
-                                    <field name="date" />
+                                    <field name="date_event" />
                                     <field name="event" />
                                     <field name="value" />
                                 </list>
