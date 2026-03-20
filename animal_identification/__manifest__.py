@@ -8,7 +8,12 @@
     "website": "https://github.com/akretion/sacpa-modules",
     "license": "AGPL-3",
     "author": " Akretion",
-    "depends": ["base"],
+    "depends": [
+        "base",
+        "fieldservice",
+        "hotel",
+        "animal_hotel_managment",
+    ],
     "data": [
         "security/animal_security.xml",
         "security/ir.model.access.csv",

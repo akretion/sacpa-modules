@@ -118,9 +118,9 @@
                             <field name="fsm_order_ids">
                                 <list string="Interventions" open_form_view="True">
                                     <field name="name" />
-                                    <field name="nature" />
-                                    <field name="date" />
-                                    <field name="Résultat" />
+                                    <!-- <field name="nature" /> -->
+                                    <field name="date_start" />
+                                    <!-- <field name="state" /> -->
                                 </list>
                             </field>
                         </page>
@@ -128,7 +128,7 @@
                             <field name="folio_ids">
                                 <list string="Folio-Dossier">
                                     <field name="name" />
-                                    <field name="type_job" />
+                                    <field name="type_folio" />
                                     <field name="animal_ids" />
                                 </list>
                             </field>
