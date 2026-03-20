@@ -117,7 +117,7 @@
                         <page name="page_interventions" string="Interventions">
                             <field name="fsm_order_ids">
                                 <list string="Interventions" open_form_view="True">
-                                    <field name="code" />
+                                    <field name="name" />
                                     <field name="nature" />
                                     <field name="date" />
                                     <field name="Résultat" />
@@ -127,7 +127,7 @@
                         <page name="page_folio" string="Folio / Dossiers">
                             <field name="folio_ids">
                                 <list string="Folio-Dossier">
-                                    <field name="code" />
+                                    <field name="name" />
                                     <field name="type_job" />
                                     <field name="animal_ids" />
                                 </list>
