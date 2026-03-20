@@ -72,7 +72,7 @@ class AnimalIdentification(models.Model):
         column2="parent_id",
         string="Affiliation Pére",
     )
-    child_of_1_ids = fields.One2Many(
+    child_of_1_ids = fields.One2many(
         "animal.identification", "parent_1_id", string="Parent de"
     )
 
