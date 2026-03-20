@@ -77,7 +77,7 @@ class AnimalIdentification(models.Model):
         column2="col_animal",
         string="Détenteurs",
     )
-    fsm_ids = fields.Many2many(
+    fsm_order_ids = fields.Many2many(
         "fsm.order",
         relation="tabl_fsm_animal_identif",
         column1="col_fsm",

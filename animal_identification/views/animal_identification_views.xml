@@ -115,7 +115,7 @@
                             </field>
                         </page>
                         <page name="page_interventions" string="Interventions">
-                            <field name="fsm_order">
+                            <field name="fsm_order_ids">
                                 <list string="Interventions" open_form_view="True">
                                     <field name="code" />
                                     <field name="nature" />
