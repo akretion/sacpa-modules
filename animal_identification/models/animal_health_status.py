@@ -20,7 +20,12 @@ class AnimalHealthStatus(models.Model):
         ],
         string="Moment",
     )
-    value = fields.Selection([()], string="Valeur")
+    value = fields.Selection(
+        [
+            ("valeur_1", "Valeur_1"),
+        ],
+        string="Valeur",
+    )
 
 
 class AnimalComportement(models.Model):
@@ -37,7 +42,9 @@ class AnimalComportement(models.Model):
         ]
     )
     value = fields.Selection(
-        [],
+        [
+            ("valeur_1", "Valeur_1"),
+        ],
         string="Valeur",
     )
 
