@@ -85,6 +85,10 @@ class AnimalIdentification(models.Model):
         string="Interventions",
     )
     folio_ids = fields.Many2many("hotel.folio", string="Dossiers")
+    weight_ids = fields.Many2many("animal.weight", string="historique poids")
+    comportement_id = fields.Many2many(
+        "animal.comportement", string="Comportement de l'animal"
+    )
 
     @api.depends("birth_date")
     def _compute_calculated_age(self):
