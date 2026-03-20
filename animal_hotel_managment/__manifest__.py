@@ -9,7 +9,6 @@
     "license": "AGPL-3",
     "author": " Akretion",
     "depends": [
-        "animal_identification",
         "hotel",
         "hotel_reservation",
     ],
