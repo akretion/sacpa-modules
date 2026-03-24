@@ -61,3 +61,12 @@ class Agreement(models.Model):
         if insee_p_map:
             return [Command.set([x for x in insee_p_map.values()])]
         return False
+
+    def unlink(self):
+        """Logs must be unlinked before the record to avoid
+        integrity error on field_log_ids"""
+        res = super().unlink()
+        self.env["field.log"]._unlink_logs_from_unlinked_resources(
+            self, "agreement", self.ids
+        )
+        return res

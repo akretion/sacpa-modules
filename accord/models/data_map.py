@@ -42,50 +42,62 @@ class DataMap(models.Model):
         df = df.with_columns(domain=pl.lit("sale"))
         # define company
         cpny_map = {
-            x.name: str(x.id)
+            x.partner_id.ref: str(x.id)
             for x in self.env["res.company"].search([])
-            if "SACPA" in x.name and x.name != "SACPA"
+            if x.partner_id.ref
         }
         df = df.with_columns(code_cli=pl.lit("c") + pl.col("code_cli"))
-        df = df.with_columns(
-            company_id=pl.col("CodeDepot")
-            .str.replace(r"(\w+)_SA", r"SACPA $1")
-            .str.replace_many(cpny_map)
-            .cast(pl.Int32)
+        df = df.with_columns(company_id=pl.col("CodeDepot").str.replace_many(cpny_map))
+        # TODO remove
+        df, __ = self.env["df.process"]._df_filter_rows_when_no_numeric_val_in_column(
+            df, "company_id"
         )
         # concatenate zip / city to create zipcity column for matching with res.city.zip
         df = df.with_columns(zipcity=pl.col("zip").cast(pl.String) + pl.col("city"))
         # add zip_city_id column with mapping from res.city.zip model and zipcity col
-        df, unknown = self.env["df.process"]._subtitute_value_by_id(
+        df, unknown = self.env["df.process"]._subtitute_value_by_id_and_split(
             df, "res.city.zip", "zipcity", "zip_city_id"
         )
+        df = df.with_columns(
+            insee2=pl.when(pl.col("insee_refs").str.contains("&"))
+            .then(pl.lit(""))
+            .otherwise(pl.col("insee_refs"))
+        )
+        # df.select('insee', 'insee2')
         # search for partner_id in res.partner based on code_cli with partner ref
-        df, no_partner = self.env["df.process"]._subtitute_value_by_id(
+        # TODO code_cli ou insee
+        # si code insee alors chercher par insee
+        # si code_cli alors chercher par code_cli
+        df = self.env["df.process"]._subtitute_value_by_id(
             df, "res.partner", "code_cli", "partner_id", ref_col="ref"
         )
-        if not no_partner.is_empty():
-            self._sacpa_agreement_create_missing_partners(no_partner)
+        df, no_partner_df = self.env["df.process"]._subtitute_value_by_id_and_split(
+            df, "res.partner", "insee2", "partner_id", ref_col="insee"
+        )
+        if not no_partner_df.is_empty():
+            breakpoint()
+            self._sacpa_agreement_create_missing_partners(no_partner_df)
         return df
 
-    def _sacpa_agreement_create_missing_partners(self, df):
-        cols = ("zip_city_id", "code_cli", "city", "street", "street2", "phone", "mail")
-        for part in df.select(*cols).unique().to_dicts():
+    def _sacpa_agreement_create_missing_partners(self, no_partner_df):
+        cols = ["zip_city_id", "client", "code_cli", "city", "street"]
+        cols.extend(["street2", "phone", "mail", "insee_refs"])
+        for part in no_partner_df.select(*cols).unique().to_dicts():
             zipcity = self.env["res.city.zip"].browse(part["zip_city_id"])
             self.env["res.partner"].create(
                 self._sacpa_agreement_prepare_partner_vals(part, zipcity)
             )
 
-    def _sacpa_agreement_prepare_partner_vals(self, part_dict, zipcity):
-        part_dict.update(
-            {
-                "name": part_dict["client"],
-                "is_company": True,
-                "zip": zipcity.name,
-                "city": zipcity.city_id.name,
-                "ref": part_dict["code_cli"],
-            }
-        )
-        return part_dict
+    def _sacpa_agreement_prepare_partner_vals(self, partner, zipcity):
+        res = {
+            "name": partner["client"],
+            "is_company": True,
+            "zip_city_id": zipcity.id,
+            "zip": zipcity.name,
+            "city": zipcity.city_id.name,
+            "ref": partner["code_cli"],
+        }
+        return res
 
     def _remove_cols_from_previewed_df(self, df):
         preview_df = super()._remove_cols_from_previewed_df(df)

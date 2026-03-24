@@ -1,3 +1,8 @@
+"""- get insee from zip and city
+- create partner from insee code
+- get partner from insee
+"""
+
 import unidecode
 
 from odoo import api, fields, models
@@ -27,6 +32,7 @@ class ResCityZip(models.Model):
             "city": self.city_id.name,
             "city_id": self.city_id.id,
             "zip": self.name,
+            "is_company": True,
             "company_id": False,
         }
 
