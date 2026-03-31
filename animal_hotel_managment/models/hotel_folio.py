@@ -22,9 +22,9 @@ class HotelFolio(models.Model):
     )
     job_type = fields.Selection(
         selection=[
-            ("Pension", "pension"),
-            ("Fourrière", "fourriere"),
-            ("Refuge", "refuge"),
+            ("pension", "Pension"),
+            ("fourrière", "Fourriere"),
+            ("refuge", "Refuge"),
         ],
         string="Type",
     )

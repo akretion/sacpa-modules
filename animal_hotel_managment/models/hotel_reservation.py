@@ -12,9 +12,9 @@ class HotelReservation(models.Model):
     # company_id = fields.Many2one("res.company", required=True, string="Société")
     job_type = fields.Selection(
         selection=[
-            ("Pension", "pension"),
-            ("Fourrière", "fourriere"),
-            ("Refuge", "refuge"),
+            ("pension", "Pension"),
+            ("fourriere", "Fourriere"),
+            ("refuge", "Refuge"),
         ],
         string="Type de folio",
     )
