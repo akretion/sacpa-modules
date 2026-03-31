@@ -19,6 +19,15 @@ class AnimalIdentification(models.Model):
         string="ID coaxis",
     )
     species_id = fields.Many2one("animal.species", string="Espèce")
+    species = fields.Selection(
+        [
+            ("0307_0000001", "Chien"),
+            ("0307_0000002", "Chat"),
+            ("0309_0000001", "Autres"),
+            ("0602_0000001", "Volatile"),
+        ],
+        string="Espèce",
+    )
     breed_id = fields.Many2one("animal.breed", string="Race")
     is_crossed = fields.Boolean(string="Croisé")
     breed2_id = fields.Many2one(
@@ -38,7 +47,7 @@ class AnimalIdentification(models.Model):
     estimated_age_max_month = fields.Integer(string="Âge estimé (max) mois")
     estimated_age_max_year = fields.Integer(string="Âge estimé (max) année")
     estimation_date = fields.Date(string="Date de l'Estimation")
-    status_id = fields.Many2one("animal.status", string="Statut")
+    status_id = fields.Many2one("animal.health.status", string="Statut")
     size = fields.Selection(
         [("petit", "Petit"), ("moyen", "Moyen"), ("grand", "Grand")], string="Taille"
     )
@@ -89,6 +98,23 @@ class AnimalIdentification(models.Model):
     comportement_id = fields.Many2many(
         "animal.comportement", string="Comportement de l'animal"
     )
+    protocole_ids = fields.Many2many(
+        "animal.protocole",
+        "tabl_animal_protocol",
+        "col_animal",
+        "col_protocol",
+        string="Protocoles",
+    )
+    care_ids = fields.Many2many(
+        "animal.care", "tabl_animal_cares", "col_animal", "col_care", string="Soins"
+    )
+    visit_ids = fields.One2many(
+        "animal.vet.visit", "animal_id", string="Visite medical"
+    )
+    treatment_ids = fields.One2many(
+        "animal.care.treatment", "animal_id", string="Traitements"
+    )
+    cares_ids = fields.One2many("animal.care", "animal_id")
 
     @api.depends("birth_date")
     def _compute_calculated_age(self):

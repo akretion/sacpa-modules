@@ -32,7 +32,7 @@ class AnimalComportement(models.Model):
     _name = "animal.comportement"
     _description = "Comportement de l'animal"
 
-    date = fields.Date(string="date")
+    date_event = fields.Date(string="date")
     event = fields.Selection(
         [
             ("fsm_order", "Intervention"),

@@ -11,3 +11,4 @@ class AnimalStatus(models.Model):
 
     name = fields.Char(string="Libellé", required=True)
     code = fields.Char()
+    protocol_id = fields.Many2many("animal.protocol", string="List des protocols")

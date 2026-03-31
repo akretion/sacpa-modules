@@ -143,9 +143,9 @@
                             </field>
                         </page>
                         <page name="page_comportement" string="Comportement">
-                            <field name="">
+                            <field name="comportement_id">
                                 <list string="Comportement">
-                                    <field name="date" />
+                                    <field name="date_event" />
                                     <field name="event" />
                                     <field name="value" />
                                 </list>
@@ -154,17 +154,54 @@
                         <page name="page_poids" string="Poids">
                             <field name="weight_ids">
                                 <list string="Courbe de poids">
-                                    <field name="date" />
+                                    <field name="date_event" />
                                     <field name="value" />
                                     <field name="notes" />
                                 </list>
                             </field>
                         </page>
-                        <page name="page_protocoles" string="Protocoles" />
-                        <page name="page_visites" string="Visites" />
+                        <page name="page_protocoles" string="Protocoles">
+                            <field name="protocole_ids">
+                                <list string="Liste des protocole">
+                                    <field name="name" />
+                                    <field name="code" />
+                                    <field name="date_event" />
+                                </list>
+                            </field>
+                        </page>
+                        <page name="page_visites" string="Visites">
+                            <field name="visit_ids">
+                                <list string="Liste des visit">
+                                    <field name="partner_id" string="Vétérinaire" />
+                                    <field name="date" />
+                                </list>
+                            </field>
+                        </page>
                         <page name="page_actes" string="Actes" />
-                        <page name="page_traitement" string="Traitements" />
-                        <page name="page_soin" string="Soins" />
+                        <page name="page_traitement" string="Traitements">
+                            <field name="treatment_ids">
+                                <list string="Liste des traitement">
+                                    <field name="name" />
+                                    <field name="start_date" />
+                                    <field name="end_date" />
+                                    <field name="medic" />
+                                    <field name="nb_medic" />
+                                    <field name="fq_time" />
+                                    <field name="duration" />
+                                    <field name="comment" />
+                                </list>
+                            </field>
+                        </page>
+                        <page name="page_soin" string="Soins">
+                            <field name="care_ids">
+                                <list string="List des soins">
+                                    <field name="name" />
+                                    <field name="date" />
+                                    <field name="animal_id" />
+                                    <field name="valeur" />
+                                </list>
+                            </field>
+                        </page>
                     </notebook>
                 </sheet>
             </form>
