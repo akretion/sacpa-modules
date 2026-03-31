@@ -10,7 +10,7 @@ class AnimalHealthStatus(models.Model):
 
     name = fields.Char(string="Libellé", required=True)
     code = fields.Char()
-    date_event = fields.Date(string="Date")
+    event_date = fields.Date(string="Date")
     event = fields.Selection(
         [
             ("fsm_order", "Intervention"),
@@ -28,11 +28,11 @@ class AnimalHealthStatus(models.Model):
     )
 
 
-class AnimalComportement(models.Model):
-    _name = "animal.comportement"
+class AnimalBehavior(models.Model):
+    _name = "animal.behavior"
     _description = "Comportement de l'animal"
 
-    date_event = fields.Date(string="date")
+    event_date = fields.Date(string="date")
     event = fields.Selection(
         [
             ("fsm_order", "Intervention"),
@@ -51,8 +51,8 @@ class AnimalComportement(models.Model):
 
 class AnimalWeight(models.Model):
     _name = "animal.weight"
-    _description = "Comportement de l'animal"
+    _description = "Historique poids de l'animal"
 
-    date_event = fields.Date(string="Date")
+    event_date = fields.Date(string="Date")
     value = fields.Float(string="Poids en kg")
     notes = fields.Text(string="Remarques")

@@ -8,7 +8,7 @@ class AnimalCare(models.Model):
     name = fields.Char(string="Nom du soin")
     date = fields.Date(string="Date du soin")
     animal_id = fields.Many2one("animal.identification", string="animal")
-    valeur = fields.Many2one("animal.care.definition", string="Soins appliquer")
+    value = fields.Many2one("animal.care.definition", string="Soins appliquer")
 
 
 class AnimaleCareDéfinition(models.Model):
@@ -26,7 +26,7 @@ class AnimalVetVisit(models.Model):
     before_date = fields.Date(string="A planifier avant le ")
     after_date = fields.Date(string="A planifier après le")
     date = fields.Date(string="Date du rdv")
-    date_state = fields.Selection(
+    state_date = fields.Selection(
         [("confirm", "confirmer"), ("to_confirm", "Provisoire")],
         string="Etat de la date de rdv",
     )

@@ -20,20 +20,20 @@ class HotelFolio(models.Model):
     animal_ids = fields.Many2many(
         "animal.identification", required=True, string="Animal"
     )
-    type_folio = fields.Selection(
+    job_type = fields.Selection(
         selection=[
             ("Pension", "pension"),
             ("Fourrière", "fourriere"),
             ("Refuge", "refuge"),
         ],
-        string="Type de folio",
+        string="Type",
     )
 
     def write(self, vals):
         for record in self:
-            if record.reservation_id.type_folio:
-                type_folio = record.reservation_id.type_folio
-            vals["type_folio"] = type_folio
+            if record.reservation_id.job_type:
+                job_type = record.reservation_id.job_type
+            vals["job_type"] = job_type
         return super().write(vals)
 
 

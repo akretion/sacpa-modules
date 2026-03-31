@@ -6,7 +6,7 @@
             <list string="Races">
                 <field name="name" />
                 <field name="code" />
-                <field name="species_id" />
+                <field name="specie_id" />
             </list>
         </field>
     </record>
@@ -19,7 +19,7 @@
                     <group>
                         <field name="name" />
                         <field name="code" />
-                        <field name="species_id" />
+                        <field name="specie_id" />
                         <field name="code_group" />
                         <field name="code_scc" />
                         <field name="classification" />

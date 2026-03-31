@@ -6,7 +6,7 @@
             <list string="Identification Animal">
                 <field name="fiche_number" />
                 <field name="name" />
-                <field name="species_id" />
+                <field name="specie_id" />
                 <field name="breed_id" />
                 <field name="gender" />
             </list>
@@ -21,7 +21,7 @@
                     <group>
                         <group string="Infos animal">
                             <field name="coaxis_id" />
-                            <field name="species_id" />
+                            <field name="specie_id" />
                             <field name="breed_id" />
                             <field name="is_crossed" />
                             <field name="breed2_id" invisible="not is_crossed" />
@@ -128,7 +128,7 @@
                             <field name="folio_ids">
                                 <list string="Folio-Dossier">
                                     <field name="name" />
-                                    <field name="type_folio" />
+                                    <field name="job_type" />
                                     <field name="animal_ids" />
                                 </list>
                             </field>
@@ -136,16 +136,16 @@
                         <page name="page_sanitaire" string="Etats sanitaire">
                             <field name="status_id">
                                 <list string="Etats sanitaire">
-                                    <field name="date_event" />
+                                    <field name="event_date" />
                                     <field name="event" />
                                     <field name="value" />
                                 </list>
                             </field>
                         </page>
                         <page name="page_comportement" string="Comportement">
-                            <field name="comportement_id">
+                            <field name="behavior_id">
                                 <list string="Comportement">
-                                    <field name="date_event" />
+                                    <field name="event_date" />
                                     <field name="event" />
                                     <field name="value" />
                                 </list>
@@ -154,18 +154,18 @@
                         <page name="page_poids" string="Poids">
                             <field name="weight_ids">
                                 <list string="Courbe de poids">
-                                    <field name="date_event" />
+                                    <field name="event_date" />
                                     <field name="value" />
                                     <field name="notes" />
                                 </list>
                             </field>
                         </page>
                         <page name="page_protocoles" string="Protocoles">
-                            <field name="protocole_ids">
+                            <field name="protocol_ids">
                                 <list string="Liste des protocole">
                                     <field name="name" />
                                     <field name="code" />
-                                    <field name="date_event" />
+                                    <field name="event_date" />
                                 </list>
                             </field>
                         </page>
@@ -193,12 +193,12 @@
                             </field>
                         </page>
                         <page name="page_soin" string="Soins">
-                            <field name="cares_ids">
+                            <field name="care_ids">
                                 <list string="List des soins">
                                     <field name="name" />
                                     <field name="date" />
                                     <field name="animal_id" />
-                                    <field name="valeur" />
+                                    <field name="value" />
                                 </list>
                             </field>
                         </page>

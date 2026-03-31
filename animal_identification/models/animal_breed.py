@@ -11,7 +11,7 @@ class AnimalBreed(models.Model):
 
     name = fields.Char(string="Libellé", required=True)
     code = fields.Char()
-    species_id = fields.Many2one("animal.species", string="Espèce")
+    specie_id = fields.Many2one("animal.species", string="Espèce")
     code_group = fields.Char(
         string="Code Groupe",
     )

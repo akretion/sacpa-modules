@@ -18,7 +18,7 @@ class AnimalIdentification(models.Model):
     coaxis_id = fields.Char(
         string="ID coaxis",
     )
-    species_id = fields.Many2one("animal.species", string="Espèce")
+    specie_id = fields.Many2one("animal.species", string="Espèce")
     species = fields.Selection(
         [
             ("0307_0000001", "Chien"),
@@ -95,10 +95,8 @@ class AnimalIdentification(models.Model):
     )
     folio_ids = fields.Many2many("hotel.folio", string="Dossiers")
     weight_ids = fields.Many2many("animal.weight", string="historique poids")
-    comportement_id = fields.Many2many(
-        "animal.comportement", string="Comportement de l'animal"
-    )
-    protocole_ids = fields.Many2many(
+    behavior_id = fields.Many2many("animal.behavior", string="Comportement de l'animal")
+    protocol_ids = fields.Many2many(
         "animal.protocol",
         "tabl_animal_protocol",
         "col_animal",
@@ -111,7 +109,7 @@ class AnimalIdentification(models.Model):
     treatment_ids = fields.One2many(
         "animal.care.treatment", "animal_id", string="Traitements"
     )
-    cares_ids = fields.One2many("animal.care", "animal_id", string="Soins")
+    care_ids = fields.One2many("animal.care", "animal_id", string="Soins")
 
     @api.depends("birth_date")
     def _compute_calculated_age(self):

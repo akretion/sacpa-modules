@@ -8,4 +8,4 @@ class AnimalProtocol(models.Model):
     name = fields.Char(string="Nom du protocol")
     code = fields.Char(string="Code")
 
-    date_event = fields.Date(string="Date de l'évènement")
+    event_date = fields.Date(string="Date de l'évènement")
