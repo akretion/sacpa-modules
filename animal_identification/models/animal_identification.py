@@ -99,14 +99,11 @@ class AnimalIdentification(models.Model):
         "animal.comportement", string="Comportement de l'animal"
     )
     protocole_ids = fields.Many2many(
-        "animal.protocole",
+        "animal.protocol",
         "tabl_animal_protocol",
         "col_animal",
         "col_protocol",
         string="Protocoles",
-    )
-    care_ids = fields.Many2many(
-        "animal.care", "tabl_animal_cares", "col_animal", "col_care", string="Soins"
     )
     visit_ids = fields.One2many(
         "animal.vet.visit", "animal_id", string="Visite medical"
@@ -114,7 +111,7 @@ class AnimalIdentification(models.Model):
     treatment_ids = fields.One2many(
         "animal.care.treatment", "animal_id", string="Traitements"
     )
-    cares_ids = fields.One2many("animal.care", "animal_id")
+    cares_ids = fields.One2many("animal.care", "animal_id", string="Soins")
 
     @api.depends("birth_date")
     def _compute_calculated_age(self):

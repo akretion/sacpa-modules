@@ -193,7 +193,7 @@
                             </field>
                         </page>
                         <page name="page_soin" string="Soins">
-                            <field name="care_ids">
+                            <field name="cares_ids">
                                 <list string="List des soins">
                                     <field name="name" />
                                     <field name="date" />

@@ -26,7 +26,7 @@ class AnimalVetVisit(models.Model):
     before_date = fields.Date(string="A planifier avant le ")
     after_date = fields.Date(string="A planifier après le")
     date = fields.Date(string="Date du rdv")
-    date_state = fields.Selecion(
+    date_state = fields.Selection(
         [("confirm", "confirmer"), ("to_confirm", "Provisoire")],
         string="Etat de la date de rdv",
     )
