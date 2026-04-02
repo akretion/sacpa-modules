@@ -173,7 +173,7 @@
                                 <field name="animal_ids">
                                     <list string="List animaux" open_form_view="True">
                                         <field name="name" />
-                                        <field name="species_id" />
+                                        <field name="specie_id" />
                                         <field name="breed_id" />
                                         <field name="is_crossed" />
                                         <field name="status_id" />
