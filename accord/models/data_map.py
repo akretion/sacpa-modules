@@ -1,6 +1,10 @@
+import logging
+
 import polars as pl
 
-from odoo import fields, models
+from odoo import exceptions, fields, models
+
+logger = logging.getLogger(__name__)
 
 
 class DataMap(models.Model):
@@ -19,9 +23,12 @@ class DataMap(models.Model):
                 .otherwise(pl.element())
             )
         )
+        df = df.with_columns(code_cli=pl.lit("c") + pl.col("code_cli"))
+        df = self._sacpa_agreement_get_missing_partners(df)
         return df
 
     def _df_validate_sacpa_agreement(self, df):
+        listing = []
         # liste of insee codes from the dataframe
         insee = (
             (df.explode("insee").select(pl.col("insee").unique()))
@@ -34,49 +41,64 @@ class DataMap(models.Model):
         )
         missing_insee = [x for x in insee if x not in existing_codes and x]
         if missing_insee:
-            return [f"Missing insee codes: {sorted(missing_insee)}"]
-        return []
+            listing.append(f"Missing insee codes: {sorted(missing_insee)}")
+        if "partner_id" in df.columns:
+            nan = (
+                df.filter(pl.col("partner_id").str.contains(r"\D"))
+                .get_column("partner_id")
+                .to_list()
+            )
+            listing.append(f"Partners inconnus {nan}")
+        return listing
 
-    def _df_alter_sacpa_agreement(self, df):
-        # set column domain
-        df = df.with_columns(domain=pl.lit("sale"))
+    def _sacpa_agreement_get_missing_partners(self, df):
         # define company
         cpny_map = {
             x.partner_id.ref: str(x.id)
             for x in self.env["res.company"].search([])
             if x.partner_id.ref
         }
-        df = df.with_columns(code_cli=pl.lit("c") + pl.col("code_cli"))
         df = df.with_columns(company_id=pl.col("CodeDepot").str.replace_many(cpny_map))
         # TODO remove
-        df, __ = self.env["df.process"]._df_filter_rows_when_no_numeric_val_in_column(
-            df, "company_id"
-        )
+        df, excluded = self.env[
+            "df.process"
+        ]._df_filter_rows_when_no_numeric_val_in_column(df, "company_id")
+        if not excluded.is_empty():
+            logger.warning(excluded)
+            exceptions.ValidationError(f"Des sociétés ne sont pas reconnues {excluded}")
         # concatenate zip / city to create zipcity column for matching with res.city.zip
         df = df.with_columns(zipcity=pl.col("zip").cast(pl.String) + pl.col("city"))
         # add zip_city_id column with mapping from res.city.zip model and zipcity col
         df, unknown = self.env["df.process"]._subtitute_value_by_id_and_split(
             df, "res.city.zip", "zipcity", "zip_city_id"
         )
-        df = df.with_columns(
-            insee2=pl.when(pl.col("insee_refs").str.contains("&"))
-            .then(pl.lit(""))
-            .otherwise(pl.col("insee_refs"))
-        )
-        # df.select('insee', 'insee2')
-        # search for partner_id in res.partner based on code_cli with partner ref
-        # TODO code_cli ou insee
-        # si code insee alors chercher par insee
-        # si code_cli alors chercher par code_cli
         df = self.env["df.process"]._subtitute_value_by_id(
             df, "res.partner", "code_cli", "partner_id", ref_col="ref"
         )
-        df, no_partner_df = self.env["df.process"]._subtitute_value_by_id_and_split(
-            df, "res.partner", "insee2", "partner_id", ref_col="insee"
-        )
+        return df
+
+    def _df_alter_sacpa_agreement(self, df):
+        original_df = df
+        # set column domain
+        df = df.with_columns(domain=pl.lit("sale"))
+
+        def code_cli_to_partner_id(df):
+            ref = df.get_column("code_cli").to_list()
+            mapp = {
+                x.ref: str(x.id)
+                for x in self.env["res.partner"].search([("ref", "in", ref)])
+                if x.ref
+            }
+            return df.with_columns(pl.col("partner_id").str.replace_many(mapp))
+
+        df = code_cli_to_partner_id(df)
+        no_partner_df = df.filter(pl.col("partner_id").str.contains(r"\D"))
         if not no_partner_df.is_empty():
-            breakpoint()
+            logger.info("Create missing partners")
             self._sacpa_agreement_create_missing_partners(no_partner_df)
+            # We renew alteration with new partners
+            return self._df_alter_sacpa_agreement(original_df)
+        df = df.with_columns(partner_id=pl.col("partner_id").cast(pl.Int64))
         return df
 
     def _sacpa_agreement_create_missing_partners(self, no_partner_df):
@@ -84,20 +106,16 @@ class DataMap(models.Model):
         cols.extend(["street2", "phone", "mail", "insee_refs"])
         for part in no_partner_df.select(*cols).unique().to_dicts():
             zipcity = self.env["res.city.zip"].browse(part["zip_city_id"])
-            self.env["res.partner"].create(
-                self._sacpa_agreement_prepare_partner_vals(part, zipcity)
+            existing = self.env["res.partner"].search(
+                [("zip_city_id", "=", zipcity.id)]
             )
-
-    def _sacpa_agreement_prepare_partner_vals(self, partner, zipcity):
-        res = {
-            "name": partner["client"],
-            "is_company": True,
-            "zip_city_id": zipcity.id,
-            "zip": zipcity.name,
-            "city": zipcity.city_id.name,
-            "ref": partner["code_cli"],
-        }
-        return res
+            if existing:
+                existing[0].ref = part["code_cli"]
+            else:
+                vals = zipcity._prepare_commune_vals()
+                vals["name"] = part["client"]
+                vals["ref"] = part["code_cli"]
+                self.env["res.partner"].create(vals)
 
     def _remove_cols_from_previewed_df(self, df):
         preview_df = super()._remove_cols_from_previewed_df(df)

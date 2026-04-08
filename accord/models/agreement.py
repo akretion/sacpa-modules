@@ -67,6 +67,6 @@ class Agreement(models.Model):
         integrity error on field_log_ids"""
         res = super().unlink()
         self.env["field.log"]._unlink_logs_from_unlinked_resources(
-            self, "agreement", self.ids
+            "agreement", self.ids
         )
         return res
