@@ -30,6 +30,7 @@ addon | version | maintainers | summary
 [converter](converter/) | 18.0.6.0.0 |  | Convert odoo records to/from plain data structures.
 [invoice_move_webhook](invoice_move_webhook/) | 18.0.1.0.0 |  | Gestion du webhook pour les factures
 [redner](redner/) | 18.0.1.8.3 |  | Odoo addon to use redner (producer of reports and emails)
+[service_agreement](service_agreement/) | 18.0.1.0.0 |  | Store service typology combinations.
 [vigipet](vigipet/) | 18.0.1.0.0 |  | Vigipet models
 
 [//]: # (end addons)
