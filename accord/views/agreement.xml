@@ -11,7 +11,8 @@
             </field>
             <xpath expr="//group[@name='main']/group[@name='left']" position="inside">
                 <field name="statut" />
-                <field name="contrat" />
+                <field name="service_id" />
+                <field name="product_ids" widget="many2many_tags" />
             </xpath>
             <xpath expr="//notebook/page[@name='config']" position="inside">
                 <field name="signature_date" position="move" />

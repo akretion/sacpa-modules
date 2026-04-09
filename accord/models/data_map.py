@@ -25,6 +25,12 @@ class DataMap(models.Model):
         )
         df = df.with_columns(code_cli=pl.lit("c") + pl.col("code_cli"))
         df = self._sacpa_agreement_get_missing_partners(df)
+        df = self.env["df.process"]._subtitute_value_by_id(
+            df, "service.agreement", "contrat", "service_id", ref_col="code"
+        )
+        df = df.with_columns(
+            service_id=pl.col("service_id").cast(pl.Int64, strict=False)
+        )
         return df
 
     def _df_validate_sacpa_agreement(self, df):
@@ -123,5 +129,6 @@ class DataMap(models.Model):
         if self.transformation == "sacpa_agreement":
             cols = ["street", "street2", "phone", "mail", "domain"]
             cols += ["statut", "name", "code", "client"]
+            cols = [x for x in cols if x in df.columns and x != "N°"]
             return preview_df.drop(cols)
         return preview_df

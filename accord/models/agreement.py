@@ -14,6 +14,10 @@ class Agreement(models.Model):
     field_log_ids = fields.Many2many(comodel_name="field.log")
     statut = fields.Char(readonly=True)
     contrat = fields.Char(readonly=True)
+    service_id = fields.Many2one(comodel_name="service.agreement")
+    product_ids = fields.Many2many(
+        comodel_name="product.product", related="service_id.product_ids", readonly=True
+    )
 
     @api.depends("insee_refs")
     def _compute_partner_ids(self):
