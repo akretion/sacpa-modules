@@ -1,6 +1,6 @@
 {
-    "name": "Accord Sacpa",
-    "summary": "Accord to manage contracts",
+    "name": "Service Agreement",
+    "summary": "Store service typology combinations.",
     "version": "18.0.1.0.0",
     "development_status": "Alpha",
     "category": "Project",
@@ -11,15 +11,10 @@
         "python": [],
     },
     "depends": [
-        "agreement",
-        "city_insee",
-        "base_address_extended",
-        "file_df",
-        "service_agreement",
+        "sale_management",
     ],
     "data": [
-        "views/agreement.xml",
-        "data/matching_field.xml",
-        "data/data_mapping.xml",
+        "views/service_agreement.xml",
+        "security/ir.model.access.csv",
     ],
 }

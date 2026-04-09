@@ -106,6 +106,7 @@ class DataMap(models.Model):
         cols.extend(["street2", "phone", "mail", "insee_refs"])
         for part in no_partner_df.select(*cols).unique().to_dicts():
             zipcity = self.env["res.city.zip"].browse(part["zip_city_id"])
+            # TODO bad performance here
             existing = self.env["res.partner"].search(
                 [("zip_city_id", "=", zipcity.id)]
             )
