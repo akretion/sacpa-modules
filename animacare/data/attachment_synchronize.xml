@@ -1,0 +1,15 @@
+<odoo noupdate="0">
+    <record id="synchro_task_animac_corps" model="attachment.synchronize.task">
+        <field name="name">Corps Animacare</field>
+        <field name="file_type">corps</field>
+        <field name="method_type">import</field>
+        <field name="avoid_duplicated_files" eval="1" />
+    </record>
+
+    <record id="synchro_task_animac_urnes" model="attachment.synchronize.task">
+        <field name="name">Urnes Animacare</field>
+        <field name="file_type">urnes</field>
+        <field name="method_type">import</field>
+        <field name="avoid_duplicated_files" eval="1" />
+    </record>
+</odoo>

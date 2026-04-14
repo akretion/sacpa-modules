@@ -21,5 +21,6 @@
         "views/agreement.xml",
         "data/matching_field.xml",
         "data/data_mapping.xml",
+        "data/attachment_synchronize.xml",
     ],
 }

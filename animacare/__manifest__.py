@@ -11,6 +11,7 @@
         "python": [],
     },
     "depends": [
+        "attachment_synchronize",
         "file_df",
         "base_import_match",
     ],
@@ -18,6 +19,7 @@
         "views/corpse.xml",
         "security/ir.model.access.csv",
         "data/data_mapping.xml",
+        "data/attachment_synchronize.xml",
     ],
     "application": True,
 }
