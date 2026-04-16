@@ -50,10 +50,10 @@
                                 string="Contact donneur d'ordre"
                             />
                             <field
-                                name="date_ticket"
+                                name="ticket_date"
                                 string="Date/heure de la demande"
                             />
-                            <field name="nature_ticket" string="Nature de la demande" />
+                            <field name="ticket_nature" string="Nature de la demande" />
                             <field
                                 name="template_id"
                                 groups="fieldservice.group_fsm_template"

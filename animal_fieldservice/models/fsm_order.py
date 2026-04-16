@@ -14,8 +14,8 @@ class FSMOrder(models.Model):
     # Details de la demande
     partner_order_type = fields.Selection(related="ticket_id.partner_order_type")
     partner_order_id = fields.Many2one(related="ticket_id.partner_order_id")
-    date_ticket = fields.Datetime(related="ticket_id.create_date")
-    nature_ticket = fields.Many2one(related="ticket_id.nature_id")
+    ticket_date = fields.Datetime(related="ticket_id.create_date")
+    ticket_nature = fields.Many2one(related="ticket_id.nature_id")
     client_id = fields.Many2one(related="ticket_id.partner_id")
     # Détails d'intervention
     request_ref = fields.Char(string="Référence Demande")
