@@ -1,5 +1,5 @@
 # Do NOT update manually; changes here will be overwritten by Copier
-#_commit: v1.40
+_commit: 69bc645
 _src_path: https://github.com/akretion/private-addons-repo-template.git
 additional_ruff_rules: []
 convert_readme_fragments_to_markdown: true
