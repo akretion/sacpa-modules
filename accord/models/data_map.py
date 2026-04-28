@@ -23,7 +23,10 @@ class DataMap(models.Model):
                 .otherwise(pl.element())
             )
         )
-        df = df.with_columns(code_cli=pl.lit("c") + pl.col("code_cli"))
+        sql = df.sql("SELECT code_cli FROM self")
+        sql = sql.get_column("code_cli").to_list()
+        if sql and sql[0][0] == "c":
+            df = df.with_columns(code_cli=pl.lit("c") + pl.col("code_cli"))
         df = self._sacpa_agreement_get_missing_partners(df)
         df = self.env["df.process"]._subtitute_value_by_id(
             df, "service.agreement", "contrat", "service_id", ref_col="code"
@@ -59,10 +62,11 @@ class DataMap(models.Model):
 
     def _sacpa_agreement_get_missing_partners(self, df):
         # define company
+        original_df = df
         cpny_map = {
-            x.partner_id.ref: str(x.id)
+            x.company_ref: str(x.id)
             for x in self.env["res.company"].search([])
-            if x.partner_id.ref
+            if x.company_ref
         }
         df = df.with_columns(company_id=pl.col("CodeDepot").str.replace_many(cpny_map))
         # TODO remove
@@ -71,13 +75,30 @@ class DataMap(models.Model):
         ]._df_filter_rows_when_no_numeric_val_in_column(df, "company_id")
         if not excluded.is_empty():
             logger.warning(excluded)
-            exceptions.ValidationError(f"Des sociétés ne sont pas reconnues {excluded}")
+            raise exceptions.ValidationError(
+                f"Des sociétés ne sont pas reconnues {excluded}"
+            )
         # concatenate zip / city to create zipcity column for matching with res.city.zip
         df = df.with_columns(zipcity=pl.col("zip").cast(pl.String) + pl.col("city"))
         # add zip_city_id column with mapping from res.city.zip model and zipcity col
+
         df, unknown = self.env["df.process"]._subtitute_value_by_id_and_split(
             df, "res.city.zip", "zipcity", "zip_city_id"
         )
+        if not unknown.is_empty():
+            comma = unknown.sql("SELECT * FROM self WHERE insee_refs LIKE '%,%'")
+            if not comma.is_empty():
+                raise exceptions.ValidationError(f"To many insee codes here {unknown}")
+            for elm in unknown.select("insee_refs", "code_cli").to_dicts():
+                czip = self.env["res.city.zip"].search(
+                    [("insee", "=", elm["insee_refs"])], limit=1
+                )
+                if czip and not self.env["res.partner"].search(
+                    [("zip_city_id", "=", czip.id)]
+                ):
+                    vals = czip._prepare_commune_vals()
+                    vals.update({"ref": elm["code_cli"]})
+                    self.env["res.partner"].create(vals)
         df = self.env["df.process"]._subtitute_value_by_id(
             df, "res.partner", "code_cli", "partner_id", ref_col="ref"
         )
