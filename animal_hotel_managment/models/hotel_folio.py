@@ -17,24 +17,22 @@ class HotelFolio(models.Model):
         string="Société",
         # required="True",
     )
-    animal_ids = fields.Many2many(
-        "animal.identification", required=True, string="Animal"
-    )
-    job_type = fields.Selection(
-        selection=[
-            ("pension", "Pension"),
-            ("fourrière", "Fourriere"),
-            ("refuge", "Refuge"),
-        ],
-        string="Type",
-    )
+    animal_id = fields.Many2one("animal.identification", required=True, string="Animal")
+    # job_type = fields.Selection(
+    #     selection=[
+    #         ("pension", "Pension"),
+    #         ("fourrière", "Fourriere"),
+    #         ("refuge", "Refuge"),
+    #     ],
+    #     string="Type",
+    # )
 
-    def write(self, vals):
-        for record in self:
-            if record.reservation_id.job_type:
-                job_type = record.reservation_id.job_type
-            vals["job_type"] = job_type
-        return super().write(vals)
+    # def write(self, vals):
+    #     for record in self:
+    #         if record.reservation_id.job_type:
+    #             job_type = record.reservation_id.job_type
+    #         vals["job_type"] = job_type
+    #     return super().write(vals)
 
 
 class HotelFolioLine(models.Model):

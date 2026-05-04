@@ -18,6 +18,7 @@
         "views/view_hotel_folio.xml",
         "views/views_hotel_reservation.xml",
         "views/views_menu_item.xml",
+        "views/view_hotel_room.xml",
     ],
     "installable": True,
     "application": True,
