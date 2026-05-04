@@ -129,7 +129,7 @@
                                 <list string="Folio-Dossier">
                                     <field name="name" />
                                     <field name="job_type" />
-                                    <field name="animal_ids" />
+                                    <field name="animal_id" />
                                 </list>
                             </field>
                         </page>

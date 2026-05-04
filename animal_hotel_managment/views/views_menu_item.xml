@@ -2,9 +2,8 @@
 <odoo>
     <!-- RENAME Hotel menue -->
     <menuitem
-        id="hotel.hotel_managment_menu"
-        name="Gestion box"
-        sequence="11"
+        id="hotel.hotel_management_menu"
+        name="Gestion des boxes"
         groups="animal_hotel_managment.groups_gestion_box_animal"
     />
     <!-- Pension menu -->
@@ -13,6 +12,7 @@
         name="Pension"
         sequence="11"
         groups="animal_hotel_managment.group_pension_animal_user"
+        web_icon="animal_hotel_managment,static/description/icon_pension.png"
     />
         <!-- web_icon="animal_hotel_managment,static/description/icon_pension.png" -->
     <menuitem
@@ -55,8 +55,8 @@
         name="Fourrière"
         sequence="11"
         groups="animal_hotel_managment.group_fourriere_animal_user"
+        web_icon="animal_hotel_managment,static/description/icon_fourriere.png"
     />
-        <!-- web_icon="animal_hotel_managment,static/description/icon_fourriere.png" -->
     <menuitem
         id="fourriere_reservation_menu"
         name="Réservation de box"
@@ -96,8 +96,8 @@
         name="Refuge"
         sequence="11"
         groups="animal_hotel_managment.group_refuge_animal_user"
+        web_icon="animal_hotel_managment,static/description/icon_refuge.png"
     />
-        <!-- web_icon="animal_hotel_managment,static/description/icon_refuge.png" -->
     <menuitem
         id="refuge_reservation_menu"
         name="Réservation de box"
@@ -130,5 +130,25 @@
         action="open_refuge_folio1_form_tree_all"
         sequence="5"
         parent="menu_refuge_folio"
+        />
+    <menuitem
+        id="hotel.menu_open_hotel_room_form"
+        name="Boxes"
+        action="hotel.action_hotel_room_form"
+        sequence="5"
+        parent="hotel.menu_hotel_room"
+     />
+    <menuitem
+        id="hotel.menu_hotel_room"
+        name="Boxe"
+        parent="hotel.hotel_configuration_menu"
+        sequence="2"
+    />
+    <menuitem
+        id="hotel.menu_open_hotel_room_type_form_tree"
+        name="Types de Boxe"
+        action="hotel.open_hotel_room_type_form_tree"
+        sequence="6"
+        parent="hotel.menu_hotel_room"
     />
 </odoo>

@@ -5,7 +5,7 @@
         <field name="inherit_id" ref="hotel.view_hotel_room_form"/>
         <field name="arch" type="xml">
             <field name="isroom" position="after">
-                <field name="company_id"/>
+                <field name="company_id" string="Société"/>
             </field>
         </field>
     </record>

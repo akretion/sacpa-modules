@@ -40,4 +40,20 @@
         <field name="domain">[("job_type", "=", "refuge")]</field>
         <field name="view_mode">list,form,calendar</field>
     </record>
+    <record id="view_form_hotel_reservation_animal" model="ir.ui.view">
+        <field name="name">form.hotel.reservation.animal</field>
+        <field name="model">hotel.reservation</field>
+        <field name="inherit_id" ref="hotel_reservation.view_hotel_reservation_form"/>
+        <field name="arch" type="xml">
+            <field name="adults" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="children" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="adults" position="before">
+                <field name="animal_id" string="Animal" readonly="state != 'draft'" />
+            </field>
+        </field>
+    </record>
 </odoo>

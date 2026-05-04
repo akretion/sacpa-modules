@@ -30,6 +30,7 @@
         <field name="arch" type="xml">
             <field name="partner_id" position="before">
                 <field name="animal_id" string="Animal"/>
+                <field name="company_id" string="Société" />
             </field>
             <field name="partner_id" position="attributes">
                 <attribute name="required">0</attribute>
