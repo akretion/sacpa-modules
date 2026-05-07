@@ -2,7 +2,7 @@ import logging
 
 import polars as pl
 
-from odoo import exceptions, fields, models
+from odoo import fields, models
 
 logger = logging.getLogger(__name__)
 
@@ -28,6 +28,9 @@ class DataMap(models.Model):
         if sql and sql[0][0] == "c":
             df = df.with_columns(code_cli=pl.lit("c") + pl.col("code_cli"))
         df = self._sacpa_agreement_get_missing_partners(df)
+        if isinstance(df, str):
+            # in that case it's an exception
+            return df
         df = self.env["df.process"]._subtitute_value_by_id(
             df, "service.agreement", "contrat", "service_id", ref_col="code"
         )
@@ -62,7 +65,6 @@ class DataMap(models.Model):
 
     def _sacpa_agreement_get_missing_partners(self, df):
         # define company
-        original_df = df
         cpny_map = {
             x.company_ref: str(x.id)
             for x in self.env["res.company"].search([])
@@ -74,10 +76,9 @@ class DataMap(models.Model):
             "df.process"
         ]._df_filter_rows_when_no_numeric_val_in_column(df, "company_id")
         if not excluded.is_empty():
-            logger.warning(excluded)
-            raise exceptions.ValidationError(
-                f"Des sociétés ne sont pas reconnues {excluded}"
-            )
+            message = f"Des sociétés ne sont pas reconnues {self._df_format(excluded)}"
+            logger.warning(message)
+            return message
         # concatenate zip / city to create zipcity column for matching with res.city.zip
         df = df.with_columns(zipcity=pl.col("zip").cast(pl.String) + pl.col("city"))
         # add zip_city_id column with mapping from res.city.zip model and zipcity col
@@ -88,7 +89,9 @@ class DataMap(models.Model):
         if not unknown.is_empty():
             comma = unknown.sql("SELECT * FROM self WHERE insee_refs LIKE '%,%'")
             if not comma.is_empty():
-                raise exceptions.ValidationError(f"To many insee codes here {unknown}")
+                message = f"To many insee codes here {self._df_format(unknown)}"
+                logger.warning(message)
+                return message
             for elm in unknown.select("insee_refs", "code_cli").to_dicts():
                 czip = self.env["res.city.zip"].search(
                     [("insee", "=", elm["insee_refs"])], limit=1
@@ -105,7 +108,6 @@ class DataMap(models.Model):
         return df
 
     def _df_alter_sacpa_agreement(self, df):
-        original_df = df
         # set column domain
         df = df.with_columns(domain=pl.lit("sale"))
 
@@ -123,8 +125,6 @@ class DataMap(models.Model):
         if not no_partner_df.is_empty():
             logger.info("Create missing partners")
             self._sacpa_agreement_create_missing_partners(no_partner_df)
-            # We renew alteration with new partners
-            return self._df_alter_sacpa_agreement(original_df)
         df = df.with_columns(partner_id=pl.col("partner_id").cast(pl.Int64))
         return df
 

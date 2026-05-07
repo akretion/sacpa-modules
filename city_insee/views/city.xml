@@ -5,6 +5,7 @@
         <field name="arch" type="xml">
             <field name="city_id" position="after">
                 <field name="insee" />
+                <field name="id" string="id" optional="hide" />
             </field>
         </field>
     </record>
