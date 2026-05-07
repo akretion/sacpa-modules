@@ -97,7 +97,7 @@ class AnimalIdentification(models.Model):
     weight_ids = fields.Many2many("animal.weight", string="historique poids")
     behavior_id = fields.Many2many("animal.behavior", string="Comportement de l'animal")
     protocol_ids = fields.Many2many(
-        "animal.protocol",
+        "animal.protocol.event",
         "tabl_animal_protocol",
         "col_animal",
         "col_protocol",

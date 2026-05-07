@@ -61,7 +61,7 @@
         id="fourriere_reservation_menu"
         name="Réservation de box"
         sequence="1"
-        parent="pension_management_menu"
+        parent="fourriere_management_menu"
     />
     <menuitem
         name="Reservations"
@@ -102,7 +102,7 @@
         id="refuge_reservation_menu"
         name="Réservation de box"
         sequence="1"
-        parent="pension_management_menu"
+        parent="refuge_management_menu"
     />
     <menuitem
         name="Reservations"
@@ -120,7 +120,7 @@
     />
     <menuitem
         id="menu_refuge_folio"
-        name="Pension Folio"
+        name="Refuge Folio"
         parent="refuge_management_menu"
         sequence="4"
     />
