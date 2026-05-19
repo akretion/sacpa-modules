@@ -13,21 +13,21 @@ class AnimalIdentification(models.Model):
     _description = "Fiche d'identification de l'animal"
     _order = "name"
 
-    name = fields.Char(string="Nom")
+    name = fields.Char(string="Nom", help="Nom de l'animal")
     fiche_number = fields.Char(string="N° Fiche", required=True)
     coaxis_id = fields.Char(
         string="ID coaxis",
     )
     specie_id = fields.Many2one("animal.species", string="Espèce")
-    species = fields.Selection(
-        [
-            ("0307_0000001", "Chien"),
-            ("0307_0000002", "Chat"),
-            ("0309_0000001", "Autres"),
-            ("0602_0000001", "Volatile"),
-        ],
-        string="Espèce",
-    )
+    # species = fields.Selection(
+    #     [
+    #         ("0307_0000001", "Chien"),
+    #         ("0307_0000002", "Chat"),
+    #         ("0309_0000001", "Autres"),
+    #         ("0602_0000001", "Volatile"),
+    #     ],
+    #     string="Espèce",
+    # )
     breed_id = fields.Many2one("animal.breed", string="Race")
     is_crossed = fields.Boolean(string="Croisé")
     breed2_id = fields.Many2one(

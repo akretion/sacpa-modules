@@ -23,7 +23,7 @@ class HotelFolio(models.Model):
     job_type = fields.Selection(
         selection=[
             ("pension", "Pension"),
-            ("fourrière", "Fourriere"),
+            ("fourriere", "Fourriere"),
             ("refuge", "Refuge"),
         ],
         string="Type",
@@ -31,6 +31,7 @@ class HotelFolio(models.Model):
 
     def write(self, vals):
         for record in self:
+            job_type = False
             if record.reservation_id.job_type:
                 job_type = record.reservation_id.job_type
             vals["job_type"] = job_type

@@ -6,8 +6,8 @@ from odoo import fields, models
 
 class AnimalSpecies(models.Model):
     _name = "animal.species"
-    _description = "Espèce d'animal"
+    _description = "Ensemeble des espèces d'animal"
     _order = "name"
 
     name = fields.Char(string="Libellé", required=True)
-    code = fields.Char()
+    code = fields.Char(string="Code Coaxis")

@@ -20,6 +20,7 @@ class HotelReservation(models.Model):
             ("refuge", "Refuge"),
         ],
         string="Type de folio",
+        default=lambda self: self.env.context.get("job_type", False),
     )
 
     @api.constrains("reservation_line", "animal_id")
@@ -73,7 +74,7 @@ class HotelReservation(models.Model):
                 "date_order": reservation.date_order,
                 "company_id": reservation.company_id.id,
                 "partner_id": reservation.partner_id.id,
-                "animal_id": reservation.animal_id,
+                "animal_id": reservation.animal_id.id,
                 "pricelist_id": reservation.pricelist_id.id,
                 "partner_invoice_id": reservation.partner_invoice_id.id
                 or reservation.partner_id.id,

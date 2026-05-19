@@ -6,10 +6,10 @@ from odoo import fields, models
 
 class AnimalHealthStatus(models.Model):
     _name = "animal.health.status"
-    _description = "État sanitaire de l'animal"
+    _description = "État sanitaire de l'animal a un instant donnée"
 
     name = fields.Char(string="Libellé", required=True)
-    code = fields.Char()
+    code = fields.Char(string="Code Coaxis")
     event_date = fields.Date(string="Date")
     event = fields.Selection(
         [
@@ -20,11 +20,19 @@ class AnimalHealthStatus(models.Model):
         ],
         string="Moment",
     )
-    value = fields.Selection(
-        [
-            ("valeur_1", "Valeur_1"),
-        ],
+    value = fields.Many2one(
+        "animal.health.status.value",
         string="Valeur",
+    )
+
+
+class AnimalHealthStatusValue(models.Model):
+    _name = "animal.health.status.value"
+    _description = "Valeur du status de santé"
+
+    name = fields.Char(string="Name value")
+    animal_healt_status = fields.One2many(
+        "animal.health.status", "value", string="Status de l'animal"
     )
 
 
@@ -41,11 +49,19 @@ class AnimalBehavior(models.Model):
             ("exit", "Sortie"),
         ]
     )
-    value = fields.Selection(
-        [
-            ("valeur_1", "Valeur_1"),
-        ],
+    value = fields.Many2one(
+        "animal.behavior.value",
         string="Valeur",
+    )
+
+
+class AnimalBehaviorValue(models.Model):
+    _name = "animal.behavior.value"
+    _description = "Valeur du Comportement de l'animal"
+
+    name = fields.Char("Valeur du comportement")
+    behavior_id = fields.One2many(
+        "animal.behavior", "value", string="Comportmenent de l'animal"
     )
 
 

@@ -4,7 +4,7 @@
     <record id="open_pension_folio1_form_tree_all" model="ir.actions.act_window">
         <field name="name">Generate pension Folio</field>
         <field name="res_model">hotel.folio</field>
-        <field name="domain">[("job_type", "=", "pension")]</field>
+        <field name="domain">["|",("job_type", "=", False), ("job_type", "=", "pension")]</field>
         <field name="view_mode">list,form,calendar,graph</field>
         <field name="context">{'folio': True}</field>
     </record>
@@ -12,7 +12,7 @@
     <record id="open_fourriere_folio1_form_tree_all" model="ir.actions.act_window">
         <field name="name">Generate fourriere Folio</field>
         <field name="res_model">hotel.folio</field>
-        <field name="domain">[("job_type", "=", "fourriere")]</field>
+        <field name="domain">["|",("job_type", "=", False), ("job_type", "=", "fourriere")]</field>
         <field name="view_mode">list,form,calendar,graph</field>
         <field name="context">{'folio': True}</field>
     </record>
@@ -20,7 +20,7 @@
     <record id="open_refuge_folio1_form_tree_all" model="ir.actions.act_window">
         <field name="name">Generate refuge Folio</field>
         <field name="res_model">hotel.folio</field>
-        <field name="domain">[("job_type", "=", "refuge")]</field>
+        <field name="domain">["|",("job_type", "=", False), ("job_type", "=", "refuge")]</field>
         <field name="view_mode">list,form,calendar,graph</field>
         <field name="context">{'folio': True}</field>
     </record>
@@ -31,6 +31,7 @@
             <field name="partner_id" position="before">
                 <field name="animal_id" string="Animal"/>
                 <field name="company_id" string="Société" />
+                <field name="job_type" string="Type métier" />
             </field>
             <field name="partner_id" position="attributes">
                 <attribute name="required">0</attribute>

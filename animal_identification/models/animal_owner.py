@@ -14,9 +14,12 @@ class AnimalOwner(models.Model):
     city = fields.Char(string="ville")
     legal = fields.Boolean(string="Propriétaire légal")
 
-    @api.depends("partner_id")
+    @api.onchange("partner_id")
     def _set_name_city(self):
         for record in self:
             if record.partner_id:
                 record.name = record.partner_id.name
                 record.city = record.partner_id.city
+            else:
+                record.name = ""
+                record.city = ""

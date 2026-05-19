@@ -3,19 +3,22 @@
     <record id="action_pension_reservation_summary" model="ir.actions.act_window">
         <field name="name">Reservation Summary</field>
         <field name="res_model">room.reservation.summary</field>
-        <field name="domain">[("job_type", "=", "pension")]</field>
+        <!-- <field name="domain">["|",("job_type", "=", False), ("job_type", "=", "pension")]</field> -->
+        <field name="context">{"job_type": "pension"}</field>
         <field name="view_mode">form</field>
     </record>
     <record id="action_fourriere_reservation_summary" model="ir.actions.act_window">
         <field name="name">Reservation Summary</field>
         <field name="res_model">room.reservation.summary</field>
-        <field name="domain">[("job_type", "=", "fourriere")]</field>
+        <!-- <field name="domain">["|",("job_type", "=", False), ("job_type", "=", "fourriere")]</field> -->
+        <field name="context">{"job_type": "fourriere"}</field>
         <field name="view_mode">form</field>
     </record>
     <record id="action_refuge_reservation_summary" model="ir.actions.act_window">
         <field name="name">Reservation Summary</field>
         <field name="res_model">room.reservation.summary</field>
-        <field name="domain">[("job_type", "=", "refuge")]</field>
+        <!-- <field name="domain">["|",("job_type", "=", False), ("job_type", "=", "refuge")]</field> -->
+        <field name="context">{"job_type": "refuge"}</field>
         <field name="view_mode">form</field>
     </record>
     <!-- Action of hotel reservation -->
@@ -23,21 +26,24 @@
         <field name="name">Reservations</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">hotel.reservation</field>
-        <field name="domain">[("job_type", "=", "pension")]</field>
+        <field name="domain">["|",("job_type", "=", False), ("job_type", "=", "pension")]</field>
+        <field name="context">{"job_type": "pension"}</field>
         <field name="view_mode">list,form,calendar</field>
     </record>
     <record id="action_fourriere_reservation_tree_all" model="ir.actions.act_window">
         <field name="name">Reservations</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">hotel.reservation</field>
-        <field name="domain">[("job_type", "=", "fourriere")]</field>
+        <field name="domain">["|",("job_type", "=", False), ("job_type", "=", "fourriere")]</field>
+        <field name="context">{"job_type": "fourriere"}</field>
         <field name="view_mode">list,form,calendar</field>
     </record>
     <record id="action_refuge_reservation_tree_all" model="ir.actions.act_window">
         <field name="name">Reservations</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">hotel.reservation</field>
-        <field name="domain">[("job_type", "=", "refuge")]</field>
+        <field name="domain">["|",("job_type", "=", False), ("job_type", "=", "refuge")]</field>
+        <field name="context">{"job_type": "refuge"}</field>
         <field name="view_mode">list,form,calendar</field>
     </record>
     <record id="view_form_hotel_reservation_animal" model="ir.ui.view">
@@ -45,6 +51,9 @@
         <field name="model">hotel.reservation</field>
         <field name="inherit_id" ref="hotel_reservation.view_hotel_reservation_form"/>
         <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <field name="job_type" string="Type métier"/>
+            </field>
             <field name="adults" position="attributes">
                 <attribute name="invisible">1</attribute>
             </field>
