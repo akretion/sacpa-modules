@@ -2,17 +2,26 @@
     <record id="group_pension_animal_user" model="res.groups">
         <field name="name">Pension User</field>
         <field name="category_id" ref="base.module_category_hidden" />
-        <field name="implied_ids" eval="[(6, 0, [ref('hotel.group_hotel_user'), ref('animal_identification.group_animal_id_user')])]" />
+        <field
+            name="implied_ids"
+            eval="[(6, 0, [ref('hotel.group_hotel_user'), ref('animal_identification.group_animal_id_user')])]"
+        />
     </record>
     <record id="group_refuge_animal_user" model="res.groups">
         <field name="name">refuge User</field>
         <field name="category_id" ref="base.module_category_hidden" />
-        <field name="implied_ids" eval="[(6, 0, [ref('hotel.group_hotel_user'), ref('animal_identification.group_animal_id_user')])]" />
+        <field
+            name="implied_ids"
+            eval="[(6, 0, [ref('hotel.group_hotel_user'), ref('animal_identification.group_animal_id_user')])]"
+        />
     </record>
     <record id="group_fourriere_animal_user" model="res.groups">
         <field name="name">Fourriere User</field>
         <field name="category_id" ref="base.module_category_hidden" />
-        <field name="implied_ids" eval="[(6, 0, [ref('hotel.group_hotel_user'), ref('animal_identification.group_animal_id_user')])]" />
+        <field
+            name="implied_ids"
+            eval="[(6, 0, [ref('hotel.group_hotel_user'), ref('animal_identification.group_animal_id_user')])]"
+        />
     </record>
     <record id="groups_gestion_box_animal" model="res.groups">
         <field name="name">Gestion box animal</field>
@@ -24,19 +33,23 @@
     </record>
     <record model="ir.rule" id="animal_hotel_managment.hotel_box_comp_rule">
         <field name="name">hotel box multi-company</field>
-        <field name="model_id" ref="hotel.model_hotel_room"/>
-        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        <field name="model_id" ref="hotel.model_hotel_room" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
     </record>
     <record model="ir.rule" id="animal_hotel_managment.hotel_folio_comp_rule">
         <field name="name">hotel folio multi-company</field>
-        <field name="model_id" ref="hotel.model_hotel_folio"/>
-        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        <field name="model_id" ref="hotel.model_hotel_folio" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
     </record>
     <record model="ir.rule" id="animal_hotel_managment.hotel_reservation_comp_rule">
         <field name="name">hotel reservation multi-company</field>
-        <field name="model_id" ref="hotel_reservation.model_hotel_reservation"/>
-        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        <field name="model_id" ref="hotel_reservation.model_hotel_reservation" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
     </record>
-
-
 </odoo>

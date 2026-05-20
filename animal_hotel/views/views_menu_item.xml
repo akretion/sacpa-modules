@@ -14,7 +14,7 @@
         groups="animal_hotel_managment.group_pension_animal_user"
         web_icon="animal_hotel_managment,static/description/icon_pension.png"
     />
-        <!-- web_icon="animal_hotel_managment,static/description/icon_pension.png" -->
+    <!-- web_icon="animal_hotel_managment,static/description/icon_pension.png" -->
     <menuitem
         id="pension_reservation_menu"
         name="Réservation de box"
@@ -130,14 +130,14 @@
         action="open_refuge_folio1_form_tree_all"
         sequence="5"
         parent="menu_refuge_folio"
-        />
+    />
     <menuitem
         id="hotel.menu_open_hotel_room_form"
         name="Boxes"
         action="hotel.action_hotel_room_form"
         sequence="5"
         parent="hotel.menu_hotel_room"
-     />
+    />
     <menuitem
         id="hotel.menu_hotel_room"
         name="Boxe"

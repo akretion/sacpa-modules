@@ -2,7 +2,7 @@ import logging
 from datetime import datetime, timedelta
 
 from odoo import api, fields, models
-from odoo.exceptions import UserError, ValidationError
+from odoo.exceptions import UserError
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT as dt
 
 _logger = logging.getLogger(__name__)
@@ -76,7 +76,9 @@ class RoomReservationSummary(models.Model):
         summary_header_list = ["Rooms"]
         if self.date_from and self.date_to:
             if self.date_from > self.date_to:
-                raise UserError(_("Checkout date should be later than Checkin date."))
+                raise UserError(
+                    self.env._("Checkout date should be later than Checkin date.")
+                )
             if self._context.get("tz", False):
                 timezone = pytz.timezone(self._context.get("tz", False))
             else:

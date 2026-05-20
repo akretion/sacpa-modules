@@ -1,6 +1,4 @@
-from typing import Required
-from odoo import fields, models, api
-
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -37,20 +35,22 @@ class HotelReservation(models.Model):
             for rec in reservation.reservation_line:
                 cap = 0
                 if len(rec.reserve) == 0:
-                    raise ValidationError(_("Please Select Rooms For Reservation."))
+                    raise ValidationError(
+                        self.env._("Please Select Rooms For Reservation.")
+                    )
                 cap = sum(room.capacity for room in rec.reserve)
                 room_cap.append(cap)
             if not ctx.get("duplicate"):
                 if (reservation.adults + reservation.children) > sum(room_cap):
                     raise ValidationError(
-                        _(
+                        self.env._(
                             "Room Capacity Exceeded \n"
                             " Please Select Rooms According to"
                             " Members Accommodation."
                         )
                     )
             if not reservation.animal_id:
-                raise ValidationError(_("Animal must be more than 0"))
+                raise ValidationError(self.env._("Animal must be more than 0"))
 
     def create_folio(self):
         """
