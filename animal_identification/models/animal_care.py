@@ -36,7 +36,7 @@ class AnimalVetVisit(models.Model):
         string="Etat de la visite",
         default="waitting",
     )
-    subjet = fields.Selection([("soin", "soin1")], string="Objet")
+    subject = fields.Selection([("soin", "soin1")], string="Objet")
     reason = fields.Selection([("beethen", "mordeur")], string="Motifs")
     other_reason = fields.Text(string="Autre motif")
 
@@ -44,7 +44,7 @@ class AnimalVetVisit(models.Model):
     # Pour le relever du poids faire avec l'interface.
     # Mettre dans la vue le liens vers le poids de l'animal.
     #
-    actes_id = fields.Many2many("animal.care.acte", string="Actes de soins")
+    act_id = fields.Many2many("animal.care.acte", string="Actes de soins")
     traitement = fields.Many2many("animal.care.treatment", string="Traitement délivré")
 
 
@@ -56,7 +56,7 @@ class AnimalCareTreatment(models.Model):
     start_date = fields.Date(string="Date de début")
     end_date = fields.Date(string="Date de fin")
     medic = fields.Char(string="Produit/Médicament")
-    nb_medic = fields.Float(string="Posologie (nb d'unité)")
+    medic_nb = fields.Float(string="Posologie (nb d'unité)")
     fq_nb = fields.Float(string="Nombre de fois")
     fq_time = fields.Selection(
         [
