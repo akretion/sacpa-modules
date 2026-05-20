@@ -25,6 +25,7 @@ addon | version | maintainers | summary
 [animacare](animacare/) | 18.0.1.0.0 |  | Animacare models
 [animal_fieldservice](animal_fieldservice/) | 18.0.1.0.0 |  | fieldservice Extension - Gestion des Animaux
 [animal_helpdesk](animal_helpdesk/) | 18.0.1.0.0 |  | Helpdesk Extension - Appels et Animaux
+[animal_hotel](animal_hotel/) | 18.0.1.0.0 |  | Gestion des box d'animaux
 [animal_identification](animal_identification/) | 18.0.1.0.0 |  | Gestion des fiches d'animaux
 [city_insee](city_insee/) | 18.0.1.0.0 |  | Add INSEE code on city/zip data and on matching partner
 [converter](converter/) | 18.0.6.0.0 |  | Convert odoo records to/from plain data structures.
