@@ -27,7 +27,7 @@
                             <field name="tattoo_number" />
                             <field name="chip_number" />
                             <field name="medal_number" />
-                            <field name="species_id" />
+                            <field name="specie_id" />
                             <field name="breed_id" />
                             <field name="is_crossbreed" />
                             <field name="crossbreed_breed_id" />

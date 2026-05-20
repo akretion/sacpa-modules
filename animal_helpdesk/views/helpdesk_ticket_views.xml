@@ -24,7 +24,7 @@
                             <field name="fax" />
                         </group>
                         <group string="Informations animales">
-                            <field name="species_id" />
+                            <field name="specie_id" />
                             <field name="breed_id" />
                             <field name="is_crossbreed" />
                             <field name="crossbreed_breed_id" />
@@ -46,7 +46,7 @@
         <field name="arch" type="xml">
             <field name="partner_id" position="after">
                 <field name="requester_id" />
-                <field name="species_id" />
+                <field name="specie_id" />
                 <field name="breed_id" />
                 <field name="agency_id" />
             </field>

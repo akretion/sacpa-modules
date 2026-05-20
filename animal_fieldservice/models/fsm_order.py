@@ -30,7 +30,7 @@ class FSMOrder(models.Model):
     tattoo_number = fields.Char(string="N° Tatouage")
     chip_number = fields.Char(string="N° Puce")
     medal_number = fields.Char(string="N° Médaille")
-    species_id = fields.Many2one("animal.species", string="Espèce")
+    specie_id = fields.Many2one("animal.species", string="Espèce")
     breed_id = fields.Many2one("animal.breed", string="Race")
     is_crossbreed = fields.Boolean(string="Croisé ?")
     crossbreed_breed_id = fields.Many2one("animal.breed", string="Race de croisement")

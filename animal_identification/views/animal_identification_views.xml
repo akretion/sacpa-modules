@@ -6,7 +6,7 @@
             <list string="Identification Animal">
                 <field name="fiche_number" />
                 <field name="name" />
-                <field name="species_id" />
+                <field name="specie_id" />
                 <field name="breed_id" />
                 <field name="gender" />
             </list>
@@ -17,13 +17,14 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
+                    <field name="fiche_number" />
                     <group>
                         <group string="Infos animal">
-                            <field name="fiche_number" />
-                            <field name="species_id" />
+                            <field name="coaxis_id" />
+                            <field name="specie_id" />
                             <field name="breed_id" />
                             <field name="is_crossed" />
-                            <field name="status_id" />
+                            <field name="breed2_id" invisible="not is_crossed" />
                         </group>
                         <group string="Identification">
                             <field name="chip_number" />
@@ -31,6 +32,7 @@
                             <field name="medal_number" />
                             <field name="name" />
                             <field name="gender" />
+                            <field name="is_sterilized" />
                         </group>
 
                         <group string="Age de l'animal">
@@ -96,9 +98,111 @@
                             <field name="color3" />
                             <field name="color4" />
                             <field name="pattern" />
-                            <field name="is_sterilized" />
                         </group>
                     </group>
+                    <notebook>
+                        <page name="page_photo" string="Photos" />
+                        <page name="page_documents" string="Documents" />
+                        <page name="page_detenteurs" string="Détenteurs">
+                            <field name="owner_ids">
+                                <list string="Propriétaire" open_form_view="True">
+                                    <field name="partner_id" />
+                                    <field name="name" />
+                                    <field name="city" />
+                                    <field name="start_date" />
+                                    <field name="legal" />
+                                </list>
+                            </field>
+                        </page>
+                        <page name="page_interventions" string="Interventions">
+                            <field name="fsm_order_ids">
+                                <list string="Interventions" open_form_view="True">
+                                    <field name="name" />
+                                    <!-- <field name="nature" /> -->
+                                    <field name="date_start" />
+                                    <!-- <field name="state" /> -->
+                                </list>
+                            </field>
+                        </page>
+                        <page name="page_folio" string="Folio / Dossiers">
+                            <field name="folio_ids">
+                                <list string="Folio-Dossier">
+                                    <field name="name" />
+                                    <field name="job_type" />
+                                    <field name="animal_id" />
+                                </list>
+                            </field>
+                        </page>
+                        <page name="page_sanitaire" string="Etats sanitaire">
+                            <field name="status_id">
+                                <list string="Etats sanitaire">
+                                    <field name="event_date" />
+                                    <field name="event" />
+                                    <field name="value" />
+                                </list>
+                            </field>
+                        </page>
+                        <page name="page_comportement" string="Comportement">
+                            <field name="behavior_id">
+                                <list string="Comportement">
+                                    <field name="event_date" />
+                                    <field name="event" />
+                                    <field name="value" />
+                                </list>
+                            </field>
+                        </page>
+                        <page name="page_poids" string="Poids">
+                            <field name="weight_ids">
+                                <list string="Courbe de poids">
+                                    <field name="event_date" />
+                                    <field name="value" />
+                                    <field name="notes" />
+                                </list>
+                            </field>
+                        </page>
+                        <page name="page_protocoles" string="Protocoles">
+                            <field name="protocol_ids">
+                                <list string="Liste des protocole">
+                                    <field name="name" />
+                                    <field name="code" />
+                                    <field name="event_date" />
+                                </list>
+                            </field>
+                        </page>
+                        <page name="page_visites" string="Visites">
+                            <field name="visit_ids">
+                                <list string="Liste des visit">
+                                    <field name="partner_id" string="Vétérinaire" />
+                                    <field name="date" />
+                                </list>
+                            </field>
+                        </page>
+                        <page name="page_actes" string="Actes" />
+                        <page name="page_traitement" string="Traitements">
+                            <field name="treatment_ids">
+                                <list string="Liste des traitement">
+                                    <field name="name" />
+                                    <field name="start_date" />
+                                    <field name="end_date" />
+                                    <field name="medic" />
+                                    <field name="nb_medic" />
+                                    <field name="fq_time" />
+                                    <field name="duration" />
+                                    <field name="comment" />
+                                </list>
+                            </field>
+                        </page>
+                        <page name="page_soin" string="Soins">
+                            <field name="care_ids">
+                                <list string="List des soins">
+                                    <field name="name" />
+                                    <field name="date" />
+                                    <field name="animal_id" />
+                                    <field name="value" />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>
