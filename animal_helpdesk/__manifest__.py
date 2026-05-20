@@ -10,7 +10,10 @@
     "author": " Akretion",
     "depends": [
         "helpdesk_mgmt",
+        "helpdesk_mgmt_fieldservice",
         "animal_identification",
+        "agreement_helpdesk_mgmt",
+        "fieldservice_vehicle",
     ],
     "data": [
         "security/ir.model.access.csv",
