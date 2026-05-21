@@ -82,7 +82,7 @@
                                 />
                             </group>
                             <group string="QUI ?">
-                                <field name="canal_demande" />
+                                <field name="canal_request" />
                                 <field name="partner_id" />
                                 <field name="agreement_id" string="Contrat" />
                                 <field

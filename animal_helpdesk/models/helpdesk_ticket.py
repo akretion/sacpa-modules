@@ -14,7 +14,7 @@ class HelpdeskTicket(models.Model):
 
     call_date = fields.Date(string="Date de l'appel")
     call_time = fields.Float(string="Heure de l'appel")
-    canal_demande = fields.Char(string="Canal de la demande")
+    canal_request = fields.Char(string="Canal de la demande")
 
     partner_order_type = fields.Selection(
         [
