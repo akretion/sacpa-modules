@@ -50,4 +50,5 @@ class ResCity(models.Model):
     @api.depends("name")
     def _compute_city_upper(self):
         for rec in self:
-            rec.city_ref = unidecode.unidecode(rec.name).upper()
+            name = rec.name.replace(" ", "").replace("-", "")
+            rec.city_ref = unidecode.unidecode(name).upper()
