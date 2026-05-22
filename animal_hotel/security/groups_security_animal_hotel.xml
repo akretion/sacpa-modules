@@ -31,21 +31,21 @@
             eval="[(6, 0, [ref('hotel.group_hotel_manager'), ref('group_refuge_animal_user'), ref('group_pension_animal_user'), ref('group_fourriere_animal_user')])]"
         />
     </record>
-    <record model="ir.rule" id="animal_hotel_managment.hotel_box_comp_rule">
+    <record model="ir.rule" id="hotel_box_comp_rule">
         <field name="name">hotel box multi-company</field>
         <field name="model_id" ref="hotel.model_hotel_room" />
         <field
             name="domain_force"
         >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
     </record>
-    <record model="ir.rule" id="animal_hotel_managment.hotel_folio_comp_rule">
+    <record model="ir.rule" id="hotel_folio_comp_rule">
         <field name="name">hotel folio multi-company</field>
         <field name="model_id" ref="hotel.model_hotel_folio" />
         <field
             name="domain_force"
         >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
     </record>
-    <record model="ir.rule" id="animal_hotel_managment.hotel_reservation_comp_rule">
+    <record model="ir.rule" id="hotel_reservation_comp_rule">
         <field name="name">hotel reservation multi-company</field>
         <field name="model_id" ref="hotel_reservation.model_hotel_reservation" />
         <field
