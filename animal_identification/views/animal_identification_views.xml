@@ -185,7 +185,7 @@
                                     <field name="start_date" />
                                     <field name="end_date" />
                                     <field name="medic" />
-                                    <field name="nb_medic" />
+                                    <field name="medic_nb" />
                                     <field name="fq_time" />
                                     <field name="duration" />
                                     <field name="comment" />

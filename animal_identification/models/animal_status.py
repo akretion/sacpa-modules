@@ -12,7 +12,7 @@ class AnimalStatus(models.Model):
     name = fields.Char(string="Libellé", required=True)
     code = fields.Char()
     description = fields.Char(string="Description du status")
-    parent_id = fields.Many2one(comodel_name="animal.status", sting="Parent")
+    parent_id = fields.Many2one(comodel_name="animal.status", string="Parent")
     child_ids = fields.One2many(
         comodel_name="animal.status", inverse_name="parent_id", string="Enfant"
     )

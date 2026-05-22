@@ -44,7 +44,7 @@ class AnimalVetVisit(models.Model):
     # Pour le relever du poids faire avec l'interface.
     # Mettre dans la vue le liens vers le poids de l'animal.
     #
-    act_id = fields.Many2many("animal.care.acte", string="Actes de soins")
+    # act_id = fields.Many2many("animal.care.acte", string="Actes de soins")
     traitement = fields.Many2many("animal.care.treatment", string="Traitement délivré")
 
 
