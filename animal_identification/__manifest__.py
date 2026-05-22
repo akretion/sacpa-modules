@@ -12,7 +12,7 @@
         "base",
         "fieldservice",
         "hotel",
-        "animal_hotel_managment",
+        "animal_hotel",
     ],
     "data": [
         "security/animal_security.xml",
