@@ -11,10 +11,10 @@
             </field>
         </field>
     </record>
-    <record id="fieldservice.fsm_order_form" model="ir.ui.view">
-        <field name="name">fsm.order.form.animal.extension</field>
+    <record id="fsm_order_form_animal" model="ir.ui.view">
+        <field name="name">fsm.order.form.animal</field>
         <field name="model">fsm.order</field>
-        <field name="priority" eval="1" />
+        <field name="priority" eval="0" />
         <!-- <field name="inherit_id" ref="fieldservice.fsm_order_form" /> -->
         <field name="arch" type="xml">
             <form>
