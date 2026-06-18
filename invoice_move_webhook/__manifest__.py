@@ -11,11 +11,11 @@
     "depends": [
         "base",
         "account",
+        "purchase",
     ],
     "data": [
         "security/ir.model.access.csv",
         "views/account_move_view.xml",
-        "views/demat_link.xml",
     ],
     "installable": True,
     "application": True,
