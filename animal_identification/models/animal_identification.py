@@ -111,6 +111,26 @@ class AnimalIdentification(models.Model):
     )
     care_ids = fields.One2many("animal.care", "animal_id", string="Soins")
 
+    photo_ids = fields.Many2many(
+        comodel_name="ir.attachment",
+        relation="animal_identification_photo_rel",
+        column1="animal_identification_id",
+        column2="attachment_photo_id",
+        string="Photos",
+    )
+    document_ids = fields.Many2many(
+        comodel_name="ir.attachment",
+        relation="animal_identification_document_rel",
+        column1="animal_identification_id",
+        column2="attachment_photo_id",
+        string="Documents",
+    )
+    actes_id = fields.One2many(
+        "animal.actes",
+        "animal_id",
+        string="Actes",
+    )
+
     @api.depends("birth_date")
     def _compute_calculated_age(self):
         for record in self:

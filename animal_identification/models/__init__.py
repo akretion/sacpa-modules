@@ -6,3 +6,4 @@ from . import animal_owner
 from . import animal_protocol
 from . import animal_species
 from . import animal_status
+from . import animal_actes

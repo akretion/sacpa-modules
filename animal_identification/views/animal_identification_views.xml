@@ -36,9 +36,10 @@
                         </group>
 
                         <group string="Age de l'animal">
-                            <field name="birth_date" />
-                            <field name="calculated_age" />
-                            <div>
+                            <field name="birth_date" invisible="estimation_date" />
+                            <field name="calculated_age" invisible="not birth_date" />
+                            <field name="estimation_date" invisible="birth_date" />
+                            <div invisible="not estimation_date">
                                 <span class="fw-bold">ou Age estimer entre : </span>
                                 <div class="row mt-2">
                                     <div class="col-3">
@@ -86,7 +87,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <field name="estimation_date" />
                         </group>
                         <group string="Caractéristiques">
                             <field name="size" />
@@ -94,15 +94,23 @@
                             <field name="tail" />
                             <field name="hair" />
                             <field name="color1" />
-                            <field name="color2" />
-                            <field name="color3" />
-                            <field name="color4" />
+                            <field name="color2" invisible="not color1" />
+                            <field name="color3" invisible="not color2" />
+                            <field name="color4" invisible="not color3" />
                             <field name="pattern" />
                         </group>
                     </group>
                     <notebook>
-                        <page name="page_photo" string="Photos" />
-                        <page name="page_documents" string="Documents" />
+                        <page name="page_photo" string="Photos">
+                            <field
+                                name="photo_ids"
+                                widget="many2many_binary"
+                                options="{'mimetype': 'image'}"
+                            />
+                        </page>
+                        <page name="page_documents" string="Documents">
+                            <field name="document_ids" widget="many2many_binary" />
+                        </page>
                         <page name="page_detenteurs" string="Détenteurs">
                             <field name="owner_ids">
                                 <list string="Propriétaire" open_form_view="True">
@@ -136,6 +144,7 @@
                         <page name="page_sanitaire" string="Etats sanitaire">
                             <field name="status_id">
                                 <list string="Etats sanitaire">
+                                    <field name="name" />
                                     <field name="event_date" />
                                     <field name="event" />
                                     <field name="value" />
@@ -177,7 +186,15 @@
                                 </list>
                             </field>
                         </page>
-                        <page name="page_actes" string="Actes" />
+                        <page name="page_actes" string="Actes">
+                            <field name="actes_id">
+                                <list string="Liste des actes">
+                                    <field name="name" />
+                                    <field name="date" />
+                                    <field name="value" />
+                                </list>
+                            </field>
+                        </page>
                         <page name="page_traitement" string="Traitements">
                             <field name="treatment_ids">
                                 <list string="Liste des traitement">

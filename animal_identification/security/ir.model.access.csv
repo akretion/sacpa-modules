@@ -31,3 +31,5 @@ access_animal_behoavior_value_user,access.animal.behavior.value.user,model_anima
 access_animal_behoavior_value_manager,access.animal.behavior.value.manager,model_animal_behavior_value,animal_identification.group_animal_id_manager,1,1,1,1
 access_animal_protocol_event_user,access.animal.protocol.event.user,model_animal_protocol_event,animal_identification.group_animal_id_user,1,0,1,0
 access_animal_protocol_event_manager,access.animal.protocol.event.manager,model_animal_protocol_event,animal_identification.group_animal_id_manager,1,1,1,1
+access_animal_actes_user,access.animal.actes.user,model_animal_actes,animal_identification.group_animal_id_user,1,0,1,0
+access_animal_actes_manager,access.animal.actes.manager,model_animal_actes,animal_identification.group_animal_id_manager,1,1,1,1
