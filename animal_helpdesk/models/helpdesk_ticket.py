@@ -36,6 +36,10 @@ class HelpdeskTicket(models.Model):
     )
 
     animal_ids = fields.Many2many("animal.identification", string="Animaux")
+    specie_id = fields.Many2one("animal.species", string="Espèce")
+    breed_id = fields.Many2one(
+        "animal.breed", string="Race", domain="[('specie_id', '=?', specie_id)]"
+    )
 
     location_address = fields.Char(related="fsm_location_id.street", string="Adresse")
     location_address2 = fields.Char(

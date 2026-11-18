@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Liste des interventions -->
+    <template id="portal_my_fsm_orders" inherit_id="fieldservice_portal.portal_my_fsm_orders">
+        <xpath expr="//t[@t-call='portal.portal_searchbar']" position="after">
+            <div t-if="filter_ticket" class="alert alert-info d-flex justify-content-between">
+                <span>
+                    Interventions liées à la demande
+                    <a
+                        t-attf-href="/my/ticket/#{filter_ticket.id}"
+                        t-out="filter_ticket.number"
+                    />
+                </span>
+                <a href="/my/fsm_orders">Voir toutes les interventions</a>
+            </div>
+        </xpath>
+        <xpath expr="//thead/tr[hasclass('active')]" position="replace">
+            <tr class="active">
+                <th class="text-wrap">Intervention</th>
+                <th class="text-wrap">Date inter</th>
+                <th class="text-wrap">Type inter</th>
+                <th class="text-wrap">Demande</th>
+                <th class="text-wrap">Date dem.</th>
+                <th class="text-wrap">Heure dem.</th>
+                <th class="text-wrap">Ville</th>
+                <th class="text-wrap">H. départ</th>
+                <th class="text-wrap">H. prise en charge</th>
+                <th class="text-wrap">H. dépôt</th>
+                <th class="text-end text-wrap">Nb animaux liés</th>
+                <th class="text-wrap">N° interne</th>
+                <th class="text-wrap">Adresse</th>
+                <th class="text-wrap">Étape</th>
+            </tr>
+        </xpath>
+        <xpath expr="//tbody/t[@t-foreach='orders']" position="replace">
+            <t t-foreach="orders" t-as="fsm_order">
+                <!-- The order is already filtered by the record rules -->
+                <t t-set="order_sudo" t-value="fsm_order.sudo()" />
+                <t t-set="ticket_sudo" t-value="order_sudo.ticket_id" />
+                <tr>
+                    <td>
+                        <a
+                            t-attf-href="/my/fsm_order/#{fsm_order.id}"
+                            t-out="order_sudo.name"
+                        />
+                    </td>
+                    <td>
+                        <span
+                            t-if="order_sudo.intervention_date"
+                            t-field="order_sudo.intervention_date"
+                        />
+                    </td>
+                    <td t-out="order_sudo.intervention_type_id.display_name" />
+                    <td>
+                        <a
+                            t-if="ticket_sudo"
+                            t-attf-href="/my/ticket/#{ticket_sudo.id}"
+                            t-out="ticket_sudo.number"
+                        />
+                    </td>
+                    <td>
+                        <span
+                            t-if="ticket_sudo.call_date"
+                            t-field="ticket_sudo.call_date"
+                        />
+                    </td>
+                    <td>
+                        <span
+                            t-if="ticket_sudo.call_time"
+                            t-field="ticket_sudo.call_time"
+                            t-options='{"widget": "float_time"}'
+                        />
+                    </td>
+                    <td t-out="order_sudo.location_id.city" />
+                    <t
+                        t-foreach="['departure_time', 'arrival_time', 'return_time']"
+                        t-as="time_field"
+                    >
+                        <td>
+                            <span
+                                t-if="order_sudo[time_field]"
+                                t-out="order_sudo[time_field]"
+                                t-options='{"widget": "float_time"}'
+                            />
+                        </td>
+                    </t>
+                    <td class="text-end" t-out="len(order_sudo.animal_ids)" />
+                    <td t-out="order_sudo.internal_reference" />
+                    <td t-out="order_sudo.location_id.street" />
+                    <td>
+                        <span class="badge text-bg-light" t-out="order_sudo.stage_id.name" />
+                    </td>
+                </tr>
+            </t>
+        </xpath>
+        <xpath expr="//th[@colspan='6']" position="attributes">
+            <attribute name="colspan">14</attribute>
+        </xpath>
+    </template>
+
+    <!-- Fiche détaillée d'une intervention -->
+    <template
+        id="portal_fieldservice_order_page"
+        inherit_id="fieldservice_portal.portal_fieldservice_order_page"
+    >
+        <xpath expr="//div[hasclass('card-header')]/h1" position="after">
+            <a
+                t-if="fsm_order.ticket_id"
+                class="float-end"
+                t-attf-href="/my/ticket/#{fsm_order.ticket_id.id}"
+            >Voir la fiche de la demande liée à cette intervention</a>
+        </xpath>
+        <xpath expr="//div[hasclass('card-body')]/div[hasclass('mb8')]" position="replace">
+            <div class="mb8">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div>
+                            <strong>N° Demande :</strong>
+                            <a
+                                t-if="fsm_order.ticket_id"
+                                t-attf-href="/my/ticket/#{fsm_order.ticket_id.id}"
+                                t-out="fsm_order.ticket_id.number"
+                            />
+                        </div>
+                        <div>
+                            <strong>N° Intervention :</strong>
+                            <span t-out="fsm_order.intervention_number" />
+                        </div>
+                        <div>
+                            <strong>Date inter :</strong>
+                            <span
+                                t-if="fsm_order.intervention_date"
+                                t-field="fsm_order.intervention_date"
+                            />
+                        </div>
+                        <div>
+                            <strong>N° Folio :</strong>
+                            <span t-out="fsm_order.internal_reference" />
+                        </div>
+                        <div>
+                            <strong>Technicien :</strong>
+                            <span t-out="fsm_order.person_id.name" />
+                        </div>
+                        <div>
+                            <strong>Nature :</strong>
+                            <span
+                                t-out="fsm_order.intervention_type_id.display_name or fsm_order.ticket_nature.display_name"
+                            />
+                        </div>
+                        <div>
+                            <strong>Étape :</strong>
+                            <span t-out="fsm_order.stage_id.name" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <t
+                            t-foreach="[('departure_time', 'Heure départ'), ('arrival_time', 'Heure arrivée'), ('capture_time', 'Heure capture'), ('return_time', 'Heure de retour')]"
+                            t-as="time_def"
+                        >
+                            <div>
+                                <strong><t t-out="time_def[1]" /> :</strong>
+                                <span
+                                    t-if="fsm_order[time_def[0]]"
+                                    t-out="fsm_order[time_def[0]]"
+                                    t-options='{"widget": "float_time"}'
+                                />
+                            </div>
+                        </t>
+                        <div>
+                            <strong>Adresse :</strong>
+                            <span t-out="fsm_order.location_id.street" />
+                            <span t-out="fsm_order.location_id.zip" />
+                            <span t-out="fsm_order.location_id.city" />
+                        </div>
+                    </div>
+                </div>
+                <div t-if="fsm_order.resolution" class="row mt8">
+                    <div class="col-md-12">
+                        <h4 class="page-header">Observations</h4>
+                        <div t-field="fsm_order.resolution" />
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

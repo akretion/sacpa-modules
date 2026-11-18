@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Consultation seule : pas de création de demande depuis le portail -->
+    <template
+        id="portal_ticket_new_button"
+        inherit_id="helpdesk_mgmt.portal_ticket_new_button"
+    >
+        <xpath expr="//form" position="replace" />
+    </template>
+
+    <!-- Liste des demandes d'intervention -->
+    <template id="portal_ticket_list" inherit_id="helpdesk_mgmt.portal_ticket_list">
+        <xpath expr="//t[@t-call='portal.portal_table']" position="replace">
+            <t t-call="portal.portal_table">
+                <t t-foreach="grouped_tickets" t-as="tickets">
+                    <thead>
+                        <tr t-if="groupby != 'none'" class="thead-light">
+                            <th colspan="11" class="text-start text-muted">
+                                <em t-out="searchbar_groupby[groupby]['label']" />
+                            </th>
+                        </tr>
+                        <tr class="active">
+                            <th class="text-wrap">N° Demande</th>
+                            <th class="text-wrap">Date appel</th>
+                            <th class="text-wrap">Heure appel</th>
+                            <th class="text-wrap">Ville cliente</th>
+                            <th class="text-wrap">Donneur d'ordre</th>
+                            <th class="text-wrap">Code postal</th>
+                            <th class="text-wrap">Ville</th>
+                            <th class="text-wrap">Type inter</th>
+                            <th class="text-end text-wrap">Nb animaux à capturer</th>
+                            <th class="text-end text-wrap">Nb interventions</th>
+                            <th class="text-wrap">Étape</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="tickets" t-as="ticket">
+                            <t t-set="ticket_sudo" t-value="ticket.sudo()" />
+                            <tr>
+                                <td>
+                                    <a
+                                        t-attf-href="/my/ticket/#{ticket.id}?{{ keep_query() }}"
+                                        t-out="ticket.number"
+                                    />
+                                </td>
+                                <td>
+                                    <span
+                                        t-if="ticket_sudo.call_date"
+                                        t-field="ticket_sudo.call_date"
+                                    />
+                                </td>
+                                <td>
+                                    <span
+                                        t-if="ticket_sudo.call_time"
+                                        t-field="ticket_sudo.call_time"
+                                        t-options='{"widget": "float_time"}'
+                                    />
+                                </td>
+                                <td t-out="ticket_sudo.partner_id.commercial_partner_id.name" />
+                                <td t-out="ticket_sudo.requester_id.display_name" />
+                                <td t-out="ticket_sudo.location_zip" />
+                                <td t-out="ticket_sudo.location_city" />
+                                <td t-out="ticket_sudo.nature_id.display_name" />
+                                <td class="text-end" t-out="ticket_sudo.animal_count" />
+                                <td
+                                    class="text-end"
+                                    t-out="len(ticket_sudo.fsm_order_ids)"
+                                />
+                                <td>
+                                    <span
+                                        class="badge text-bg-light"
+                                        t-out="ticket_sudo.stage_id.name"
+                                    />
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </t>
+            </t>
+        </xpath>
+    </template>
+
+    <!-- Fiche détail de la demande + interventions réalisées -->
+    <template
+        id="portal_helpdesk_ticket_page"
+        inherit_id="helpdesk_mgmt.portal_helpdesk_ticket_page"
+    >
+        <!-- Consultation seule : pas de clôture depuis le portail -->
+        <xpath expr="//div[@name='ticket_close_buttons']" position="replace" />
+        <xpath expr="//div[@id='card_body']" position="before">
+            <t t-set="ticket_sudo" t-value="ticket.sudo()" />
+            <div id="animal_ticket_detail" class="mb-4">
+                <h5 class="mb-1">Fiche détaillée de la demande d'intervention</h5>
+                <hr class="mt-1 mb-2" />
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <div>
+                            <strong>N° Demande :</strong>
+                            <span t-field="ticket.number" />
+                        </div>
+                        <div>
+                            <strong>Date demande :</strong>
+                            <span t-field="ticket_sudo.call_date" />
+                            <t t-if="ticket_sudo.call_time">
+                                à
+                                <span
+                                    t-field="ticket_sudo.call_time"
+                                    t-options='{"widget": "float_time"}'
+                                />
+                            </t>
+                        </div>
+                        <div>
+                            <strong>Client :</strong>
+                            <span
+                                t-out="ticket_sudo.partner_id.commercial_partner_id.name"
+                            />
+                        </div>
+                        <div>
+                            <strong>Donneur d'ordre :</strong>
+                            <span t-out="ticket_sudo.requester_id.display_name" />
+                        </div>
+                        <div>
+                            <strong>Nature :</strong>
+                            <span t-out="ticket_sudo.nature_id.display_name" />
+                        </div>
+                        <div>
+                            <strong>Adresse :</strong>
+                            <span t-out="ticket_sudo.location_address" />
+                            <t t-if="ticket_sudo.location_address2">
+                                <span t-out="ticket_sudo.location_address2" />
+                            </t>
+                        </div>
+                        <div>
+                            <strong>Code postal / Ville :</strong>
+                            <span t-out="ticket_sudo.location_zip" />
+                            <span t-out="ticket_sudo.location_city" />
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div>
+                            <strong>Contact :</strong>
+                            <span t-out="ticket_sudo.contact_on_place" />
+                        </div>
+                        <div>
+                            <strong>Téléphone :</strong>
+                            <span t-out="ticket_sudo.contact_phone" />
+                        </div>
+                        <div>
+                            <strong>Espèce :</strong>
+                            <span t-out="ticket_sudo.specie_id.display_name" />
+                        </div>
+                        <div>
+                            <strong>Race :</strong>
+                            <span t-out="ticket_sudo.breed_id.display_name" />
+                        </div>
+                        <div>
+                            <strong>Statut des animaux :</strong>
+                            <span t-out="ticket_sudo.animal_status_id.display_name" />
+                        </div>
+                        <div>
+                            <strong>Nombre d'animaux :</strong>
+                            <span t-out="ticket_sudo.animal_count" />
+                        </div>
+                        <div>
+                            <strong>Étape :</strong>
+                            <span t-out="ticket_sudo.stage_id.name" />
+                        </div>
+                    </div>
+                </div>
+                <div t-if="ticket_sudo.notes" class="mt-2">
+                    <strong>Observations :</strong>
+                    <div t-out="ticket_sudo.notes" style="white-space: pre-line;" />
+                </div>
+
+                <h5 class="mt-4 mb-1">
+                    Liste des interventions réalisées pour cette demande
+                </h5>
+                <hr class="mt-1 mb-2" />
+                <p t-if="not fsm_orders" class="text-muted">
+                    Aucune intervention pour cette demande.
+                </p>
+                <div t-else="" class="table-responsive">
+                    <table class="table table-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th>Intervention</th>
+                                <th>Date inter</th>
+                                <th>H. départ</th>
+                                <th>H. prise en charge</th>
+                                <th>H. dépôt</th>
+                                <th>Type inter</th>
+                                <th>Étape</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="fsm_orders" t-as="demand_order">
+                                <td>
+                                    <a
+                                        t-attf-href="/my/fsm_order/#{demand_order.id}"
+                                        t-out="demand_order.name"
+                                    />
+                                </td>
+                                <td>
+                                    <span
+                                        t-if="demand_order.intervention_date"
+                                        t-field="demand_order.intervention_date"
+                                    />
+                                </td>
+                                <t
+                                    t-foreach="['departure_time', 'arrival_time', 'return_time']"
+                                    t-as="time_field"
+                                >
+                                    <td>
+                                        <span
+                                            t-if="demand_order[time_field]"
+                                            t-out="demand_order[time_field]"
+                                            t-options='{"widget": "float_time"}'
+                                        />
+                                    </td>
+                                </t>
+                                <td t-out="demand_order.intervention_type_id.display_name" />
+                                <td t-out="demand_order.stage_id.name" />
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <a
+                    t-if="fsm_orders"
+                    class="btn btn-sm btn-secondary"
+                    t-attf-href="/my/fsm_orders?ticket_id=#{ticket.id}&amp;filterby=all"
+                >
+                    <i class="fa fa-map-marker" /> Voir les interventions de cette demande
+                </a>
+            </div>
+        </xpath>
+    </template>
+</odoo>
