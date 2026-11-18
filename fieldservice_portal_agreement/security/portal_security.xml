@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--
+    Replace the fieldservice_portal rule (rules of the same group are OR-ed,
+    so adding a new one would only widen access).
+    A portal user sees a FSM order only if it is linked to a helpdesk ticket and:
+      - the ticket customer belongs to the user's company, or
+      - the user's company is the partner of the order agreement (e.g. the
+        EPCI); the other agreement partners (communes) only see their own.
+    -->
+    <record id="fieldservice_portal.fsm_order_rule_portal" model="ir.rule">
+        <field name="name">Portal FSM orders: ticket + agreement partners</field>
+        <field name="domain_force">[
+            ('ticket_id', '!=', False),
+            '|',
+            ('ticket_id.partner_id', 'child_of', [user.commercial_partner_id.id]),
+            ('agreement_partner_id', 'child_of', [user.commercial_partner_id.id]),
+        ]</field>
+    </record>
+
+    <!--
+    Same logic for helpdesk tickets (replaces the helpdesk_mgmt portal rule):
+    the ticket customer belongs to the user's company, or the user's company
+    is the partner of the ticket agreement.
+    The helpdesk_mgmt rule is declared noupdate="1", so a <record> override is
+    ignored on module update: write it explicitly instead.
+    -->
+    <function model="ir.rule" name="write">
+        <value eval="[ref('helpdesk_mgmt.helpdesk_ticket_rule_portal')]" />
+        <value
+            eval="{
+                'name': 'Portal tickets: customer + agreement partners',
+                'domain_force': &quot;['|', ('partner_id', 'child_of', [user.commercial_partner_id.id]), ('agreement_partner_id', 'child_of', [user.commercial_partner_id.id])]&quot;,
+            }"
+        />
+    </function>
+</odoo>
