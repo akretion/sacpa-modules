@@ -103,6 +103,8 @@
                             </group>
                             <group string="QUOI ?">
                                 <field name="nature_id" string="Nature" />
+                                <field name="specie_id" />
+                                <field name="breed_id" />
                                 <field name="description" string="Description" />
                             </group>
                             <group>
